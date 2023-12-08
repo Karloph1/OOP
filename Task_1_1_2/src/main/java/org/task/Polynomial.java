@@ -157,10 +157,10 @@ public class Polynomial {
                     word.append(" - ");
                 }
 
-                if (i == cfs.length-1) {
+                if (i == cfs.length - 1) {
                     word.append(Math.abs(cfs[i]));
                 }
-                else if (i == cfs.length-2) {
+                else if (i == cfs.length - 2) {
                     if (cfs[i] != 1) {
                         word.append(Math.abs(cfs[i])).append("x");
                     }
