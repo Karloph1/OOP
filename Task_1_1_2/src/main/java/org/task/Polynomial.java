@@ -91,8 +91,9 @@ public class Polynomial {
         else {
             Polynomial tmp = new Polynomial(new int[(cfs.length-1)+(list.cfs.length-1)+1]);
             for (int i = 0; i < cfs.length; i++) {
-                for (int j = 0; j < list.cfs.length; j++)
-                    tmp.cfs[tmp.cfs.length - (cfs.length-i-1)-(list.cfs.length-j-1) - 1] += cfs[i] * list.cfs[j];
+                for (int j = 0; j < list.cfs.length; j++) {
+                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1) - (list.cfs.length - j - 1) - 1] += cfs[i] * list.cfs[j];
+                }
             }
             return tmp;
         }
@@ -179,5 +180,4 @@ public class Polynomial {
         }
         return word.toString();
     }
-
 }
