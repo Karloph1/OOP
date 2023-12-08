@@ -3,28 +3,22 @@ package org.task;
 import java.util.Arrays;
 
 /**
- * main class
+ * main class.
  */
 public class Polynomial {
 
     public int[] cfs;
 
-    /**
-     * empty
-     */
     public Polynomial() {
         cfs = new int[0];
     }
 
-    /**
-     * not empty
-     */
     public Polynomial(int[] list) {
         cfs = list;
     }
 
     /**
-     * plus function
+     * plus function.
      */
     public Polynomial plus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
@@ -58,7 +52,7 @@ public class Polynomial {
     }
 
     /**
-     * minus function
+     * minus function.
      */
     public Polynomial minus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
@@ -93,7 +87,7 @@ public class Polynomial {
     }
 
     /**
-     * times function
+     * times function.
      */
     public Polynomial times(Polynomial list) {
         if (cfs.length == 0 && list.cfs.length == 0) {
@@ -111,7 +105,7 @@ public class Polynomial {
     }
 
     /**
-     * evaluate function
+     * evaluate function.
      */
     public int evaluate(int num) {
         int result = 0;
@@ -122,7 +116,7 @@ public class Polynomial {
     }
 
     /**
-     * differentiate function
+     * differentiate function.
      */
     public Polynomial differentiate(int num) {
         for (int i = 0; i < cfs.length; i++) {
@@ -145,7 +139,7 @@ public class Polynomial {
     }
 
     /**
-     * compare function
+     * compare function.
      */
     public boolean compare(Polynomial list) {
         if (cfs.length != list.cfs.length) {
@@ -161,7 +155,7 @@ public class Polynomial {
     }
 
     /**
-     * string function
+     * string function.
      */
     public String toString() {
         StringBuilder word = new StringBuilder();

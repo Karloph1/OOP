@@ -3,15 +3,15 @@ import org.junit.jupiter.api.Test;
 import org.task.Polynomial;
 
 /**
- * tests
+ * tests.
  */
 public class PolynomialTest {
 
     @Test
     void simplePlusCheck() {
-       Polynomial test1 = new Polynomial(new int[] {1, 2, 3, 4});
-       Polynomial test2 = new Polynomial(new int[] {1, 4, 1, 0});
-       Assertions.assertEquals("2x^3 + 6x^2 + 4x + 4", test1.plus(test2).toString());
+        Polynomial test1 = new Polynomial(new int[]{1, 2, 3, 4});
+        Polynomial test2 = new Polynomial(new int[]{1, 4, 1, 0});
+        Assertions.assertEquals("2x^3 + 6x^2 + 4x + 4", test1.plus(test2).toString());
     }
 
     @Test
@@ -142,7 +142,7 @@ public class PolynomialTest {
         Polynomial test2 = new Polynomial(new int[]{1, 2, 4, 0, -1});
         Assertions.assertFalse(test1.compare(test2));
 
-        Polynomial test3 = new Polynomial(new int[] {1, 2, 0, 1, 1000});
+        Polynomial test3 = new Polynomial(new int[]{1, 2, 0, 1, 1000});
         Polynomial test4 = new Polynomial();
         Assertions.assertFalse(test3.compare(test4));
 
