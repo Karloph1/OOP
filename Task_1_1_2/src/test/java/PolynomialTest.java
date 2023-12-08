@@ -90,7 +90,7 @@ public class PolynomialTest {
     @Test
     void emptyMinusCheck() {
         Polynomial test1 = new Polynomial();
-        Polynomial test2 = new Polynomial(new int[]{9,-2, 100, -111});
+        Polynomial test2 = new Polynomial(new int[]{9, -2, 100, -111});
         Assertions.assertEquals("-9x^3 + 2x^2 - 100x + 111", test1.minus(test2).toString());
 
         Polynomial test3 = new Polynomial(new int[]{-100, 10231, 1230, 0, 0});
@@ -108,7 +108,7 @@ public class PolynomialTest {
         Polynomial test2 = new Polynomial(new int[]{1, 2, 3, 5, 1923, -123});
         Assertions.assertEquals("", test1.times(test2).toString());
 
-        Polynomial test3 = new Polynomial(new int[]{-123, 0, 123, -231, 0,0,0});
+        Polynomial test3 = new Polynomial(new int[]{-123, 0, 123, -231, 0, 0, 0});
         Polynomial test4 = new Polynomial();
         Assertions.assertEquals("", test3.times(test4).toString());
 
