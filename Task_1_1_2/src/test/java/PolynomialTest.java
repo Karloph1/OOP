@@ -6,7 +6,7 @@ public class PolynomialTest {
     @Test
     void simplePlusCheck() {
        Polynomial test1 = new Polynomial(new int[]{1, 2, 3, 4});
-       Polynomial test2 = new Polynomial(new int[]{1,4,1,0});
+       Polynomial test2 = new Polynomial(new int[]{1, 4, 1, 0});
        Assertions.assertEquals("2x^3 + 6x^2 + 4x + 4", test1.plus(test2).toString());
     }
 
@@ -75,10 +75,10 @@ public class PolynomialTest {
     @Test
     void emptyPlusCheck(){
         Polynomial test1 = new Polynomial();
-        Polynomial test2 = new Polynomial(new int[]{1,5,7});
+        Polynomial test2 = new Polynomial(new int[]{1, 5, 7});
         Assertions.assertEquals("x^2 + 5x + 7", test1.plus(test2).toString());
 
-        Polynomial test3 = new Polynomial(new int[]{900,0,0,0,0,-2});
+        Polynomial test3 = new Polynomial(new int[]{900, 0, 0, 0, 0, -2});
         Polynomial test4 = new Polynomial();
         Assertions.assertEquals("900x^5 - 2", test3.plus(test4).toString());
 
@@ -105,7 +105,7 @@ public class PolynomialTest {
     @Test
     void emptyTimesCheck(){
         Polynomial test1 = new Polynomial();
-        Polynomial test2 = new Polynomial(new int[]{1,2,3,5,1923,-123});
+        Polynomial test2 = new Polynomial(new int[]{1, 2, 3, 5, 1923, -123});
         Assertions.assertEquals("", test1.times(test2).toString());
 
         Polynomial test3 = new Polynomial(new int[]{-123, 0, 123, -231, 0,0,0});
@@ -133,10 +133,10 @@ public class PolynomialTest {
     @Test
     void emptyCompareCheck(){
         Polynomial test1 = new Polynomial();
-        Polynomial test2 = new Polynomial(new int[]{1,2,4,0,-1});
+        Polynomial test2 = new Polynomial(new int[]{1, 2, 4, 0, -1});
         Assertions.assertFalse(test1.compare(test2));
 
-        Polynomial test3 = new Polynomial(new int[] {1,2,0,1,1000});
+        Polynomial test3 = new Polynomial(new int[] {1, 2, 0, 1, 1000});
         Polynomial test4 = new Polynomial();
         Assertions.assertFalse(test3.compare(test4));
 
