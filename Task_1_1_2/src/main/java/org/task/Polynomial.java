@@ -2,7 +2,8 @@ package org.task;
 
 import java.util.Arrays;
 
-public class Polynomial{
+public class Polynomial {
+
     public int[] cfs;
 
     public Polynomial() { // пустой многочлен
