@@ -11,40 +11,40 @@ public class PolynomialTest {
     }
 
     @Test
-    void simpleMinusCheck(){
+    void simpleMinusCheck() {
         Polynomial test1 = new Polynomial(new int[]{1, 2, 3, 4});
         Polynomial test2 = new Polynomial(new int[]{2, 4, 1, 0});
         Assertions.assertEquals("-x^3 - 2x^2 + 2x + 4", test1.minus(test2).toString());
     }
 
     @Test
-    void simpleTimesCheck(){
+    void simpleTimesCheck() {
         Polynomial test1 = new Polynomial(new int[]{2, 3, 4});
         Polynomial test2 = new Polynomial(new int[]{4, 1, 2});
         Assertions.assertEquals("8x^4 + 14x^3 + 23x^2 + 10x + 8", test1.times(test2).toString());
     }
 
     @Test
-    void simpleEvaluateCheck(){
+    void simpleEvaluateCheck() {
         Polynomial test = new Polynomial(new int[]{4, 2, 3, 4});
         Assertions.assertEquals(4234, test.evaluate(10));
     }
 
     @Test
-    void simpleDifferentiateCheck(){
+    void simpleDifferentiateCheck() {
         Polynomial test = new Polynomial(new int[]{4, 2, 3, 4});
         Assertions.assertEquals("24x + 4", test.differentiate(2).toString());
     }
 
     @Test
-    void simpleCompareCheck(){
+    void simpleCompareCheck() {
         Polynomial test1 = new Polynomial(new int[]{2, 3, 4});
         Polynomial test2 = new Polynomial(new int[]{4, 1, 2});
         Assertions.assertFalse(test1.compare(test2));
     }
 
     @Test
-    void everythingEvaluateCheck(){
+    void everythingEvaluateCheck() {
         Polynomial test1 = new Polynomial(new int[]{5, 6, 7, 2, 3, 4, 0});
         Polynomial test2 = new Polynomial(new int[]{4, 0, 2});
         Polynomial test3 = new Polynomial(new int[]{1, 2, 3, 4});
@@ -54,7 +54,7 @@ public class PolynomialTest {
     }
 
     @Test
-    void everythingToStringCheck(){
+    void everythingToStringCheck() {
         Polynomial test1 = new Polynomial(new int[]{8, 21});
         Polynomial test2 = new Polynomial(new int[]{-1, 2, -40, 0, 0, 0});
         Polynomial test3 = new Polynomial(new int[]{-10, 102, 20, 0, -1});
@@ -64,7 +64,7 @@ public class PolynomialTest {
     }
 
     @Test
-    void everythingCompareCheck(){
+    void everythingCompareCheck() {
         Polynomial test1 = new Polynomial(new int[]{8, 21});
         Polynomial test2 = new Polynomial(new int[]{-6, 5, -40, 0, 0, 0});
         Polynomial test3 = new Polynomial(new int[]{1, -1, 10, 0, 4, 21, 7});
@@ -73,7 +73,7 @@ public class PolynomialTest {
     }
 
     @Test
-    void emptyPlusCheck(){
+    void emptyPlusCheck() {
         Polynomial test1 = new Polynomial();
         Polynomial test2 = new Polynomial(new int[]{1, 5, 7});
         Assertions.assertEquals("x^2 + 5x + 7", test1.plus(test2).toString());
@@ -88,7 +88,7 @@ public class PolynomialTest {
     }
 
     @Test
-    void emptyMinusCheck(){
+    void emptyMinusCheck() {
         Polynomial test1 = new Polynomial();
         Polynomial test2 = new Polynomial(new int[]{9,-2, 100, -111});
         Assertions.assertEquals("-9x^3 + 2x^2 - 100x + 111", test1.minus(test2).toString());
@@ -103,7 +103,7 @@ public class PolynomialTest {
     }
 
     @Test
-    void emptyTimesCheck(){
+    void emptyTimesCheck() {
         Polynomial test1 = new Polynomial();
         Polynomial test2 = new Polynomial(new int[]{1, 2, 3, 5, 1923, -123});
         Assertions.assertEquals("", test1.times(test2).toString());
@@ -118,20 +118,20 @@ public class PolynomialTest {
     }
 
     @Test
-    void emptyEvaluateCheck(){
+    void emptyEvaluateCheck() {
         Polynomial test1 = new Polynomial();
         Polynomial test2 = new Polynomial();
         Assertions.assertEquals(0, test1.plus(test2).evaluate(100));
     }
 
     @Test
-    void emptyDifferentiateCheck(){
+    void emptyDifferentiateCheck() {
         Polynomial test1 = new Polynomial(new int[]{10, -100});
         Assertions.assertEquals("", test1.differentiate(2).toString());
     }
 
     @Test
-    void emptyCompareCheck(){
+    void emptyCompareCheck() {
         Polynomial test1 = new Polynomial();
         Polynomial test2 = new Polynomial(new int[]{1, 2, 4, 0, -1});
         Assertions.assertFalse(test1.compare(test2));
