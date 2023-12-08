@@ -6,13 +6,11 @@ public class Polynomial {
 
     public int[] cfs;
 
-    public Polynomial ()
-    {
+    public Polynomial ( ) {
         cfs = new int[0];
     }
 
-    public Polynomial(int[] list)
-    {
+    public Polynomial(int[] list) {
         cfs = list;
     }
 
@@ -34,7 +32,6 @@ public class Polynomial {
                     tmp.cfs[tmpLen] = cfs[i] + list.cfs[tmpLen];
                     tmpLen++;
                 }
-
             }
             else { //если первое больше
                 for (int i = 0; i < cfs.length - list.cfs.length; i++) {
