@@ -25,7 +25,7 @@ public class Polynomial {
         cfs = list;
     }
 
-    //plus function
+    /**/
     public Polynomial plus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) {
@@ -57,7 +57,7 @@ public class Polynomial {
         return tmp;
     }
 
-    //minus function
+    /**/
     public Polynomial minus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) {
@@ -90,7 +90,7 @@ public class Polynomial {
         return tmp;
     }
 
-    //times function
+    /**/
     public Polynomial times(Polynomial list) {
         if (cfs.length == 0 && list.cfs.length == 0) {
             return new Polynomial();
@@ -105,7 +105,7 @@ public class Polynomial {
         }
     }
 
-    //evaluate function
+    /**/
     public int evaluate(int num) {
         int result = 0;
         for (int i = 0; i < cfs.length; i++) {
@@ -114,7 +114,7 @@ public class Polynomial {
         return result;
     }
 
-    //differentiate function
+    /**/
     public Polynomial differentiate(int num) {
         for (int i = 0; i < cfs.length; i++) {
             if (i == cfs.length - 1) {
@@ -135,7 +135,7 @@ public class Polynomial {
         }
     }
 
-    //compare function
+    /**/
     public boolean compare(Polynomial list) {
         if (cfs.length != list.cfs.length) {
             return false;
@@ -149,6 +149,7 @@ public class Polynomial {
         }
     }
 
+    /**/
     public String toString() {
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < cfs.length; i++) {
