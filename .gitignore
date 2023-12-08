@@ -145,7 +145,4 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij+all
 src/main/java/org/example/Main.java
 src/test/java/Maintest.java
-Task_1_1_2/.idea/gradle.xml
-Task_1_1_2/.idea/misc.xml
-Task_1_1_2/.idea/vcs.xml
-Task_1_1_2/.idea/workspace.xml
+
