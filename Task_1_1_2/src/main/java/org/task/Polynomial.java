@@ -13,17 +13,19 @@ public class Polynomial {
     empty
     */
 
-    /*
-    not empty
-     */
     public Polynomial() {
         cfs = new int[0];
     }
+
+    /*
+    not empty
+     */
 
     public Polynomial(int[] list) {
         cfs = list;
     }
 
+    //plus function
     public Polynomial plus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) {
@@ -41,8 +43,7 @@ public class Polynomial {
                     tmp.cfs[tmpLen] = cfs[i] + list.cfs[tmpLen];
                     tmpLen++;
                 }
-            }
-            else { //если первое больше
+            } else { //если первое больше
                 for (int i = 0; i < cfs.length - list.cfs.length; i++) {
                     tmp.cfs[i] = cfs[i];
                     tmpLen++;
@@ -56,14 +57,14 @@ public class Polynomial {
         return tmp;
     }
 
+    //minus function
     public Polynomial minus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) {
             for (int i = 0; i < list.cfs.length; i++) {
                 tmp.cfs[i] = cfs[i] - list.cfs[i];
             }
-        }
-        else {
+        } else {
             int tmpLen = 0;
             if (cfs.length < list.cfs.length) {
                 for (int i = 0; i < list.cfs.length - cfs.length; i++) {
@@ -75,8 +76,7 @@ public class Polynomial {
                     tmpLen++;
                 }
 
-            }
-            else {
+            } else {
                 for (int i = 0; i < cfs.length - list.cfs.length; i++) {
                     tmp.cfs[i] = cfs[i];
                     tmpLen++;
@@ -90,11 +90,11 @@ public class Polynomial {
         return tmp;
     }
 
+    //times function
     public Polynomial times(Polynomial list) {
         if (cfs.length == 0 && list.cfs.length == 0) {
             return new Polynomial();
-        }
-        else {
+        } else {
             Polynomial tmp = new Polynomial(new int[(cfs.length-1)+(list.cfs.length-1)+1]);
             for (int i = 0; i < cfs.length; i++) {
                 for (int j = 0; j < list.cfs.length; j++) {
@@ -105,6 +105,7 @@ public class Polynomial {
         }
     }
 
+    //evaluate function
     public int evaluate(int num) {
         int result = 0;
         for (int i = 0; i < cfs.length; i++) {
@@ -113,12 +114,12 @@ public class Polynomial {
         return result;
     }
 
+    //differentiate function
     public Polynomial differentiate(int num) {
         for (int i = 0; i < cfs.length; i++) {
             if (i == cfs.length - 1) {
                 cfs[i] = 0;
-            }
-            else {
+            } else {
                 cfs[i] *= (cfs.length - i - 1);
             }
         }
@@ -127,19 +128,18 @@ public class Polynomial {
 
         if (num != 1) {
             return differentiate(num - 1);
-        }
-        else {
+        } else {
             Polynomial tmp = new Polynomial();
             tmp.cfs = cfs;
             return tmp;
         }
     }
 
+    //compare function
     public boolean compare(Polynomial list) {
         if (cfs.length != list.cfs.length) {
             return false;
-        }
-        else {
+        } else {
             for (int i = 0; i < cfs.length; i ++) {
                 if (cfs[i] != list.cfs[i]) {
                     return false;
