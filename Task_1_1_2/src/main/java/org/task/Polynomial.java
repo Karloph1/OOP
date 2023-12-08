@@ -6,7 +6,10 @@ public class Polynomial {
 
     public int[] cfs;
 
-    public Polynomial ( ) {
+    /*
+    main class
+    */
+    public Polynomial() {
         cfs = new int[0];
     }
 
