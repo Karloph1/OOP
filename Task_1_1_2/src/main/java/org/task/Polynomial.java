@@ -2,13 +2,20 @@ package org.task;
 
 import java.util.Arrays;
 
+/*
+main class
+*/
 public class Polynomial {
 
     public int[] cfs;
 
     /*
-    main class
+    empty
     */
+
+    /*
+    not empty
+     */
     public Polynomial() {
         cfs = new int[0];
     }
@@ -23,8 +30,7 @@ public class Polynomial {
             for (int i = 0; i < list.cfs.length; i++) {
                 tmp.cfs[i] = cfs[i] + list.cfs[i];
             }
-        }
-        else {
+        } else {
             int tmpLen = 0;
             if (cfs.length < list.cfs.length) {
                 for (int i = 0; i < list.cfs.length - cfs.length; i++) {
