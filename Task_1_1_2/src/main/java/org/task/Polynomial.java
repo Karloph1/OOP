@@ -1,15 +1,19 @@
 package org.task;
+
 import java.util.Arrays;
+
 public class Polynomial{
     public int[] cfs;
 
-    public Polynomial(){ // пустой многочлен
+    public Polynomial() { // пустой многочлен
         cfs = new int[0];
     }
-    public Polynomial(int[] list){ // непустой многочлен
+
+    public Polynomial(int[] list) { // непустой многочлен
         cfs = list;
     }
-    public Polynomial plus(Polynomial list){ // сложение многочленов
+
+    public Polynomial plus(Polynomial list) { // сложение многочленов
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length){ //если равны по длине
             for (int i = 0; i < list.cfs.length; i++){
@@ -42,7 +46,8 @@ public class Polynomial{
         }
         return tmp;
     }
-    public Polynomial minus(Polynomial list){ // вычитание многочленов
+
+    public Polynomial minus(Polynomial list) { // вычитание многочленов
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length){ // если равны
             for (int i = 0; i < list.cfs.length; i++){
@@ -75,7 +80,8 @@ public class Polynomial{
         }
         return tmp;
     }
-    public Polynomial times(Polynomial list){ // умножение многочленов
+
+    public Polynomial times(Polynomial list) { // умножение многочленов
         if (cfs.length == 0 && list.cfs.length == 0)
             return new Polynomial();
         else{
@@ -87,14 +93,16 @@ public class Polynomial{
             return tmp;
         }
     }
-    public int evaluate(int num){ // вычисление значения в точке
+
+    public int evaluate(int num) { // вычисление значения в точке
         int result = 0;
         for (int i = 0; i < cfs.length; i++){
             result += (int) (cfs[i] * Math.pow(num, cfs.length - i - 1));
         }
         return result;
     }
-    public Polynomial differentiate(int num){ // взятие производной
+
+    public Polynomial differentiate(int num) { // взятие производной
         for (int i = 0; i < cfs.length; i++) {
             if (i == cfs.length - 1)
                 cfs[i] = 0;
@@ -112,7 +120,8 @@ public class Polynomial{
             return tmp;
         }
     }
-    public boolean compare(Polynomial list){ // сравнение многочленов
+
+    public boolean compare(Polynomial list) { // сравнение многочленов
         if (cfs.length != list.cfs.length)
             return false;
         else{
@@ -124,7 +133,7 @@ public class Polynomial{
         }
     }
 
-    public String toString(){ // получение строкового представления полинома
+    public String toString() { // получение строкового представления полинома
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < cfs.length; i++){
             if (cfs[i] != 0){
@@ -153,4 +162,5 @@ public class Polynomial{
         }
         return word.toString();
     }
+
 }
