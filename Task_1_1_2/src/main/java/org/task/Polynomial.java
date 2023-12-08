@@ -6,11 +6,13 @@ public class Polynomial {
 
     public int[] cfs;
 
-    public Polynomial() {
+    public Polynomial()
+    {
         cfs = new int[0];
     }
 
-    public Polynomial(int[] list) {
+    public Polynomial(int[] list)
+    {
         cfs = list;
     }
 
