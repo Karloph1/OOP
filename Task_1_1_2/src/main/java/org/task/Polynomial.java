@@ -2,31 +2,30 @@ package org.task;
 
 import java.util.Arrays;
 
-/*
-main class
-*/
-
+/**
+ * main class
+ */
 public class Polynomial {
 
     public int[] cfs;
 
-    /*
-    empty
-    */
-
+    /**
+     * empty
+     */
     public Polynomial() {
         cfs = new int[0];
     }
 
-    /*
-    not empty
+    /**
+     * not empty
      */
-
     public Polynomial(int[] list) {
         cfs = list;
     }
 
-    /**/
+    /**
+     * plus function
+     */
     public Polynomial plus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) {
@@ -58,7 +57,9 @@ public class Polynomial {
         return tmp;
     }
 
-    /**/
+    /**
+     * minus function
+     */
     public Polynomial minus(Polynomial list) {
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) {
@@ -91,7 +92,9 @@ public class Polynomial {
         return tmp;
     }
 
-    /**/
+    /**
+     * times function
+     */
     public Polynomial times(Polynomial list) {
         if (cfs.length == 0 && list.cfs.length == 0) {
             return new Polynomial();
@@ -99,14 +102,17 @@ public class Polynomial {
             Polynomial tmp = new Polynomial(new int[(cfs.length - 1) + (list.cfs.length - 1) + 1]);
             for (int i = 0; i < cfs.length; i++) {
                 for (int j = 0; j < list.cfs.length; j++) {
-                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1) - (list.cfs.length - j - 1) - 1] += cfs[i] * list.cfs[j];
+                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1) - (list.cfs.length - j - 1) - 1]
+                            += cfs[i] * list.cfs[j];
                 }
             }
             return tmp;
         }
     }
 
-    /**/
+    /**
+     * evaluate function
+     */
     public int evaluate(int num) {
         int result = 0;
         for (int i = 0; i < cfs.length; i++) {
@@ -115,7 +121,9 @@ public class Polynomial {
         return result;
     }
 
-    /**/
+    /**
+     * differentiate function
+     */
     public Polynomial differentiate(int num) {
         for (int i = 0; i < cfs.length; i++) {
             if (i == cfs.length - 1) {
@@ -136,7 +144,9 @@ public class Polynomial {
         }
     }
 
-    /**/
+    /**
+     * compare function
+     */
     public boolean compare(Polynomial list) {
         if (cfs.length != list.cfs.length) {
             return false;
@@ -150,7 +160,9 @@ public class Polynomial {
         }
     }
 
-    /**/
+    /**
+     * string function
+     */
     public String toString() {
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < cfs.length; i++) {
