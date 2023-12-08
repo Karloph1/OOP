@@ -5,6 +5,7 @@ import java.util.Arrays;
 /*
 main class
 */
+
 public class Polynomial {
 
     public int[] cfs;
