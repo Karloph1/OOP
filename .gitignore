@@ -143,7 +143,6 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij+all
-build.gradle
 src/main/java/org/example/Main.java
 src/test/java/Maintest.java
 Task_1_1_2/.idea/gradle.xml
