@@ -104,6 +104,9 @@ public class Polynomial {
         }
     }
 
+    /**
+     * evaluate function.
+     */
     public int evaluate(int num) { // вычисление значения в точке
         int result = 0;
         for (int i = 0; i < cfs.length; i++) {
@@ -112,6 +115,9 @@ public class Polynomial {
         return result;
     }
 
+    /**
+     * differentiate function.
+     */
     public Polynomial differentiate(int num) { // взятие производной
         for (int i = 0; i < cfs.length; i++) {
             if (i == cfs.length - 1)
@@ -131,6 +137,9 @@ public class Polynomial {
         }
     }
 
+    /**
+     * compare function.
+     */
     public boolean compare(Polynomial list) { // сравнение многочленов
         if (cfs.length != list.cfs.length)
             return false;
@@ -143,6 +152,9 @@ public class Polynomial {
         }
     }
 
+    /**
+     * toString function.
+     */
     public String toString() { // получение строкового представления полинома
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < cfs.length; i++) {
