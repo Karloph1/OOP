@@ -96,8 +96,7 @@ public class Polynomial {
             Polynomial tmp = new Polynomial(new int[(cfs.length - 1) + (list.cfs.length - 1) + 1]);
             for (int i = 0; i < cfs.length; i++) {
                 for (int j = 0; j < list.cfs.length; j++) {
-                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1)
-                            - (list.cfs.length - j - 1) - 1] += cfs[i] * list.cfs[j];
+                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1) - (list.cfs.length - j - 1) - 1] += cfs[i] * list.cfs[j];
                 }
             }
             return tmp;
@@ -120,16 +119,19 @@ public class Polynomial {
      */
     public Polynomial differentiate(int num) { // взятие производной
         for (int i = 0; i < cfs.length; i++) {
-            if (i == cfs.length - 1)
+            if (i == cfs.length - 1){
                 cfs[i] = 0;
-            else
+            }
+            else {
                 cfs[i] *= (cfs.length - i - 1);
+            }
         }
         int[] cfs1 = Arrays.copyOf(cfs, cfs.length - 1);
         cfs = Arrays.copyOf(cfs1, cfs1.length);
 
-        if (num != 1)
+        if (num != 1) {
             return differentiate(num - 1);
+        }
         else {
             Polynomial tmp = new Polynomial();
             tmp.cfs = cfs;
@@ -141,12 +143,14 @@ public class Polynomial {
      * compare function.
      */
     public boolean compare(Polynomial list) { // сравнение многочленов
-        if (cfs.length != list.cfs.length)
+        if (cfs.length != list.cfs.length) {
             return false;
+        }
         else {
             for (int i = 0; i < cfs.length; i++) {
-                if (cfs[i] != list.cfs[i])
+                if (cfs[i] != list.cfs[i]){
                     return false;
+                }
             }
             return true;
         }
@@ -159,25 +163,33 @@ public class Polynomial {
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < cfs.length; i++) {
             if (cfs[i] != 0) {
-                if (cfs[i] > 0 && i != 0)
+                if (cfs[i] > 0 && i != 0) {
                     word.append(" + ");
-                else if (cfs[i] < 0 && i == 0)
+                }
+                else if (cfs[i] < 0 && i == 0) {
                     word.append("-");
-                else if (cfs[i] < 0)
+                }
+                else if (cfs[i] < 0) {
                     word.append(" - ");
+                }
 
-                if (i == cfs.length - 1)
+                if (i == cfs.length - 1) {
                     word.append(Math.abs(cfs[i]));
+                }
                 else if (i == cfs.length - 2) {
-                    if (cfs[i] != 1)
+                    if (cfs[i] != 1) {
                         word.append(Math.abs(cfs[i])).append("x");
-                    else
+                    }
+                    else {
                         word.append("x");
+                    }
                 } else {
-                    if (cfs[i] != 1 && cfs[i] != -1)
+                    if (cfs[i] != 1 && cfs[i] != -1) {
                         word.append(Math.abs(cfs[i])).append("x^").append(cfs.length - i - 1);
-                    else
+                    }
+                    else {
                         word.append("x^").append(cfs.length - i - 1);
+                    }
                 }
             }
         }
