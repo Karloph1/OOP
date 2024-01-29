@@ -3,7 +3,6 @@ package org.example;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.*;
 
 /**
  * main class.
@@ -20,14 +19,14 @@ public class StringFinder {
         char[] CopyBuffer = new char[Capacity - subString.length() + 1];
         try (FileReader reader = new FileReader(fileName)) {
 
-            int NBuffer = reader.read(Buffer);
-            if (NBuffer == -1) {
+            int nBuffer = reader.read(Buffer);
+            if (nBuffer == -1) {
                 return indices;
             }
             int curIndex = 0;
             boolean subFind = false;
             while (true) {
-                for (int i = 0; i < NBuffer - subString.length() + 1; i++) {
+                for (int i = 0; i < nBuffer - subString.length() + 1; i++) {
                     if (Buffer[i] == subString.charAt(0)) {
                         subFind = true;
                         for (int j = i; j < i + subString.length(); j++) {
@@ -43,16 +42,16 @@ public class StringFinder {
                     curIndex++;
                 }
 
-                System.arraycopy(Buffer, NBuffer - subString.length() + 1, Buffer, 0, subString.length() - 1);
-                NBuffer = reader.read(CopyBuffer);
-                if (NBuffer == -1) {
+                System.arraycopy(Buffer, nBuffer - subString.length() + 1, Buffer, 0, subString.length() - 1);
+                nBuffer = reader.read(CopyBuffer);
+                if (nBuffer == -1) {
                     break;
                 }
-                System.arraycopy(CopyBuffer, 0, Buffer, subString.length() - 1, NBuffer);
-                NBuffer += subString.length() - 1;
+                System.arraycopy(CopyBuffer, 0, Buffer, subString.length() - 1, nBuffer);
+                nBuffer += subString.length() - 1;
             }
         } catch (IOException e) {
-            throw new FileNotFoundException("no file to read");
+            throw new Exception("no file to read");
         }
         return indices;
     }

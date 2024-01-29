@@ -1,13 +1,12 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.junit.jupiter.api.Test;
 
 /**
  * main test class.
  */
-public class SFTest {
+public class Sftest {
 
     @Test
     void littleCheck() {
