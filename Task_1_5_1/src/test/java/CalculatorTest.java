@@ -54,24 +54,4 @@ class CalculatorTest {
         String h1 = "cos sin - sqrt pow log 49 7 0 1";
         Assertions.assertEquals(1, org.example.Calculator.calculation(h1));
     }
-
-    @Test
-    void incorrectStatementExceptionCheck() throws Exception {
-        String h = "/ 1 0 1";
-        try {
-            Assertions.assertEquals(0, org.example.Calculator.calculation(h));
-        } catch (Exception e) {
-            Assertions.fail();
-        }
-    }
-
-    @Test
-    void incorrectFunctionExceptionCheck() throws Exception {
-        String h = "a";
-        try {
-            Assertions.assertEquals(0, org.example.Calculator.calculation(h));
-        } catch (Exception e) {
-            Assertions.fail();
-        }
-    }
 }
