@@ -1,8 +1,16 @@
 package org.example;
+
 import java.util.Stack;
 
+/**
+ * main class.
+ */
 public class Calculator {
-    public static double calculation (String statement) throws
+
+    /**
+     * calculation class.
+     */
+    public static double calculation(String statement) throws
             IncorrectFunctionException, IncorrectStatementException {
         /*
         IncorrectFunctionException - the original line contained a word
@@ -11,17 +19,18 @@ public class Calculator {
          do not match each other to obtain the answer
          */
         double ans = 0;
-        String[] units = statement.split(" ");
-        Stack <Double> stack = new Stack<>();
-        double x, y, z;
-        for (int i = units.length-1; i >= 0; i--){
-            switch(units[i]){
-                 case "+":
+        String[] units = statement.split (" ");
+        Stack<Double> stack = new Stack <>();
+        double x;
+        double y;
+        for (int i = units.length - 1; i >= 0; i--) {
+            switch (units[i]) {
+                case "+":
                     x = stack.pop();
                     y = stack.pop();
                     ans = x + y;
                     stack.push(ans);
-                     break;
+                    break;
 
                 case "-":
                     x = stack.pop();
@@ -79,14 +88,15 @@ public class Calculator {
                 default:
                     try {
                         stack.push(Double.valueOf(units[i]));
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         throw new IncorrectFunctionException("Your function is incorrect");
                     }
                     break;
             }
         }
-        if (!stack.isEmpty())
+        if (!stack.isEmpty()) {
             throw new IncorrectStatementException("Original statement is incorrect");
+        }
         return ans;
     }
 }

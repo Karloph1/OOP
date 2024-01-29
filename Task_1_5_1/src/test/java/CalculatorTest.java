@@ -3,6 +3,9 @@ import org.example.IncorrectStatementException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+/**
+ * main test class.
+ */
 class CalculatorTest {
     @Test
     void simpleCheck() throws Exception {
@@ -55,9 +58,9 @@ class CalculatorTest {
     @Test
     void incorrectStatementExceptionCheck() throws Exception {
         String h = "/ 1 0 1";
-        try{
+        try {
             Assertions.assertEquals(0, org.example.Calculator.calculation(h));
-        }catch (Exception e){
+        } catch (Exception e) {
             Assertions.fail();
         }
     }
@@ -65,9 +68,9 @@ class CalculatorTest {
     @Test
     void incorrectFunctionExceptionCheck() throws Exception {
         String h = "a";
-        try{
+        try {
             Assertions.assertEquals(0, org.example.Calculator.calculation(h));
-        }catch (Exception e){
+        } catch (Exception e) {
             Assertions.fail();
         }
     }
