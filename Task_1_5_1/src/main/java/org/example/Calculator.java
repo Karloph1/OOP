@@ -13,7 +13,7 @@ public class Calculator {
         double ans = 0;
         String[] units = statement.split(" ");
         Stack <Double> stack = new Stack<>();
-        double x, y, z;
+        double x, y;
         for (int i = units.length-1; i >= 0; i--){
             switch(units[i]){
                  case "+":
