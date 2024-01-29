@@ -3,11 +3,10 @@ package org.example;
 import java.util.Stack;
 
 /**
- * main class
+ * main class.
  */
 public class Calculator {
     /**
-     *
      * @param statement
      * @return
      * @throws IncorrectFunctionException - the original line contained a word

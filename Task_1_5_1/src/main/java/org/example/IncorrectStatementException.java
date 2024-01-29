@@ -1,12 +1,11 @@
 package org.example;
 
 /**
- * main exception class
+ * main exception class.
  */
 public class IncorrectStatementException extends Exception{
     /**
-     *
-     * @param pe
+     * function.
      */
     public IncorrectStatementException(String pe) {
         super(pe);
