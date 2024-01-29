@@ -3,7 +3,7 @@ package org.example;
 /**
  * main exception class.
  */
-public class IncorrectStatementException extends Exception{
+public class IncorrectStatementException extends Exception {
     /**
      * function.
      */
