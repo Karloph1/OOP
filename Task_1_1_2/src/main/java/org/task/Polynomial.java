@@ -2,8 +2,10 @@ package org.task;
 
 import java.util.Arrays;
 
+/**
+ * main class.
+ */
 public class Polynomial {
-
     public int[] cfs;
 
     public Polynomial() { //пустой многочлен
@@ -14,6 +16,9 @@ public class Polynomial {
         cfs = list;
     }
 
+    /**
+     * plus function.
+     */
     public Polynomial plus(Polynomial list) { // сложение многочленов
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) { //если равны по длине
@@ -46,6 +51,9 @@ public class Polynomial {
         return tmp;
     }
 
+    /**
+     * minus function.
+     */
     public Polynomial minus(Polynomial list) { // вычитание многочленов
         Polynomial tmp = new Polynomial(new int[Math.max(cfs.length, list.cfs.length)]);
         if (cfs.length == list.cfs.length) { // если равны
@@ -78,14 +86,19 @@ public class Polynomial {
         return tmp;
     }
 
+    /**
+     * times function.
+     */
     public Polynomial times(Polynomial list) { // умножение многочленов
-        if (cfs.length == 0 && list.cfs.length == 0)
+        if (cfs.length == 0 && list.cfs.length == 0) {
             return new Polynomial();
-        else {
+        } else {
             Polynomial tmp = new Polynomial(new int[(cfs.length - 1) + (list.cfs.length - 1) + 1]);
             for (int i = 0; i < cfs.length; i++) {
-                for (int j = 0; j < list.cfs.length; j++)
-                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1) - (list.cfs.length - j - 1) - 1] += cfs[i] * list.cfs[j];
+                for (int j = 0; j < list.cfs.length; j++) {
+                    tmp.cfs[tmp.cfs.length - (cfs.length - i - 1)
+                            - (list.cfs.length - j - 1) - 1] += cfs[i] * list.cfs[j];
+                }
             }
             return tmp;
         }

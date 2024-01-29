@@ -1,7 +1,10 @@
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.task.Polynomial;
 
+/**
+ * main class.
+ */
 public class PolynomialTest {
     @Test
     void simplePlusCheck() {
@@ -50,7 +53,8 @@ public class PolynomialTest {
         Polynomial test3 = new Polynomial(new int[]{1, 2, 3, 4});
         Polynomial test4 = new Polynomial(new int[]{5, 6, 1, -8});
 
-        Assertions.assertEquals(15412278, test1.plus(test2).minus(test3).times(test4).differentiate(3).evaluate(3));
+        Assertions.assertEquals(15412278,
+                test1.plus(test2).minus(test3).times(test4).differentiate(3).evaluate(3));
     }
 
     @Test
@@ -60,7 +64,8 @@ public class PolynomialTest {
         Polynomial test3 = new Polynomial(new int[]{-10, 102, 20, 0, -1});
         Polynomial test4 = new Polynomial(new int[]{4, 2, 0, -1});
 
-        Assertions.assertEquals("-6720x^4 + 38640x^3 - 195840x^2 - 43560x - 480", test1.plus(test2).minus(test3).times(test4).differentiate(4).toString());
+        Assertions.assertEquals("-6720x^4 + 38640x^3 - 195840x^2 - 43560x - 480",
+                test1.plus(test2).minus(test3).times(test4).differentiate(4).toString());
     }
 
     @Test
