@@ -94,6 +94,7 @@ public class Calculator {
                     break;
             }
         }
+        ans = stack.pop();
         if (!stack.isEmpty()) {
             throw new IncorrectStatementException("Original statement is incorrect");
         }
