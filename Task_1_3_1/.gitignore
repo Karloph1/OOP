@@ -143,3 +143,22 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij+all
 src/main/java/org/example/Main.java
 src/test/java/Maintest.java
+
+Task_1_3_1/.gradle/8.2/checksums/checksums.lock
+Task_1_3_1/.gradle/8.2/checksums/sha1-checksums.bin
+Task_1_3_1/.gradle/8.2/dependencies-accessors/dependencies-accessors.lock
+Task_1_3_1/.gradle/8.2/dependencies-accessors/gc.properties
+Task_1_3_1/.gradle/8.2/executionHistory/executionHistory.bin
+Task_1_3_1/.gradle/8.2/executionHistory/executionHistory.lock
+Task_1_3_1/.gradle/8.2/fileChanges/last-build.bin
+Task_1_3_1/.gradle/8.2/fileHashes/fileHashes.bin
+Task_1_3_1/.gradle/8.2/fileHashes/fileHashes.lock
+Task_1_3_1/.gradle/8.2/fileHashes/resourceHashesCache.bin
+Task_1_3_1/.gradle/8.2/gc.properties
+Task_1_3_1/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+Task_1_3_1/.gradle/buildOutputCleanup/cache.properties
+Task_1_3_1/.gradle/buildOutputCleanup/outputFiles.bin
+Task_1_3_1/.gradle/file-system.probe
+Task_1_3_1/.gradle/vcs-1/gc.properties
+Task_1_3_1/.gradle/workspace-id.txt
+Task_1_3_1/.gradle/workspace-id.txt.lock
