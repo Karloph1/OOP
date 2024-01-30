@@ -22,7 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-
 Task_1_5_1/.gradle/vcs-1/gc.properties
 Task_1_5_1/.gradle/file-system.probe
 Task_1_5_1/.gradle/buildOutputCleanup/outputFiles.bin
