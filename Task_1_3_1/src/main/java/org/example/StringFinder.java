@@ -24,8 +24,10 @@ public class StringFinder {
                 return indices;
             }
             int curIndex = 0;
-            boolean subFind = false;
+
+            boolean subFind;
             while (true) {
+                subFind = false;
                 for (int i = 0; i < nBuffer - subString.length() + 1; i++) {
                     if (Buffer[i] == subString.charAt(0)) {
                         subFind = true;
@@ -35,9 +37,9 @@ public class StringFinder {
                                 break;
                             }
                         }
-                    }
-                    if (subFind) {
-                        indices.add(curIndex);
+                        if (subFind) {
+                            indices.add(curIndex);
+                        }
                     }
                     curIndex++;
                 }
