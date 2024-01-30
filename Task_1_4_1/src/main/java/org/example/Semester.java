@@ -26,7 +26,7 @@ public class Semester {
     }
 
     /**
-     * get function
+     * get function.
      */
     public ArrayList<Subject> getSubjects() {
         return subjects;
@@ -35,9 +35,9 @@ public class Semester {
     /**
      * stipend function.
      */
-    public boolean StipendPossibility;
+    public boolean stipendPossibility;
 
-    public boolean StipendPossibility() {
+    public boolean stipendPossibility() {
         return this.subjects.stream().noneMatch(x -> x.getGrades().value < 4);
     }
 

@@ -9,14 +9,14 @@ import java.util.HashMap;
 public class RecordBook {
 
     private Mark defence;
-    private ArrayList<Semester> Semesters = new ArrayList<>();
+    private ArrayList<Semester> semesters = new ArrayList<>();
     private int lastSemester = 0;
 
     /**
      * add function.
      */
     public void addSemester(Semester sem) {
-        Semesters.add(sem);
+        semesters.add(sem);
         lastSemester += 1;
     }
 
@@ -24,7 +24,7 @@ public class RecordBook {
      * average function.
      */
     public double getAverageMark() {
-        double ans = Semesters.stream()
+        double ans = semesters.stream()
                 .mapToDouble(x -> x.getAverage())
                 .average().getAsDouble();
         return ans;
@@ -43,7 +43,7 @@ public class RecordBook {
     public boolean isRedDiplomaPossible() {
         HashMap<String, Mark> lastMarks = new HashMap<>();
         for (int i = 0; i < lastSemester; i++) {
-            Semesters.get(i).getSubjects()
+            semesters.get(i).getSubjects()
                     .stream()
                     .forEach(x -> lastMarks
                             .put(x.getSubjectName(), x.getGrades()));
@@ -58,17 +58,18 @@ public class RecordBook {
             }
         }
 
-        boolean noThree = Semesters.stream()
-                .allMatch(Semester::StipendPossibility);
+        boolean noThree = semesters.stream()
+                .allMatch(Semester::stipendPossibility);
 
-        return (noThree & (defence == Mark.FIVE) & ((double) fiveCount / (fourCount + fiveCount)) >= 0.75);
+        return (noThree & (defence == Mark.FIVE)
+                & ((double) fiveCount / (fourCount + fiveCount)) >= 0.75);
     }
 
     /**
      * stipend function.
      */
     public boolean isStipendPossible() {
-        return Semesters.get(lastSemester - 1).StipendPossibility();
+        return semesters.get(lastSemester - 1).stipendPossibility();
     }
 
 }

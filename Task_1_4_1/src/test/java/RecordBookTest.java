@@ -1,9 +1,9 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.example.RecordBook;
 import org.example.Semester;
 import org.example.Subject;
 import org.example.Mark;
+import org.junit.jupiter.api.Test;
 
 public class RecordBookTest {
 
