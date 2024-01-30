@@ -1,15 +1,17 @@
 import org.example.RecordBook;
 import org.example.Semester;
-import org.example.Subject;
 import org.example.Mark;
+import org.example.Subject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * main test class.
+ */
 public class RecordBookTest {
 
     @Test
     void testAverageMark() {
-        RecordBook Student = new RecordBook();
         Semester sem1 = new Semester(1);
         Subject peLesson = new Subject("PE", Mark.FOUR);
         Subject literature = new Subject("literature", Mark.THREE);
@@ -22,15 +24,15 @@ public class RecordBookTest {
         sem2.addSubject(peLesson2);
         sem2.addSubject(math);
 
-        Student.addSemester(sem1);
-        Student.addSemester(sem2);
+        RecordBook student = new RecordBook();
+        student.addSemester(sem1);
+        student.addSemester(sem2);
 
-        Assertions.assertFalse(Math.abs(5 - Student.getAverageMark()) < 0.1);
+        Assertions.assertFalse(Math.abs(5 - student.getAverageMark()) < 0.1);
     }
 
     @Test
     void testStipend() {
-        RecordBook Student = new RecordBook();
         Semester sem1 = new Semester(1);
         Subject terver = new Subject("terver", Mark.THREE);
         Subject objectOriented = new Subject("java", Mark.THREE);
@@ -47,15 +49,15 @@ public class RecordBookTest {
         sem2.addSubject(peLesson);
         sem2.addSubject(math);
 
-        Student.addSemester(sem1);
-        Student.addSemester(sem2);
-        assert(Student.isStipendPossible());
+        RecordBook student = new RecordBook();
+        student.addSemester(sem1);
+        student.addSemester(sem2);
+        assert (student.isStipendPossible());
     }
 
 
     @Test
     void testDiploma() {
-        RecordBook Student = new RecordBook();
         Semester sem1 = new Semester(1);
         Subject terver = new Subject("PE", Mark.FIVE);
         Subject objectOriented = new Subject("math", Mark.FIVE);
@@ -68,12 +70,12 @@ public class RecordBookTest {
         sem2.addSubject(english);
         sem2.addSubject(peLesson2);
 
-        Student.addSemester(sem1);
-        Student.addSemester(sem2);
-        Student.setDefence(Mark.FIVE);
-        assert(Student.isRedDiplomaPossible());
+        RecordBook student = new RecordBook();
+        student.addSemester(sem1);
+        student.addSemester(sem2);
+        student.setDefence(Mark.FIVE);
+        assert (student.isRedDiplomaPossible());
     }
-
 
 
 }
