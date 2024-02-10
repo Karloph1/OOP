@@ -1,11 +1,12 @@
 package org.example;
-import java.util.ArrayList;
+
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Stack;
 import java.util.Queue;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
+import java.util.Stack;
 
 /**
  * main class.
