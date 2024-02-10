@@ -2,20 +2,28 @@ package org.example;
 
 import java.util.*;
 
-public class Tree <T> {
+/**
+ * main class
+ */
+public class Tree<T> {
 
     private T var;
     private Tree<T> parent;
     private ArrayList<Tree<T>> children;
     private int modCounter = 0;
 
-
+    /**
+     * class specification
+     */
     public Tree(T var) {
         this.var = var;
         this.parent = null;
         this.children = new ArrayList<>();
     }
 
+    /**
+     * update function
+     */
     public void updateModCounter(Tree<T> current) {
         if (current.parent == null) {
             return;
@@ -24,6 +32,9 @@ public class Tree <T> {
         updateModCounter(current.parent);
     }
 
+    /**
+     * add simple child function
+     */
     public Tree<T> addChild(T var) {
         this.modCounter++;
         updateModCounter(this);
@@ -34,6 +45,9 @@ public class Tree <T> {
         return child;
     }
 
+    /**
+     * add subtree child function
+     */
     public void addChild(Tree<T> subtree) {
         this.modCounter++;
         updateModCounter(this);
@@ -42,6 +56,9 @@ public class Tree <T> {
         this.children.add(subtree);
     }
 
+    /**
+     * remove function
+     */
     public void remove() {
         this.modCounter++;
         updateModCounter(this);
@@ -66,8 +83,8 @@ public class Tree <T> {
         if (this.children.size() != tree2.children.size()) {
             return false;
         }
-        Iterator<T> iterator1 = this.iteratorDFS();
-        Iterator<T> iterator2 = tree2.iteratorDFS();
+        Iterator<T> iterator1 = this.iteratorDfs();
+        Iterator<T> iterator2 = tree2.iteratorDfs();
         while (iterator1.hasNext() && iterator2.hasNext()) {
             if (iterator1.next() != iterator2.next()) {
                 return false;
@@ -77,9 +94,10 @@ public class Tree <T> {
     }
 
 
-    public Iterator<T> iteratorDFS() {
+    public Iterator<T> iteratorDfs() {
         return new DfsIterator<T>(this);
     }
+
     class DfsIterator<T> implements Iterator<T> {
         private Stack<Tree<T>> stack;
         private int currentModCounter;
