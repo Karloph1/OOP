@@ -1,9 +1,14 @@
 package org.example;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Iterator;
+import java.util.Stack;
+import java.util.Queue;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 
 /**
- * main class
+ * main class.
  */
 public class Tree<T> {
 
@@ -13,7 +18,7 @@ public class Tree<T> {
     private int modCounter = 0;
 
     /**
-     * class specification
+     * class specification.
      */
     public Tree(T var) {
         this.var = var;
@@ -22,7 +27,7 @@ public class Tree<T> {
     }
 
     /**
-     * update function
+     * update function.
      */
     public void updateModCounter(Tree<T> current) {
         if (current.parent == null) {
@@ -33,7 +38,7 @@ public class Tree<T> {
     }
 
     /**
-     * add simple child function
+     * add simple child function.
      */
     public Tree<T> addChild(T var) {
         this.modCounter++;
@@ -46,7 +51,7 @@ public class Tree<T> {
     }
 
     /**
-     * add subtree child function
+     * add subtree child function.
      */
     public void addChild(Tree<T> subtree) {
         this.modCounter++;
@@ -57,7 +62,7 @@ public class Tree<T> {
     }
 
     /**
-     * remove function
+     * remove function.
      */
     public void remove() {
         this.modCounter++;
@@ -139,7 +144,7 @@ public class Tree<T> {
     }
 
 
-    public Iterator<T> iteratorBFS() {
+    public Iterator<T> iteratorBfs() {
         return new BfsIterator<T>(this);
     }
 

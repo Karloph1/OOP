@@ -19,7 +19,7 @@ public class TreeTest {
         b.remove();
 
         List<String> DfsArray = new ArrayList<>();
-        Iterator iter = tree.iteratorDFS();
+        Iterator iter = tree.iteratorDfs();
         while (iter.hasNext()) {
             DfsArray.add(iter.next().toString());
         }
@@ -48,7 +48,7 @@ public class TreeTest {
         b.remove();
 
         List<String> BfsArray = new ArrayList<>();
-        Iterator iter = tree.iteratorBFS();
+        Iterator iter = tree.iteratorBfs();
         while (iter.hasNext()) {
             BfsArray.add(iter.next().toString());
         }
