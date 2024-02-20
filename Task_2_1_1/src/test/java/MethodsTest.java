@@ -20,7 +20,7 @@ public class MethodsTest {
         methodsList.add(new SecondMethod(numsList, 5000));
         methodsList.add(new ThirdMethod(numsList));
 
-        for (сomplexтumberFinder method : methodsList) {
+        for (сomplexnumberFinder method : methodsList) {
             boolean result = method.hasComplexNum();
             System.out.printf("%s. Complex numbers %s found. Execution time %d ms.%n", method.getName(), result ? "" : "not ", method.getExecutionTime());
         }
