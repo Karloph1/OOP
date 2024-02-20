@@ -3,7 +3,7 @@ package org.example;
 /**
  * super interface.
  */
-public interface icomplexnumberFinder {
+public interface complexnumberFinder {
     boolean hasComplexNum();
 
     String getName();

@@ -3,7 +3,7 @@ package org.example;
 /**
  * abstract main class.
  */
-public abstract class ComplexNumberFinderBase implements icomplexnumberFinder {
+public abstract class ComplexNumberFinderBase implements complexnumberFinder {
     private final String name;
     private long startTime = 0;
     private long endTime = 0;
