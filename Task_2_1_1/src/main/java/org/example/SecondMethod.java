@@ -5,11 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Second class.
+ */
 public class SecondMethod extends ComplexNumberFinderBase {
     private final ArrayList<Integer> rows;
     private final int threadNum;
 
-
+    /**
+     * Class's constructor.
+     */
     public SecondMethod(ArrayList<Integer> rows, int threadNum) {
         super("Method #2");
         this.rows = rows;
@@ -32,8 +37,9 @@ public class SecondMethod extends ComplexNumberFinderBase {
                 }
             }
 
-            for (SecondMethodThread thr : numThreads)
+            for (SecondMethodThread thr : numThreads){
                 thr.getThread().start();
+            }
 
 
             for (SecondMethodThread thr : numThreads) {

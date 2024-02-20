@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * abstract main class.
+ */
 public abstract class ComplexNumberFinderBase implements IComplexNumberFinder {
     private final String name;
     private long startTime = 0;
@@ -10,13 +13,13 @@ public abstract class ComplexNumberFinderBase implements IComplexNumberFinder {
     }
 
     /**
-     * @return
+     * check function.
      */
     @Override
     public abstract boolean hasComplexNum();
 
     /**
-     * @return
+     * name funtcion.
      */
     @Override
     public String getName() {
@@ -24,7 +27,7 @@ public abstract class ComplexNumberFinderBase implements IComplexNumberFinder {
     }
 
     /**
-     * @return
+     * get time function.
      */
     @Override
     public long getExecutionTime() {

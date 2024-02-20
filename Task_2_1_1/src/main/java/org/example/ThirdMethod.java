@@ -3,6 +3,9 @@ package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Third class.
+ */
 public class ThirdMethod extends ComplexNumberFinderBase {
     private ArrayList<Integer> row;
 
