@@ -30,9 +30,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2bcovrFdaDzTkLEX6vKRQX6DhdN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,7 +42,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Task__1__5__1",
+    "git-widget-placeholder": "Task__2__1__1",
+    "jdk.selected.JAVA_MODULE": "11",
     "last_opened_file_path": "C:/Users/Админ/Documents/GitHub/OOP/Task_1_5_1"
   }
 }]]></component>

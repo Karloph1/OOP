@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MethodsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-20T04:00:24" hostname="DESKTOP-PS09NIH" time="4.703">
+  <properties/>
+  <testcase name="allMethodsTest()" classname="MethodsTest" time="4.703"/>
+  <system-out><![CDATA[Method #1. Complex numbers not  found. Execution time 2444 ms.
+Method #2. Complex numbers not  found. Execution time 509 ms.
+Method #2. Complex numbers not  found. Execution time 390 ms.
+Method #2. Complex numbers not  found. Execution time 363 ms.
+Method #2. Complex numbers not  found. Execution time 550 ms.
+Method #3. Complex numbers not  found. Execution time 399 ms.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
