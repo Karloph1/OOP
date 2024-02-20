@@ -11,7 +11,7 @@ public class MethodsTest {
 
     @Test
     void allMethodsTest() {
-        List<сomplexтumberFinder> methodsList = new ArrayList<>();
+        List<complexnumberFinder> methodsList = new ArrayList<>();
 
         methodsList.add(new FirstMethod(numsList));
         methodsList.add(new SecondMethod(numsList, 10));
@@ -20,7 +20,7 @@ public class MethodsTest {
         methodsList.add(new SecondMethod(numsList, 5000));
         methodsList.add(new ThirdMethod(numsList));
 
-        for (сomplexnumberFinder method : methodsList) {
+        for (complexnumberFinder method : methodsList) {
             boolean result = method.hasComplexNum();
             System.out.printf("%s. Complex numbers %s found. Execution time %d ms.%n", method.getName(), result ? "" : "not ", method.getExecutionTime());
         }
