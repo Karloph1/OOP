@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Utils class.
+ */
 public class Utils {
 
     protected static volatile boolean findingResult = false;
