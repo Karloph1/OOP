@@ -28,14 +28,15 @@ public class SecondMethod extends ComplexNumberFinderBase {
             List<SecondMethodThread> numThreads = new ArrayList<>();
             for (int i = 0; i < threadNum; i++) {
                 if (i == threadNum - 1) {
-                    numThreads.add(new SecondMethodThread(rows.subList(rows.size() / threadNum * i, rows.size()), i));
+                    numThreads.add(new SecondMethodThread(rows.subList(rows.size() / threadNum * i,
+                            rows.size()), i));
                 } else {
                     numThreads.add(new SecondMethodThread(rows.subList(rows.size() / threadNum * i,
                                     rows.size() / threadNum * (i + 1) - 1), i));
                 }
             }
 
-            for (SecondMethodThread thr : numThreads){
+            for (SecondMethodThread thr : numThreads) {
                 thr.getThread().start();
             }
 

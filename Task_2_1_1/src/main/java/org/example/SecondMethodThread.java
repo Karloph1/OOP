@@ -2,8 +2,8 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -17,7 +17,7 @@ public class SecondMethodThread implements Runnable {
     private List<Integer> cutOffArray;
 
     /**
-     * Extra second class's constructor
+     * Extra second class's constructor.
      */
     public SecondMethodThread(List<Integer> numsList, int threadNum) {
         cutOffArray = numsList; // отсеченный массив
