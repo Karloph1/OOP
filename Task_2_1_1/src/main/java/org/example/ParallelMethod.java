@@ -26,11 +26,11 @@ public class ParallelMethod extends ComplexNumberFinderBase {
             List<ParallelMethodThread> numThreads = new ArrayList<>();
             for (int i = 0; i < threadNum; i++) {
                 if (i == threadNum - 1) {
-                    numThreads.add(new ParallelMethodThread(rows.subList(rows.size() / threadNum * i,
-                            rows.size()), i));
+                    numThreads.add(new ParallelMethodThread(rows.subList(rows.size() / threadNum * i
+                            , rows.size()), i));
                 } else {
-                    numThreads.add(new ParallelMethodThread(rows.subList(rows.size() / threadNum * i,
-                                    rows.size() / threadNum * (i + 1) - 1), i));
+                    numThreads.add(new ParallelMethodThread(rows.subList(rows.size() / threadNum * i
+                            , rows.size() / threadNum * (i + 1) - 1), i));
                 }
             }
 

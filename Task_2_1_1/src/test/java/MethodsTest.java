@@ -1,11 +1,16 @@
-import org.example.*;
+import org.example.Complexfinder;
+import org.example.ConsistentMethod;
+import org.example.ParallelMethod;
+import org.example.ThreadMethod;
+import org.example.Utils;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-
+/**
+ * testing class.
+ */
 public class MethodsTest {
     ArrayList<Integer> numsList = Utils.generatePrimeNums(10000000);
 
@@ -22,7 +27,8 @@ public class MethodsTest {
 
         for (Complexfinder method : methodsList) {
             boolean result = method.hasComplexNum();
-            System.out.printf("%s. Complex numbers %s found. Execution time %d ms.%n", method.getName(), result ? "" : "not ", method.getExecutionTime());
+            System.out.printf("%s. Complex numbers %s found. Execution time %d ms.%n",
+                    method.getName(), result ? "" : "not ", method.getExecutionTime());
         }
     }
 
