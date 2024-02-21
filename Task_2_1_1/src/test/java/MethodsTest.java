@@ -1,10 +1,10 @@
 import org.example.Complexfinder;
 import org.example.ConsistentMethod;
-import org.example.ThreadMethod;
 import org.example.ParallelMethod;
-import org.example.Utils;
+import org.example.ThreadMethod;
 import java.util.ArrayList;
 import java.util.List;
+import org.example.Utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
