@@ -1,11 +1,11 @@
 import org.example.Complexfinder;
 import org.example.ConsistentMethod;
-import org.example.ParallelMethod;
 import org.example.ThreadMethod;
+import org.example.ParallelMethod;
 import org.example.Utils;
-import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,11 +19,11 @@ public class MethodsTest {
         List<Complexfinder> methodsList = new ArrayList<>();
 
         methodsList.add(new ConsistentMethod(numsList));
-        methodsList.add(new ParallelMethod(numsList, 10));
-        methodsList.add(new ParallelMethod(numsList, 100));
-        methodsList.add(new ParallelMethod(numsList, 1000));
-        methodsList.add(new ParallelMethod(numsList, 5000));
-        methodsList.add(new ThreadMethod(numsList));
+        methodsList.add(new ThreadMethod(numsList, 10));
+        methodsList.add(new ThreadMethod(numsList, 100));
+        methodsList.add(new ThreadMethod(numsList, 1000));
+        methodsList.add(new ThreadMethod(numsList, 5000));
+        methodsList.add(new ParallelMethod(numsList));
 
         for (Complexfinder method : methodsList) {
             boolean result = method.hasComplexNum();
@@ -44,7 +44,7 @@ public class MethodsTest {
 
     @Test
     void checkingSecondMethod() {
-        ParallelMethod ob = new ParallelMethod(numsList, 500);
+        ThreadMethod ob = new ThreadMethod(numsList, 500);
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum());
@@ -54,7 +54,7 @@ public class MethodsTest {
 
     @Test
     void checkingThirdMethod() {
-        ThreadMethod ob = new ThreadMethod(numsList);
+        ParallelMethod ob = new ParallelMethod(numsList);
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum());

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Extra second class.
  */
-public class ParallelMethodThread implements Runnable {
+public class ThreadMethodThread implements Runnable {
 
     private Thread thread;
     private String threadName;
@@ -15,7 +15,7 @@ public class ParallelMethodThread implements Runnable {
     /**
      * Extra second class's constructor.
      */
-    public ParallelMethodThread(List<Integer> numsList, int threadNum) {
+    public ThreadMethodThread(List<Integer> numsList, int threadNum) {
         cutOffArray = numsList; // отсеченный массив
         threadName = "Thread " + threadNum;
         thread = new Thread(this, threadName);
