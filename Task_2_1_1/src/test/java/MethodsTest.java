@@ -11,16 +11,16 @@ public class MethodsTest {
 
     @Test
     void allMethodsTest() {
-        List<complexnumberFinder> methodsList = new ArrayList<>();
+        List<Complexfinder> methodsList = new ArrayList<>();
 
-        methodsList.add(new FirstMethod(numsList));
-        methodsList.add(new SecondMethod(numsList, 10));
-        methodsList.add(new SecondMethod(numsList, 100));
-        methodsList.add(new SecondMethod(numsList, 1000));
-        methodsList.add(new SecondMethod(numsList, 5000));
-        methodsList.add(new ThirdMethod(numsList));
+        methodsList.add(new ConsistentMethod(numsList));
+        methodsList.add(new ParallelMethod(numsList, 10));
+        methodsList.add(new ParallelMethod(numsList, 100));
+        methodsList.add(new ParallelMethod(numsList, 1000));
+        methodsList.add(new ParallelMethod(numsList, 5000));
+        methodsList.add(new ThreadMethod(numsList));
 
-        for (complexnumberFinder method : methodsList) {
+        for (Complexfinder method : methodsList) {
             boolean result = method.hasComplexNum();
             System.out.printf("%s. Complex numbers %s found. Execution time %d ms.%n", method.getName(), result ? "" : "not ", method.getExecutionTime());
         }
@@ -28,7 +28,7 @@ public class MethodsTest {
 
     @Test
     void checkingFirstMethod() {
-        FirstMethod ob = new FirstMethod(numsList);
+        ConsistentMethod ob = new ConsistentMethod(numsList);
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum());
@@ -38,7 +38,7 @@ public class MethodsTest {
 
     @Test
     void checkingSecondMethod() {
-        SecondMethod ob = new SecondMethod(numsList, 500);
+        ParallelMethod ob = new ParallelMethod(numsList, 500);
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum());
@@ -48,7 +48,7 @@ public class MethodsTest {
 
     @Test
     void checkingThirdMethod() {
-        ThirdMethod ob = new ThirdMethod(numsList);
+        ThreadMethod ob = new ThreadMethod(numsList);
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum());

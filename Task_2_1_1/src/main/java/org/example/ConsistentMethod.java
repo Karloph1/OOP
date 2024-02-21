@@ -6,10 +6,10 @@ import java.util.ArrayList;
 /**
  * First class.
  */
-public class FirstMethod extends ComplexNumberFinderBase {
+public class ConsistentMethod extends ComplexNumberFinderBase {
     private final int[] row;
 
-    public FirstMethod(ArrayList<Integer> nums) {
+    public ConsistentMethod(ArrayList<Integer> nums) {
         super("Method #1");
         row = nums.stream().mapToInt(i -> i).toArray();
     }

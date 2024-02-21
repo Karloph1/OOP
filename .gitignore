@@ -94,3 +94,7 @@ Task_2_1_1/.gradle/8.2/dependencies-accessors/gc.properties
 Task_2_1_1/.gradle/8.2/dependencies-accessors/dependencies-accessors.lock
 Task_2_1_1/.gradle/8.2/checksums/checksums.lock
 .idea/workspace.xml
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/uiDesigner.xml
+.idea/gradle.xml

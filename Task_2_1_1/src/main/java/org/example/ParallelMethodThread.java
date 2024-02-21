@@ -1,15 +1,11 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Extra second class.
  */
-public class SecondMethodThread implements Runnable {
+public class ParallelMethodThread implements Runnable {
 
     private Thread thread;
     private String threadName;
@@ -19,7 +15,7 @@ public class SecondMethodThread implements Runnable {
     /**
      * Extra second class's constructor.
      */
-    public SecondMethodThread(List<Integer> numsList, int threadNum) {
+    public ParallelMethodThread(List<Integer> numsList, int threadNum) {
         cutOffArray = numsList; // отсеченный массив
         threadName = "Thread " + threadNum;
         thread = new Thread(this, threadName);

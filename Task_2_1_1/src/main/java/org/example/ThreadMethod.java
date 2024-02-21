@@ -6,10 +6,10 @@ import java.util.ArrayList;
 /**
  * Third class.
  */
-public class ThirdMethod extends ComplexNumberFinderBase {
+public class ThreadMethod extends ComplexNumberFinderBase {
     private ArrayList<Integer> row;
 
-    public ThirdMethod(ArrayList<Integer> nums) {
+    public ThreadMethod(ArrayList<Integer> nums) {
         super("Method #3");
         row = nums;
     }
@@ -18,7 +18,7 @@ public class ThirdMethod extends ComplexNumberFinderBase {
     public boolean hasComplexNum() {
         boolean result = false;
         setStartTime();
-        result = row.parallelStream().anyMatch(ThirdMethod::complyCheck);
+        result = row.parallelStream().anyMatch(ThreadMethod::complyCheck);
         setEndTime();
 
         return result;
