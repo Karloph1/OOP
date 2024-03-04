@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class Bakery {
     private static ArrayList<Baker> bakers = new ArrayList<>();
     private static ArrayList<Courier> couriers = new ArrayList<>();
-    private static volatile LinkedList<Order> freeOrders = new LinkedList<>(); // невзятые заказы, синхронизованное
+    private static volatile LinkedList<Order> freeOrders = new LinkedList<>();
     private static Storage storage;
     private static boolean isEndOfDay; // конец дня
     private static volatile int workingBakerCounter = 0; // конец дня

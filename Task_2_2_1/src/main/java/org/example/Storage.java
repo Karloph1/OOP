@@ -9,8 +9,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Storage class.
  */
 public class Storage {
-    private static volatile Queue<Order> completedOrders = new ArrayDeque<>(); // готовые заказы на складе, синхронизованное
-    private static volatile Queue<String> queue; // очередь на склад, синхронизованное
+    private static volatile Queue<Order> completedOrders = new ArrayDeque<>();
+    private static volatile Queue<String> queue;
     private static int capacity;
     protected static final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
 
@@ -23,6 +23,9 @@ public class Storage {
         return completedOrders.size();
     }
 
+    /**
+     * get function.
+     */
     public static ArrayList<Order> getOrders(int maxCount) {
         ArrayList<Order> selectedOrders = new ArrayList<Order>();
 
@@ -33,7 +36,6 @@ public class Storage {
                 break;
             }
         }
-
         return selectedOrders;
     }
 
@@ -57,6 +59,9 @@ public class Storage {
         String a = queue.remove();
     }
 
+    /**
+     * check function.
+     */
     public static boolean checkFirstReservedPlace(String orderNumber) {
         if (!queue.isEmpty()) {
             return (orderNumber.equals(queue.peek())); // нет элементов в очереди?

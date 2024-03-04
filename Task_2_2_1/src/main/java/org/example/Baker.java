@@ -10,6 +10,12 @@ public class Baker implements Runnable {
     private String threadName;
     private Thread thread;
 
+    /**
+     * Baker constructor.
+     *
+     * @param velocity
+     * @param threadName
+     */
     public Baker(int velocity, String threadName) {
         this.velocity = velocity;
         this.threadName = threadName;
@@ -20,7 +26,7 @@ public class Baker implements Runnable {
         return this.thread;
     }
 
-    private void pizzaTransfer(Order order) throws InterruptedException { // складинирование пиццы на склад
+    private void pizzaTransfer(Order order) throws InterruptedException {
         boolean isReserved = false;
 
         try {
@@ -39,7 +45,8 @@ public class Baker implements Runnable {
             while (true) {
                 try {
                     Storage.lock1.writeLock().lock();
-                    if (Storage.isExistFreeSpace() && Storage.checkFirstReservedPlace(this.threadName)) {
+                    if (Storage.isExistFreeSpace() &&
+                            Storage.checkFirstReservedPlace(this.threadName)) {
                         Storage.unReservePlace();
                         Storage.putToStorage(order);
                         break;
@@ -53,7 +60,7 @@ public class Baker implements Runnable {
         }
     }
 
-    private boolean TryToCook() { // готовка пиццы
+    private boolean tryToCook() { // готовка пиццы
         Order order = null;
         boolean result = false;
         if (Bakery.hasFreeOrders()) {
@@ -103,7 +110,7 @@ public class Baker implements Runnable {
 
         try {
             while (thread.isAlive()) { // пока поток жив
-                if (!TryToCook()) { // если не получилось взять заказ
+                if (!tryToCook()) { // если не получилось взять заказ
                     if (Bakery.isEndOfDay()) { // если день закончился
                         return;
                     } else {

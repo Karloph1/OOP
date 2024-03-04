@@ -4,7 +4,8 @@ package org.example;
  * Ordergenerator class.
  */
 public class OrderGenerator implements Runnable {
-    private static final String[] pizzaNames = new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
+    private static final String[] pizzaNames =
+            new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders = 0;
     private Thread thread;
 
@@ -16,6 +17,9 @@ public class OrderGenerator implements Runnable {
         return this.thread;
     }
 
+    /**
+     * generate function.
+     */
     public static Order generateNewOrder() {
         String pizza = pizzaNames[(int) (Math.random() * pizzaNames.length)];
         totalOrders++;
