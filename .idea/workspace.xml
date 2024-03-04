@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7403c3c4-6ecb-46c4-adc8-ddf8e52f03ee" name="Changes" comment="" />
+    <list default="true" id="7403c3c4-6ecb-46c4-adc8-ddf8e52f03ee" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,9 +44,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Task__2__1__1",
+    "git-widget-placeholder": "Task__2__2__1",
     "jdk.selected.JAVA_MODULE": "11",
-    "last_opened_file_path": "C:/Users/Админ/IdeaProjects/tmp"
+    "last_opened_file_path": "C:/Users/Админ/Documents/GitHub/OOP"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
