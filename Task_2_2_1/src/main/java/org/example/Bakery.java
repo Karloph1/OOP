@@ -16,6 +16,9 @@ public class Bakery {
     private static volatile int workingBakerCounter = 0; // конец дня
     protected static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
+    /**
+     * bakery constructor.
+     */
     public Bakery(ArrayList<Baker> bakers, ArrayList<Courier> couriers, Storage storage) {
         this.bakers = bakers;
         this.couriers = couriers;
@@ -55,6 +58,9 @@ public class Bakery {
         return isEndOfDay;
     }
 
+    /**
+     * start function.
+     */
     public void initialisingProcess() { // инициализация пиццерии
         for (Baker thr : bakers) {
             thr.getThread().start();

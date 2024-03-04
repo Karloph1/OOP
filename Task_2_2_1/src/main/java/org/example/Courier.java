@@ -11,6 +11,9 @@ public class Courier implements Runnable {
     private Thread thread;
     private ArrayList<Order> takenOrders; // взятые заказы
 
+    /**
+     * courier constructor.
+     */
     public Courier(int capacity, String threadName) {
         this.capacity = capacity;
         this.threadName = threadName;

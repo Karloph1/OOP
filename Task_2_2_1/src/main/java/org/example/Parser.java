@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +16,9 @@ public class Parser {
     private static JsonArray couriers = new JsonArray();
     private static int storage;
 
-
+    /**
+     * parser function.
+     */
     public static void parser(String fileName) {
         try (FileReader reader = new FileReader(fileName)) {
             JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
@@ -29,6 +30,9 @@ public class Parser {
         }
     }
 
+    /**
+     * get function.
+     */
     public static ArrayList<Baker> getBakers() {
         ArrayList<Baker> bakersList = new ArrayList<>();
         for (JsonElement bakerElement : bakers) {
@@ -41,6 +45,9 @@ public class Parser {
         return bakersList;
     }
 
+    /**
+     * get function.
+     */
     public static ArrayList<Courier> getCouriers() {
         ArrayList<Courier> couriersList = new ArrayList<>();
         for (JsonElement courierElement : couriers) {

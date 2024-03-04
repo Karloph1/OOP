@@ -12,9 +12,6 @@ public class Baker implements Runnable {
 
     /**
      * Baker constructor.
-     *
-     * @param velocity
-     * @param threadName
      */
     public Baker(int velocity, String threadName) {
         this.velocity = velocity;
@@ -45,8 +42,8 @@ public class Baker implements Runnable {
             while (true) {
                 try {
                     Storage.lock1.writeLock().lock();
-                    if (Storage.isExistFreeSpace() &&
-                            Storage.checkFirstReservedPlace(this.threadName)) {
+                    if (Storage.isExistFreeSpace()
+                            && Storage.checkFirstReservedPlace(this.threadName)) {
                         Storage.unReservePlace();
                         Storage.putToStorage(order);
                         break;
