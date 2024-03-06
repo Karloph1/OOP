@@ -8,6 +8,9 @@ public class Order {
     int orderNumber;
     String status;
 
+    /**
+     * Order constructor.
+     */
     public Order(String name, int orderNumber) {
         this.name = name;
         this.orderNumber = orderNumber;

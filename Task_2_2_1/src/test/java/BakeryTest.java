@@ -1,10 +1,9 @@
+import java.util.ArrayList;
 import org.example.Baker;
 import org.example.Courier;
 import org.example.Parser;
-import org.example.Storage;
 import org.example.Bakery;
-
-import java.util.ArrayList;
+import org.example.Storage;
 
 /**
  * Test class.
@@ -14,6 +13,9 @@ public class BakeryTest {
     static ArrayList<Courier> couriers = new ArrayList<>();
     static int capacity;
 
+    /**
+     * main function.
+     */
     public static void main(String[] argc) {
         Parser.parser("src/test/resources/data.json");
         bakers = Parser.getBakers();

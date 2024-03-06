@@ -58,7 +58,7 @@ public class Courier implements Runnable {
                     throw new RuntimeException(e);
                 }
             } else {
-                if (!Bakery.hasWorkedBakers() && Storage.getCurrentStorage() == 0) { // если готовых пицц больше нету
+                if (!Bakery.hasWorkedBakers() && Storage.getCurrentStorage() == 0) {
                     return;
                 } else {
                     try {
