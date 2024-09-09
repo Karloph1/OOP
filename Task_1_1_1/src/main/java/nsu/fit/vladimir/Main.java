@@ -2,7 +2,7 @@ package nsu.fit.vladimir;
 
 public class Main {
     /**
-     * sifting function
+     * sifting function.
      */
 
     private static void sift(int[] array, int index, int unsortedArrayLength) {
@@ -31,7 +31,7 @@ public class Main {
 
 
     /**
-     * heapsort function
+     * heapsort function.
      */
 
     public static void heapsort(int[] array) {
