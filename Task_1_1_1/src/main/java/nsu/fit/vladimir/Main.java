@@ -1,5 +1,9 @@
 package nsu.fit.vladimir;
 
+/**
+ * Main class.
+ */
+
 public class Main {
     /**
      * sifting function.
