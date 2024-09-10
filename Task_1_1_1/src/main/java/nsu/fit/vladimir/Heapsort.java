@@ -4,7 +4,7 @@ package nsu.fit.vladimir;
  * Main class.
  */
 
-public class Main {
+public class Heapsort {
     /**
      * sifting function.
      */
