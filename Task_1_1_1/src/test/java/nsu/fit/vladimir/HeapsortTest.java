@@ -50,7 +50,7 @@ class HeapsortTest {
     void heapsort7() {
         int[] ans = {10, -23, 9, 0, -23, 0, 0, -3, 100, 23, 10, -23};
         Heapsort.heapsort(ans);
-        Assertions.assertArrayEquals(new int[]{-23, -23, -23, -3, 0, 0, 0,
-                9, 10, 10, 23, 100}, ans);
+        Assertions.assertArrayEquals(new int[]
+                {-23, -23, -23, -3, 0, 0, 0, 9, 10, 10, 23, 100}, ans);
     }
 }
