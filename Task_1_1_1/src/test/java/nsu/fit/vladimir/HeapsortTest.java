@@ -53,13 +53,4 @@ class HeapsortTest {
         Assertions.assertArrayEquals(new int[]{-23, -23, -23, -3, 0, 0, 0,
                 9, 10, 10, 23, 100}, ans);
     }
-
-    @Test
-    void heapsortTimeTest() {
-        int[] ans = new int[20];
-
-        long x = System.currentTimeMillis();
-        Heapsort.heapsort(ans);
-        System.out.println(System.currentTimeMillis() - x);
-    }
 }
