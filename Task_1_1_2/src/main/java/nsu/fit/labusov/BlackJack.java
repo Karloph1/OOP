@@ -207,8 +207,8 @@ public class BlackJack {
                 System.out.println("\nВаш ход\n------");
 
                 while (!isGameOver && isPlayerTurn) {
-                    System.out.println("Введите “1”, чтобы взять карту," +
-                            " и “0”, чтобы остановиться...");
+                    System.out.println("Введите “1”, чтобы взять карту,"
+                            + " и “0”, чтобы остановиться...");
                     int commandNumber = scanner.nextInt();
 
                     if (commandNumber == 1) {
@@ -217,8 +217,8 @@ public class BlackJack {
                         String drawnCard = showCard(dealer.getPlayerCards());
 
                         System.out.println("Вы открыли карту " + drawnCard);
-                        System.out.println("    Ваши карты: " +
-                                printCards(dealer.getPlayerCards()));
+                        System.out.println("    Ваши карты: "
+                                + printCards(dealer.getPlayerCards()));
                         System.out.println("    Карты дилера:" + string);
 
                         if (calculateScore(dealer.getPlayerCards()) > 21) {
