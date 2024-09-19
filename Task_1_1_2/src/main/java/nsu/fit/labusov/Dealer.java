@@ -3,11 +3,17 @@ package nsu.fit.labusov;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Dealer class.
+ */
 public class Dealer {
     private ArrayList<CardsDeck> decks;
     private final ArrayList<Card> playerCards;
     private final ArrayList<Card> dealerCards;
 
+    /**
+     * Constructor dealer method.
+     */
     public Dealer(int decksAmount) {
         decks = new ArrayList<>(decksAmount);
         playerCards = new ArrayList<>();
@@ -18,6 +24,9 @@ public class Dealer {
         }
     }
 
+    /**
+     * Draw card method.
+     */
     public void drawCard(boolean isPlayerTurn) {
         Random random = new Random();
 
@@ -41,6 +50,9 @@ public class Dealer {
         return dealerCards;
     }
 
+    /**
+     * Start new round method.
+     */
     public void makeNewRound() {
         playerCards.clear();
         dealerCards.clear();

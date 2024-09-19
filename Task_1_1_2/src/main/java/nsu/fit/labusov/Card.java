@@ -1,10 +1,16 @@
 package nsu.fit.labusov;
 
+/**
+ * Single card class.
+ */
 public class Card {
     private final CardSuit suit;
     private final int value;
     private int blackJackValue;
 
+    /**
+     * Constructor single card method.
+     */
     public Card(int numberSuit, int value, int blackJackValue) {
         switch (numberSuit) {
             case 0:

@@ -2,9 +2,15 @@ package nsu.fit.labusov;
 
 import java.util.ArrayList;
 
+/**
+ *  Deck of cards class.
+ */
 public class CardsDeck {
     private final ArrayList<Card> cards;
 
+    /**
+     * Constructor deck of cards method.
+     */
     public CardsDeck() {
         cards = new ArrayList<>();
 
@@ -21,6 +27,9 @@ public class CardsDeck {
         }
     }
 
+    /**
+     * Get object method.
+     */
     public Card getCard(int index) {
         Card card = cards.get(index);
         cards.remove(index);
