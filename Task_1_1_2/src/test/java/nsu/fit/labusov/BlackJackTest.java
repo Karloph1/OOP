@@ -1,14 +1,16 @@
 package nsu.fit.labusov;
 
 import org.junit.jupiter.api.Assertions;
+import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
+/**
+ * BlackJack test.
+ */
 public class BlackJackTest {
 
     @Test
-    void blackjackTestPlayerLose() {
+    void blackJackTestPlayerLose() {
         BlackJack blackJack = new BlackJack(1, 1, false);
         Scanner scanner1 = new Scanner("1 1 1 1 1 1 1 1 1");
 
@@ -18,7 +20,7 @@ public class BlackJackTest {
     }
 
     @Test
-    void blackjackTestDealerLose() {
+    void blackJackTestDealerLose() {
         BlackJack blackJack = new BlackJack(1, 1, true);
         Scanner scanner2 = new Scanner("0");
 

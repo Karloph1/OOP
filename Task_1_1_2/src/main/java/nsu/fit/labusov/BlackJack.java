@@ -246,7 +246,8 @@ public class BlackJack {
                     System.out.println("    Dealer cards:" + printCards(dealer.getDealerCards()));
                 }
 
-                while ((calculateScore(dealer.getDealerCards()) < 18 || shouldDealerLose) && !isGameOver) {
+                while ((calculateScore(dealer.getDealerCards()) < 18 || shouldDealerLose)
+                        && !isGameOver) {
                     dealer.drawCard(false);
 
                     String drawnCard = showCard(dealer.getDealerCards());
