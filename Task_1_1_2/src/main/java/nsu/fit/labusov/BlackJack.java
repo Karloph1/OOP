@@ -7,19 +7,25 @@ import java.util.Scanner;
  * BlackJack class.
  */
 public class BlackJack {
-    private int round;
+    private int currentRound;
+    private final int maxRounds;
+    private final int decksAmount;
     private boolean isGameOver;
     private int playerScore;
     private int dealerScore;
+    private final boolean shouldDealerLose;
 
     /**
      * Constructor BlackJack method.
      */
-    public BlackJack() {
-        round = 1;
+    public BlackJack(int maxRounds, int decksAmount, boolean shouldDealerLose) {
+        currentRound = 1;
         isGameOver = false;
         playerScore = 0;
         dealerScore = 0;
+        this.maxRounds = maxRounds;
+        this.decksAmount = decksAmount;
+        this.shouldDealerLose = shouldDealerLose;
     }
 
     private int calculateScore(ArrayList<Card> cardsHand) {
@@ -174,28 +180,27 @@ public class BlackJack {
     /**
      * Initialising game method.
      */
-    public void startGame(int decksAmount) {
+    public boolean startGame(Scanner scanner) {
         Dealer dealer = new Dealer(decksAmount);
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Добро пожаловать в Блэкджек!");
+        System.out.println("Welcome to BlackJack!");
 
-        while (playerScore < 5 || dealerScore < 5) {
-            System.out.println("Раунд " + round + "\nДилер раздал карты");
+        while (playerScore < maxRounds && dealerScore < maxRounds) {
+            System.out.println("Round " + currentRound + "\nDealer deals out cards");
 
             dealer.drawCard(true);
             dealer.drawCard(true);
             dealer.drawCard(false);
             dealer.drawCard(false);
 
-            System.out.println("    Ваши карты: " + printCards(dealer.getPlayerCards()));
+            System.out.println("    Your cards: " + printCards(dealer.getPlayerCards()));
 
             StringBuilder string = new StringBuilder(printCards(dealer.getDealerCards()));
             int index = string.indexOf(",");
             string.delete(index + 2, string.length());
-            string.append("<закрытая карта>]");
+            string.append("<close card>]");
 
-            System.out.println("    Карты дилера:" + string);
+            System.out.println("    Dealer cards:" + string);
             boolean isPlayerTurn = true;
 
             if (calculateScore(dealer.getPlayerCards()) == 21
@@ -204,22 +209,25 @@ public class BlackJack {
             }
 
             while (!isGameOver) {
-                System.out.println("\nВаш ход\n------");
+                System.out.println("\nYour turn\n------");
 
                 while (!isGameOver && isPlayerTurn) {
-                    System.out.println("Введите “1”, чтобы взять карту,"
-                            + " и “0”, чтобы остановиться...");
+
+                    System.out.println("Insert '1' to take a card,"
+                            + " and '0' to pass...");
                     int commandNumber = scanner.nextInt();
+
+                    System.out.println(commandNumber);
 
                     if (commandNumber == 1) {
                         dealer.drawCard(true);
 
                         String drawnCard = showCard(dealer.getPlayerCards());
 
-                        System.out.println("Вы открыли карту " + drawnCard);
-                        System.out.println("    Ваши карты: "
+                        System.out.println("You get card " + drawnCard);
+                        System.out.println("    Your cards: "
                                 + printCards(dealer.getPlayerCards()));
-                        System.out.println("    Карты дилера:" + string);
+                        System.out.println("    Dealer cards:" + string);
 
                         if (calculateScore(dealer.getPlayerCards()) > 21) {
                             isGameOver = true;
@@ -232,20 +240,20 @@ public class BlackJack {
                 if (!isGameOver) {
                     String hiddenCard = showCard(dealer.getDealerCards());
 
-                    System.out.println("\nХод дилера\n------\nДилер открывает закрытую карту "
+                    System.out.println("\nDealer turn\n------\nDealer opens closed card "
                             + hiddenCard);
-                    System.out.println("    Ваши карты: " + printCards(dealer.getPlayerCards()));
-                    System.out.println("    Карты дилера:" + printCards(dealer.getDealerCards()));
+                    System.out.println("    Your cards: " + printCards(dealer.getPlayerCards()));
+                    System.out.println("    Dealer cards:" + printCards(dealer.getDealerCards()));
                 }
 
-                while (calculateScore(dealer.getDealerCards()) < 18 && !isGameOver) {
+                while ((calculateScore(dealer.getDealerCards()) < 18 || shouldDealerLose) && !isGameOver) {
                     dealer.drawCard(false);
 
                     String drawnCard = showCard(dealer.getDealerCards());
 
-                    System.out.println("Дилер открывает карту " + drawnCard);
-                    System.out.println("    Ваши карты: " + printCards(dealer.getPlayerCards()));
-                    System.out.println("    Карты дилера:" + printCards(dealer.getDealerCards()));
+                    System.out.println("Dealer opens a card " + drawnCard);
+                    System.out.println("    Your cards: " + printCards(dealer.getPlayerCards()));
+                    System.out.println("    Dealer cards:" + printCards(dealer.getDealerCards()));
 
                     if (calculateScore(dealer.getDealerCards()) > 21) {
                         isGameOver = true;
@@ -258,27 +266,29 @@ public class BlackJack {
             if (calculateScore(dealer.getPlayerCards()) > 21
                     || (calculateScore(dealer.getPlayerCards())
                     < calculateScore(dealer.getDealerCards())
-                            && calculateScore(dealer.getDealerCards()) <= 21)) {
+                    && calculateScore(dealer.getDealerCards()) <= 21)) {
                 dealerScore++;
 
-                System.out.print("\nВы проиграли раунд! Счет " + playerScore + ":" + dealerScore);
+                System.out.print("\nYou lose a round! Score " + playerScore + ":" + dealerScore);
             } else {
                 playerScore++;
 
-                System.out.print("\nВы выиграли раунд! Счет " + playerScore + ":" + dealerScore);
+                System.out.print("\nYou win a round! Score " + playerScore + ":" + dealerScore);
             }
 
             if (playerScore > dealerScore) {
-                System.out.println(" в вашу пользу\n");
+                System.out.println(" in your favor\n");
             } else if (dealerScore > playerScore) {
-                System.out.println(" в пользу дилера\n");
+                System.out.println(" in dealer's favor\n");
             } else {
                 System.out.println("\n");
             }
 
             dealer.makeNewRound();
             isGameOver = false;
-            round++;
+            currentRound++;
         }
+
+        return playerScore > dealerScore;
     }
 }
