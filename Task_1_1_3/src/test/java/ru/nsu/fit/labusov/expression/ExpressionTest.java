@@ -1,4 +1,4 @@
-package nsu.fit.labusov;
+package ru.nsu.fit.labusov.expression;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,15 +11,15 @@ public class ExpressionTest {
     @Test
     void expressionOneSentenceTest() {
         Expression e = new Add(new Sub(new Div(new Variable("x"), new Variable("yy")),
-                new Number(100)), new Mul(new Number(15), new Variable("a")));
+                new ru.nsu.fit.labusov.expression.Number(100)), new Mul(new ru.nsu.fit.labusov.expression.Number(15), new Variable("a")));
 
         Assertions.assertEquals("(((x/yy)-100)+(15*a))", e.showExpression());
     }
 
     @Test
     void expressionEvaluationTest() {
-        Expression e = new Add(new Mul(new Sub(new Number(3), new Variable("x")),
-                new Variable("xan")), new Div(new Variable("n"), new Number(2)));
+        Expression e = new Add(new Mul(new Sub(new ru.nsu.fit.labusov.expression.Number(3), new Variable("x")),
+                new Variable("xan")), new Div(new Variable("n"), new ru.nsu.fit.labusov.expression.Number(2)));
 
         Assertions.assertEquals(30, e.eval("xan = 10; x = 5; n = 100; a = 1"));
     }
@@ -27,7 +27,7 @@ public class ExpressionTest {
     @Test
     void expressionDerivativeTest() {
         Expression e = new Add(new Mul(new Div(new Variable("x"), new Variable("y")),
-                new Number(10)), new Sub(new Number(5), new Mul(new Variable("x"),
+                new ru.nsu.fit.labusov.expression.Number(10)), new Sub(new ru.nsu.fit.labusov.expression.Number(5), new Mul(new Variable("x"),
                     new Number(6))));
         Expression devE = e.derivative("x");
 
