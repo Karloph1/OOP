@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"nsu.fit.labusov","l":"Add"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"nsu.fit.labusov","l":"Div"},{"p":"nsu.fit.labusov","l":"Expression"},{"p":"nsu.fit.labusov","l":"Mul"},{"p":"nsu.fit.labusov","l":"Number"},{"p":"nsu.fit.labusov","l":"Sub"},{"p":"nsu.fit.labusov","l":"Variable"}]
