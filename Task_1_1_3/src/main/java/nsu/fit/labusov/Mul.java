@@ -31,7 +31,8 @@ public class Mul extends Expression {
 
     @Override
     public Expression derivative(String string) {
-        return new Add(new Mul(firstTerm.derivative(string), secondTerm), new Mul(firstTerm, secondTerm.derivative(string)));
+        return new Add(new Mul(firstTerm.derivative(string), secondTerm),
+                new Mul(firstTerm, secondTerm.derivative(string)));
     }
 
     @Override
