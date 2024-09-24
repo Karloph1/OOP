@@ -15,18 +15,22 @@ public class Card {
         switch (numberSuit) {
             case 0:
                 suit = CardSuit.HEARTS;
+                suit.setStringRepresentation("Червы");
 
                 break;
             case 1:
                 suit = CardSuit.DIAMONDS;
+                suit.setStringRepresentation("Буби");
 
                 break;
             case 2:
                 suit = CardSuit.SPADES;
+                suit.setStringRepresentation("Пики");
 
                 break;
             default:
                 suit = CardSuit.CROSSES;
+                suit.setStringRepresentation("Крести");
 
                 break;
         }

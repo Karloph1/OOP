@@ -63,26 +63,7 @@ public class BlackJack {
         for (Card card : cardsHand) {
             StringBuilder substring = new StringBuilder();
 
-            switch (card.getSuit()) {
-                case HEARTS:
-                    substring.append("Червы");
-
-                    break;
-                case SPADES:
-                    substring.append("Пики");
-
-                    break;
-                case CROSSES:
-                    substring.append("Крести");
-
-                    break;
-                case DIAMONDS:
-                    substring.append("Буби");
-
-                    break;
-                default:
-                    break;
-            }
+            substring.append(card.getSuit().getStringRepresentation());
 
             switch (card.getValue()) {
                 case 0:
