@@ -55,4 +55,18 @@ public class Card {
     public String toString() {
         return suit + " " + value;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+
+        Card card = (Card) obj;
+
+        return this.suit == card.suit && this.value == card.value
+                && this.blackJackValue == card.blackJackValue;
+    }
 }
