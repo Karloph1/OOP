@@ -1,4 +1,4 @@
-package nsu.fit.labusov;
+package ru.nsu.fit.labusov.blackjack;
 
 /**
  * Single card class.
