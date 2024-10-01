@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 public class BlackJackTest {
     @Test
     void cardTest() {
-        Card card = new Card(1, 0, 10);
+        Card card = new Card(CardSuit.DIAMONDS, 2, 10);
 
         Assertions.assertEquals(CardSuit.DIAMONDS, card.getSuit());
-        Assertions.assertEquals(0, card.getValue());
-        Assertions.assertEquals(10, card.getBlackJackValue());
-        Assertions.assertEquals("DIAMONDS 0", card.toString());
+        Assertions.assertEquals(2, card.getValue());
+        Assertions.assertEquals(2, card.getBlackJackValue());
+        Assertions.assertEquals("Двойка Буби (2)", card.toString());
     }
 
     @Test
@@ -23,9 +23,9 @@ public class BlackJackTest {
         CardsDeck cardsDeck = new CardsDeck();
         Assertions.assertEquals(52, cardsDeck.getDeckLength());
 
-        Assertions.assertEquals(10, cardsDeck.getCard(10).getBlackJackValue());
-        Assertions.assertEquals(CardSuit.HEARTS, cardsDeck.getCard(1).getSuit());
-        Assertions.assertEquals(cardsDeck.getCard(0), new Card(0, 0, 2));
+        Assertions.assertEquals(4, cardsDeck.getCard(10).getBlackJackValue());
+        Assertions.assertEquals(CardSuit.CROSSES, cardsDeck.getCard(1).getSuit());
+        Assertions.assertEquals(cardsDeck.getCard(0), new Card(CardSuit.HEARTS, 2, 2));
 
         Assertions.assertEquals(49, cardsDeck.getDeckLength());
     }

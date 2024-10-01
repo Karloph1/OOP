@@ -1,5 +1,8 @@
 package ru.nsu.fit.labusov.blackjack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Single card class.
  */
@@ -8,33 +11,30 @@ public class Card {
     private final int value;
     private int blackJackValue;
 
+    private static final Map<Integer, String> valueNames;
+
+    static {
+        valueNames = new HashMap<>();
+        valueNames.put(2, "Двойка");
+        valueNames.put(3, "Тройка");
+        valueNames.put(4, "Четверка");
+        valueNames.put(5, "Пятерка");
+        valueNames.put(6, "Шестерка");
+        valueNames.put(7, "Семерка");
+        valueNames.put(8, "Восьмерка");
+        valueNames.put(9, "Девятка");
+        valueNames.put(10, "Десятка");
+        valueNames.put(11, "Валет");
+        valueNames.put(12, "Дама");
+        valueNames.put(13, "Король");
+        valueNames.put(14, "Туз");
+    }
+
     /**
      * Constructor single card method.
      */
-    public Card(int numberSuit, int value, int blackJackValue) {
-        switch (numberSuit) {
-            case 0:
-                suit = CardSuit.HEARTS;
-                suit.setStringRepresentation("Червы");
-
-                break;
-            case 1:
-                suit = CardSuit.DIAMONDS;
-                suit.setStringRepresentation("Буби");
-
-                break;
-            case 2:
-                suit = CardSuit.SPADES;
-                suit.setStringRepresentation("Пики");
-
-                break;
-            default:
-                suit = CardSuit.CROSSES;
-                suit.setStringRepresentation("Крести");
-
-                break;
-        }
-
+    public Card(CardSuit numberSuit, int value, int blackJackValue) {
+        suit = numberSuit;
         this.value = value;
         this.blackJackValue = blackJackValue;
     }
@@ -48,8 +48,17 @@ public class Card {
     }
 
     public int getBlackJackValue() {
-        return blackJackValue;
+        int cardWeight = value;
+
+        if (value == 14) {
+            cardWeight = blackJackValue;
+        } else if (value > 10) {
+            cardWeight = 10;
+        }
+
+        return cardWeight;
     }
+
 
     public void setBlackJackValue(int value) {
         blackJackValue = value;
@@ -57,7 +66,23 @@ public class Card {
 
     @Override
     public String toString() {
-        return suit + " " + value;
+        StringBuilder str = new StringBuilder();
+        String suitName = getSuit().toString(value);
+        String cardName = valueNames.get(value);
+
+        if (value <= 10 || value == 14) {
+            str.append(cardName);
+            str.append(" ");
+            str.append(suitName);
+            str.append(" (").append(getBlackJackValue()).append(")");
+        } else {
+            str.append(suitName);
+            str.append(" ");
+            str.append(cardName);
+            str.append(" (").append(getBlackJackValue()).append(")");
+        }
+
+        return str.toString();
     }
 
     @Override
@@ -72,5 +97,16 @@ public class Card {
 
         return this.suit == card.suit && this.value == card.value
                 && this.blackJackValue == card.blackJackValue;
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 23;
+        int hash = 1;
+        hash = PRIME * hash + Integer.hashCode(suit.ordinal());
+        hash = PRIME * hash + Integer.hashCode(value);
+        hash = PRIME * hash + Integer.hashCode(blackJackValue);
+
+        return hash;
     }
 }

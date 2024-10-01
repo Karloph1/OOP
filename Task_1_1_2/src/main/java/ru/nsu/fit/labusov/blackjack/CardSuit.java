@@ -5,13 +5,36 @@ package ru.nsu.fit.labusov.blackjack;
  */
 public enum CardSuit {
     HEARTS, DIAMONDS, SPADES, CROSSES;
-    private String stringRepresentation;
 
-    public void setStringRepresentation(String string) {
-        this.stringRepresentation = string;
+    @Override
+    public String toString() {
+        switch (this) {
+            case HEARTS:
+                return ("Червы");
+            case DIAMONDS:
+                return ("Буби");
+            case CROSSES:
+                return ("Крести");
+            default:
+                return ("Пики");
+        }
     }
 
-    public String getStringRepresentation() {
-        return stringRepresentation;
+    public String toString(int cardValue) {
+        if (cardValue <= 10 || cardValue == 14) {
+            return toString();
+        } else {
+            StringBuilder suitName = new StringBuilder(toString());
+            suitName.delete(suitName.length() - 2, suitName.length());
+            suitName.append("ов");
+
+            if (cardValue == 12) {
+                suitName.append("ая");
+            } else {
+                suitName.append("ый");
+            }
+
+            return suitName.toString();
+        }
     }
 }

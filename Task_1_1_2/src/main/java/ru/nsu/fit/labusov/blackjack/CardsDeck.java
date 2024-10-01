@@ -3,7 +3,7 @@ package ru.nsu.fit.labusov.blackjack;
 import java.util.ArrayList;
 
 /**
- *  Deck of cards class.
+ * Deck of cards class.
  */
 public class CardsDeck {
     private final ArrayList<Card> cards;
@@ -14,15 +14,22 @@ public class CardsDeck {
     public CardsDeck() {
         cards = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 13; j++) {
-                if (j == 12) {
-                    cards.add(new Card(i, j, 11));
-                } else if (j > 8) {
-                    cards.add(new Card(i, j, 10));
-                } else {
-                    cards.add(new Card(i, j, j + 2));
-                }
+        for (int i = 2; i < 15; i++) {
+            if (i == 14) {
+                cards.add(new Card(CardSuit.HEARTS, i, 11));
+                cards.add(new Card(CardSuit.CROSSES, i, 11));
+                cards.add(new Card(CardSuit.DIAMONDS, i, 11));
+                cards.add(new Card(CardSuit.SPADES, i, 11));
+            } else if (i > 10) {
+                cards.add(new Card(CardSuit.HEARTS, i, 10));
+                cards.add(new Card(CardSuit.CROSSES, i, 10));
+                cards.add(new Card(CardSuit.DIAMONDS, i, 10));
+                cards.add(new Card(CardSuit.SPADES, i, 10));
+            } else {
+                cards.add(new Card(CardSuit.HEARTS, i, i));
+                cards.add(new Card(CardSuit.CROSSES, i, i));
+                cards.add(new Card(CardSuit.DIAMONDS, i, i));
+                cards.add(new Card(CardSuit.SPADES, i, i));
             }
         }
     }
