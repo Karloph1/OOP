@@ -1,6 +1,7 @@
 package ru.nsu.fit.labusov.blackjack;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -42,11 +43,11 @@ public class Dealer {
         }
     }
 
-    public ArrayList<Card> getPlayerCards() {
+    public List<Card> getPlayerCards() {
         return playerCards;
     }
 
-    public ArrayList<Card> getDealerCards() {
+    public List<Card> getDealerCards() {
         return dealerCards;
     }
 

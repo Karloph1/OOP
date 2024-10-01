@@ -1,6 +1,7 @@
 package ru.nsu.fit.labusov.blackjack;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -28,7 +29,7 @@ public class BlackJack {
         this.shouldDealerLose = shouldDealerLose;
     }
 
-    private int calculateScore(ArrayList<Card> cardsHand) {
+    private int calculateScore(List<Card> cardsHand) {
         int score = 0;
         int aceCount = 0;
 
@@ -55,7 +56,7 @@ public class BlackJack {
         return score;
     }
 
-    private String printCards(ArrayList<Card> cardsHand) {
+    private String printCards(List<Card> cardsHand) {
         StringBuilder string = new StringBuilder("[");
 
         int cardSum = calculateScore(cardsHand);
@@ -70,7 +71,7 @@ public class BlackJack {
         return String.valueOf(string);
     }
 
-    private String showCard(ArrayList<Card> cardsHand) {
+    private String showCard(List<Card> cardsHand) {
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(cardsHand.get(cardsHand.size() - 1));
         calculateScore(cardsHand);
