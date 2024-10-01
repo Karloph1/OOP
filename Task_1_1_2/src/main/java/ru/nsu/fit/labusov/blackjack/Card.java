@@ -47,6 +47,9 @@ public class Card {
         return value;
     }
 
+    /**
+     * Get BlackJack value method.
+     */
     public int getBlackJackValue() {
         int cardWeight = value;
 
@@ -101,11 +104,11 @@ public class Card {
 
     @Override
     public int hashCode() {
-        final int PRIME = 23;
+        final int prime = 23;
         int hash = 1;
-        hash = PRIME * hash + Integer.hashCode(suit.ordinal());
-        hash = PRIME * hash + Integer.hashCode(value);
-        hash = PRIME * hash + Integer.hashCode(blackJackValue);
+        hash = prime * hash + Integer.hashCode(suit.ordinal());
+        hash = prime * hash + Integer.hashCode(value);
+        hash = prime * hash + Integer.hashCode(blackJackValue);
 
         return hash;
     }

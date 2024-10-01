@@ -20,6 +20,9 @@ public enum CardSuit {
         }
     }
 
+    /**
+     * Get card formatted into string.
+     */
     public String toString(int cardValue) {
         if (cardValue <= 10 || cardValue == 14) {
             return toString();
