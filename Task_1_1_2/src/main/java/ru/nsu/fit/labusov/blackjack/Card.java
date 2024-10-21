@@ -51,6 +51,7 @@ public class Card {
      * Get BlackJack value method.
      */
     public int getBlackJackValue() {
+
         int cardWeight = value;
 
         if (value == 14) {

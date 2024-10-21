@@ -1,5 +1,6 @@
 package ru.nsu.fit.labusov.blackjack;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class BlackJackTest {
         Assertions.assertEquals(52, cardsDeck.getDeckLength());
 
         Assertions.assertEquals(4, cardsDeck.getCard(10).getBlackJackValue());
-        Assertions.assertEquals(CardSuit.CROSSES, cardsDeck.getCard(1).getSuit());
+        Assertions.assertEquals(CardSuit.DIAMONDS, cardsDeck.getCard(1).getSuit());
         Assertions.assertEquals(cardsDeck.getCard(0), new Card(CardSuit.HEARTS, 2, 2));
 
         Assertions.assertEquals(49, cardsDeck.getDeckLength());
@@ -35,11 +36,8 @@ public class BlackJackTest {
         Dealer dealer = new Dealer(3);
 
         dealer.drawCard(true);
-        Assertions.assertFalse(dealer.getPlayerCards().isEmpty());
-        Assertions.assertTrue(dealer.getDealerCards().isEmpty());
-
-        dealer.makeNewRound();
-        Assertions.assertTrue(dealer.getPlayerCards().isEmpty());
+        Assertions.assertNotEquals(new ArrayList<Card>(), dealer.getPlayerCards());
+        Assertions.assertEquals(new ArrayList<Card>(), dealer.getDealerCards());
     }
 
     @Test

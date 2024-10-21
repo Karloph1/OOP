@@ -1,6 +1,8 @@
 package ru.nsu.fit.labusov.blackjack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Deck of cards class.
@@ -16,20 +18,13 @@ public class CardsDeck {
 
         for (int i = 2; i < 15; i++) {
             if (i == 14) {
-                cards.add(new Card(CardSuit.HEARTS, i, 11));
-                cards.add(new Card(CardSuit.CROSSES, i, 11));
-                cards.add(new Card(CardSuit.DIAMONDS, i, 11));
-                cards.add(new Card(CardSuit.SPADES, i, 11));
+                cards.addAll(Arrays.stream(CardSuit.values()).map(suit -> new Card(suit, 14, 11)).collect(Collectors.toList()));
             } else if (i > 10) {
-                cards.add(new Card(CardSuit.HEARTS, i, 10));
-                cards.add(new Card(CardSuit.CROSSES, i, 10));
-                cards.add(new Card(CardSuit.DIAMONDS, i, 10));
-                cards.add(new Card(CardSuit.SPADES, i, 10));
+                final int j = i;
+                cards.addAll(Arrays.stream(CardSuit.values()).map(suit -> new Card(suit, j, 10)).collect(Collectors.toList()));
             } else {
-                cards.add(new Card(CardSuit.HEARTS, i, i));
-                cards.add(new Card(CardSuit.CROSSES, i, i));
-                cards.add(new Card(CardSuit.DIAMONDS, i, i));
-                cards.add(new Card(CardSuit.SPADES, i, i));
+                final int k = i;
+                cards.addAll(Arrays.stream(CardSuit.values()).map(suit -> new Card(suit, k, k)).collect(Collectors.toList()));
             }
         }
     }
