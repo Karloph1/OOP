@@ -10,11 +10,11 @@ import java.util.Scanner;
 public class BlackJack {
     private int currentRound;
     private final int maxRounds;
-    private final int decksAmount;
     private boolean isGameOver;
     private int playerScore;
     private int dealerScore;
     private final boolean shouldDealerLose;
+    private final Dealer dealer;
 
     /**
      * Constructor BlackJack method.
@@ -25,8 +25,12 @@ public class BlackJack {
         playerScore = 0;
         dealerScore = 0;
         this.maxRounds = maxRounds;
-        this.decksAmount = decksAmount;
         this.shouldDealerLose = shouldDealerLose;
+        dealer = new Dealer(decksAmount);
+    }
+
+    public void changePlayerCards(ArrayList<Card> cards) {
+        dealer.setPlayerCards(cards);
     }
 
     private int calculateScore(List<Card> cardsHand) {
@@ -89,8 +93,6 @@ public class BlackJack {
      * Initialising game method.
      */
     public boolean startGame(Scanner scanner) {
-        Dealer dealer = new Dealer(decksAmount);
-
         System.out.println("Welcome to BlackJack!");
 
         while (playerScore < maxRounds && dealerScore < maxRounds) {
@@ -111,8 +113,8 @@ public class BlackJack {
             System.out.println("    Dealer cards:" + string);
             boolean isPlayerTurn = true;
 
-            if (calculateScore(dealer.getPlayerCards()) == 21
-                    || calculateScore(dealer.getDealerCards()) == 21) {
+            if (calculateScore(dealer.getPlayerCards()) >= 21
+                    || calculateScore(dealer.getDealerCards()) >= 21) {
                 isGameOver = true;
             }
 

@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class Dealer {
     private ArrayList<CardsDeck> decks;
-    private final ArrayList<Card> playerCards;
+    private ArrayList<Card> playerCards;
     private final ArrayList<Card> dealerCards;
 
     /**
@@ -45,6 +45,10 @@ public class Dealer {
 
     public List<Card> getPlayerCards() {
         return playerCards;
+    }
+
+    public void setPlayerCards(ArrayList<Card> cards) {
+        playerCards = cards;
     }
 
     public List<Card> getDealerCards() {

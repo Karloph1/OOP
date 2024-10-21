@@ -44,9 +44,17 @@ public class BlackJackTest {
     @Test
     void blackJackTestPlayerLose() {
         BlackJack blackJack = new BlackJack(1, 1, false);
-        Scanner scanner1 = new Scanner("1 1 1 1 1 1 1 1 1");
 
-        boolean a = blackJack.startGame(scanner1);
+        ArrayList<Card> b = new ArrayList<>();
+        b.add(new Card(CardSuit.SPADES, 10, 10));
+        b.add(new Card(CardSuit.CROSSES, 10, 10));
+        b.add(new Card(CardSuit.HEARTS, 10, 10));
+
+        blackJack.changePlayerCards(b);
+
+        Scanner scanner = new Scanner(System.in);
+
+        boolean a = blackJack.startGame(scanner);
 
         Assertions.assertFalse(a);
     }
