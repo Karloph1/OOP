@@ -24,11 +24,12 @@ public class BlackJackTest {
         CardsDeck cardsDeck = new CardsDeck();
         Assertions.assertEquals(52, cardsDeck.getDeckLength());
 
+        Assertions.assertEquals(new Card(CardSuit.HEARTS, 7, 7), cardsDeck.getCard(20));
         Assertions.assertEquals(4, cardsDeck.getCard(10).getBlackJackValue());
         Assertions.assertEquals(CardSuit.DIAMONDS, cardsDeck.getCard(1).getSuit());
         Assertions.assertEquals(cardsDeck.getCard(0), new Card(CardSuit.HEARTS, 2, 2));
 
-        Assertions.assertEquals(49, cardsDeck.getDeckLength());
+        Assertions.assertEquals(48, cardsDeck.getDeckLength());
     }
 
     @Test
