@@ -1,5 +1,7 @@
 package ru.nsu.fit.labusov.expression;
 
+import java.util.Objects;
+
 /**
  * Addition class.
  */
@@ -37,5 +39,23 @@ public class Add extends Expression {
     @Override
     public int eval(String string) {
         return firstTerm.eval(string) + secondTerm.eval(string);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+
+        Add add = (Add) obj;
+
+        return this.firstTerm.equals(add.firstTerm) && this.secondTerm.equals(add.secondTerm);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstTerm, secondTerm);
     }
 }

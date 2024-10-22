@@ -1,5 +1,7 @@
 package ru.nsu.fit.labusov.expression;
 
+import java.util.Objects;
+
 /**
  * Multiplication class.
  */
@@ -38,5 +40,23 @@ public class Mul extends Expression {
     @Override
     public int eval(String string) {
         return firstTerm.eval(string) * secondTerm.eval(string);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+
+        Mul mul = (Mul) obj;
+
+        return this.firstTerm.equals(mul.firstTerm) && this.secondTerm.equals(mul.secondTerm);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstTerm, secondTerm);
     }
 }

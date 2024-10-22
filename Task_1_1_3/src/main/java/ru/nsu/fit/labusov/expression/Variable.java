@@ -1,5 +1,7 @@
 package ru.nsu.fit.labusov.expression;
 
+import java.util.Objects;
+
 /**
  * Variable class.
  */
@@ -55,5 +57,23 @@ public class Variable extends Expression {
         }
 
         return number;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+
+        Variable variable = (Variable) obj;
+
+        return this.variable.equals(variable.variable);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(variable);
     }
 }
