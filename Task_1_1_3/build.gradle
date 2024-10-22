@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'nsu.fit.labusov'
+group = 'ru.nsu.fit.labusov.expression'
 version = '1.0-SNAPSHOT'
 
 repositories {

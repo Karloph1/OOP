@@ -40,8 +40,17 @@ public class Variable extends Expression {
         for (String str : strings) {
             int index = str.indexOf("=");
 
+            if (index == -1) {
+                throw new NullPointerException("There's no '=' in variable");
+            }
+
             if (str.substring(0, index - 1).equals(variable)) {
-                number = Integer.parseInt(str.substring(index + 2));
+                try {
+                    number = Integer.parseInt(str.substring(index + 2));
+                } catch (NumberFormatException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Sentence in variable is incorrect");
+                }
             }
         }
 
