@@ -1,7 +1,7 @@
 package ru.nsu.fit.labusov.expression;
 
 /**
- * Abstract expression class.
+` * Abstract expression class.
  */
 public abstract class Expression {
     public abstract String showExpression();

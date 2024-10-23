@@ -11,8 +11,19 @@ public class Variable extends Expression {
     /**
      * Constructor variable method.
      */
-    public Variable(String variable) {
-        this.variable = variable;
+    public Variable(String string) {
+        char character;
+
+        for (int i = 0; i < string.length(); i++) {
+            character = string.charAt(i);
+
+            if (!Character.isLetter(character)) {
+                System.out.println(character);
+                throw new IllegalArgumentException("String for variable is incorrect");
+            }
+        }
+
+        this.variable = string;
     }
 
     @Override
@@ -43,7 +54,7 @@ public class Variable extends Expression {
             int index = str.indexOf("=");
 
             if (index == -1) {
-                throw new NullPointerException("There's no '=' in variable");
+                throw new ArrayIndexOutOfBoundsException("There's no '=' in variable");
             }
 
             if (str.substring(0, index - 1).equals(variable)) {

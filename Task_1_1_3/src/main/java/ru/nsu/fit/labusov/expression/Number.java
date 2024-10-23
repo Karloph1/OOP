@@ -6,13 +6,24 @@ import java.util.Objects;
  * Number class.
  */
 public class Number extends Expression {
-    private final int number;
+    private int number;
 
     /**
      * Constructor number method.
      */
     public Number(int number) {
         this.number = number;
+    }
+
+    public Number(String string) {
+        int number;
+        try {
+            number = Integer.parseInt(string);
+            this.number = number;
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            System.out.println("String for number is incorrect");
+        }
     }
 
     @Override

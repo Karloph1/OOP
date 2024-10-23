@@ -28,7 +28,7 @@ public class ExpressionTest {
     void expressionDerivativeTest() {
         Expression e = new Add(new Mul(new Div(new Variable("x"), new Variable("y")),
                 new Number(10)), new Sub(new Number(5), new Mul(new Variable("x"),
-                    new Number(6))));
+                new Number(6))));
         Expression devE = e.derivative("x");
 
         Assertions.assertEquals("((((((1*y)-(x*0))/(y*y))*10)+((x/y)*0))+(0-((1*6)+(x*0))))",
@@ -61,6 +61,9 @@ public class ExpressionTest {
         Assertions.assertEquals("(1+x)", e.showExpression());
         Assertions.assertEquals(new Add(new Number(0), new Number(1)), e.derivative("x"));
         Assertions.assertEquals(11, e.eval("x = 10"));
+
+        e = new Add("(3+2)");
+        Assertions.assertEquals("(3+2)", e.showExpression());
     }
 
     @Test
@@ -70,6 +73,9 @@ public class ExpressionTest {
         Assertions.assertEquals("(10-y)", e.showExpression());
         Assertions.assertEquals(new Sub(new Number(0), new Number(1)), e.derivative("y"));
         Assertions.assertEquals(-90, e.eval("y = 100"));
+
+        e = new Sub("(x-10)");
+        Assertions.assertEquals("(x-10)", e.showExpression());
     }
 
     @Test
@@ -80,6 +86,9 @@ public class ExpressionTest {
         Assertions.assertEquals(new Add(new Mul(new Number(1), new Variable("y")),
                 new Mul(new Variable("x"), new Number(0))), e.derivative("x"));
         Assertions.assertEquals(1000, e.eval("x = 10; y = 100"));
+
+        e = new Mul("(1*x)");
+        Assertions.assertEquals("(1*x)", e.showExpression());
     }
 
     @Test
@@ -91,5 +100,15 @@ public class ExpressionTest {
                 new Mul(new Variable("abc"), new Number(1))),
                 new Mul(new Variable("xyz"), new Variable("xyz"))), e.derivative("xyz"));
         Assertions.assertEquals(5, e.eval("abc = 100; xyz = 20"));
+
+        e = new Div("(x/u)");
+        Assertions.assertEquals("(x/u)", e.showExpression());
+    }
+
+    @Test
+    void readLongSentenceTest() {
+        Expression e = new Add("(((2+t)/x)+(a*(1-(9/1))))");
+
+        Assertions.assertEquals("(((2+t)/x)+(a*(1-(9/1))))", e.showExpression());
     }
 }
