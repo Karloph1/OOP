@@ -3,6 +3,8 @@ package ru.nsu.fit.labusov.expression;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 /**
  * Expression tests.
  */
@@ -64,6 +66,9 @@ public class ExpressionTest {
 
         e = new Add("(3+2)");
         Assertions.assertEquals("(3+2)", e.showExpression());
+
+        e = new Add(new File("addTest.txt"));
+        Assertions.assertEquals("(1+5)", e.showExpression());
     }
 
     @Test
@@ -76,6 +81,9 @@ public class ExpressionTest {
 
         e = new Sub("(x-10)");
         Assertions.assertEquals("(x-10)", e.showExpression());
+
+        e = new Sub(new File("subTest.txt"));
+        Assertions.assertEquals("(x-u)", e.showExpression());
     }
 
     @Test
@@ -89,6 +97,9 @@ public class ExpressionTest {
 
         e = new Mul("(1*x)");
         Assertions.assertEquals("(1*x)", e.showExpression());
+
+        e = new Mul(new File("mulTest.txt"));
+        Assertions.assertEquals("(10*a)", e.showExpression());
     }
 
     @Test
@@ -103,6 +114,9 @@ public class ExpressionTest {
 
         e = new Div("(x/u)");
         Assertions.assertEquals("(x/u)", e.showExpression());
+
+        e = new Div(new File("divTest.txt"));
+        Assertions.assertEquals("(o/-200)", e.showExpression());
     }
 
     @Test
