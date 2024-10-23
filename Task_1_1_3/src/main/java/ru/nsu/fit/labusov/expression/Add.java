@@ -14,13 +14,16 @@ public class Add extends Expression {
     private Expression secondTerm;
 
     /**
-     * Constructor add method.
+     * Constructor add method by pair of expressions.
      */
     public Add(Expression firstTerm, Expression secondTerm) {
         this.firstTerm = firstTerm;
         this.secondTerm = secondTerm;
     }
 
+    /**
+     * Constructor add method by sentence.
+     */
     public Add(String string) {
         ExpressionParser expressionParser = new ExpressionParser();
         String[][] strings = expressionParser.parseExpression(string, '+');
@@ -74,6 +77,9 @@ public class Add extends Expression {
         }
     }
 
+    /**
+     * Constructor add method by file.
+     */
     public Add(File file) {
         try (Scanner fileScanner = new Scanner(new FileInputStream(file))) {
             String line = fileScanner.nextLine();

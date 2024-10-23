@@ -1,9 +1,8 @@
 package ru.nsu.fit.labusov.expression;
 
+import java.io.File;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 
 /**
  * Expression tests.
@@ -30,7 +29,7 @@ public class ExpressionTest {
     void expressionDerivativeTest() {
         Expression e = new Add(new Mul(new Div(new Variable("x"), new Variable("y")),
                 new Number(10)), new Sub(new Number(5), new Mul(new Variable("x"),
-                new Number(6))));
+                    new Number(6))));
         Expression devE = e.derivative("x");
 
         Assertions.assertEquals("((((((1*y)-(x*0))/(y*y))*10)+((x/y)*0))+(0-((1*6)+(x*0))))",

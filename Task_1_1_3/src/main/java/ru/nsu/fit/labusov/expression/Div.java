@@ -14,13 +14,16 @@ public class Div extends Expression {
     private Expression secondTerm;
 
     /**
-     * Constructor div method.
+     * Constructor div method by pair of expressions.
      */
     public Div(Expression firstTerm, Expression secondTerm) {
         this.firstTerm = firstTerm;
         this.secondTerm = secondTerm;
     }
 
+    /**
+     * Constructor div method by sentence.
+     */
     public Div(String string) {
         ExpressionParser expressionParser = new ExpressionParser();
         String[][] strings = expressionParser.parseExpression(string, '/');
@@ -74,6 +77,9 @@ public class Div extends Expression {
         }
     }
 
+    /**
+     * Constructor div method by file.
+     */
     public Div(File file) {
         try (Scanner fileScanner = new Scanner(new FileInputStream(file))) {
             String line = fileScanner.nextLine();

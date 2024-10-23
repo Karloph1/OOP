@@ -14,13 +14,16 @@ public class Sub extends Expression {
     private Expression secondTerm;
 
     /**
-     * Constructor sub method.
+     * Constructor sub method by pair of expressions.
      */
     public Sub(Expression firstTerm, Expression secondTerm) {
         this.firstTerm = firstTerm;
         this.secondTerm = secondTerm;
     }
 
+    /**
+     * Constructor sub method by sentence.
+     */
     public Sub(String string) {
         ExpressionParser expressionParser = new ExpressionParser();
         String[][] strings = expressionParser.parseExpression(string, '-');
@@ -74,6 +77,9 @@ public class Sub extends Expression {
         }
     }
 
+    /**
+     * Constructor sub method by file.
+     */
     public Sub(File file) {
         try (Scanner fileScanner = new Scanner(new FileInputStream(file))) {
             String line = fileScanner.nextLine();

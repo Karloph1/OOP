@@ -14,13 +14,16 @@ public class Mul extends Expression {
     private Expression secondTerm;
 
     /**
-     * Constructor mul method.
+     * Constructor mul method by pair of expressions.
      */
     public Mul(Expression firstTerm, Expression secondTerm) {
         this.firstTerm = firstTerm;
         this.secondTerm = secondTerm;
     }
 
+    /**
+     * Constructor mul method by sentence.
+     */
     public Mul(String string) {
         ExpressionParser expressionParser = new ExpressionParser();
         String[][] strings = expressionParser.parseExpression(string, '*');
@@ -74,6 +77,9 @@ public class Mul extends Expression {
         }
     }
 
+    /**
+     * Constructor mul method by file.
+     */
     public Mul(File file) {
         try (Scanner fileScanner = new Scanner(new FileInputStream(file))) {
             String line = fileScanner.nextLine();
