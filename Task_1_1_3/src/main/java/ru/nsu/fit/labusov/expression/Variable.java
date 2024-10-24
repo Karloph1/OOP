@@ -1,6 +1,10 @@
 package ru.nsu.fit.labusov.expression;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Variable class.
@@ -24,6 +28,27 @@ public class Variable extends Expression {
         }
 
         this.variable = string;
+    }
+
+    public Variable(File file) {
+        try(Scanner fileScanner = new Scanner(new FileInputStream(file))) {
+            char character;
+            String string = fileScanner.nextLine();
+
+            for (int i = 0; i < string.length(); i++) {
+                character = string.charAt(i);
+
+                if (!Character.isLetter(character)) {
+                    System.out.println(character);
+                    throw new IllegalArgumentException("String for variable is incorrect");
+                }
+            }
+
+            this.variable = string;
+        } catch (FileNotFoundException e) {
+            System.out.println("There's no such file");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

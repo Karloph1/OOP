@@ -1,6 +1,10 @@
 package ru.nsu.fit.labusov.expression;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Number class.
@@ -23,6 +27,21 @@ public class Number extends Expression {
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             System.out.println("String for number is incorrect");
+        }
+    }
+
+    public Number(File file) {
+        try(Scanner fileScanner = new Scanner(new FileInputStream(file))) {
+            try {
+                String string = fileScanner.nextLine();
+                this.number = Integer.parseInt(string);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                System.out.println("String for number is incorrect");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("There's no such file");
+            throw new RuntimeException(e);
         }
     }
 
