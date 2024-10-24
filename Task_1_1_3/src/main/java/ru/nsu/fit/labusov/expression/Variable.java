@@ -13,7 +13,7 @@ public class Variable extends Expression {
     private final String variable;
 
     /**
-     * Constructor variable method.
+     * Constructor variable method by sentence.
      */
     public Variable(String string) {
         char character;
@@ -30,8 +30,11 @@ public class Variable extends Expression {
         this.variable = string;
     }
 
+    /**
+     * Constructor variable method by file.
+     */
     public Variable(File file) {
-        try(Scanner fileScanner = new Scanner(new FileInputStream(file))) {
+        try (Scanner fileScanner = new Scanner(new FileInputStream(file))) {
             char character;
             String string = fileScanner.nextLine();
 

@@ -13,12 +13,15 @@ public class Number extends Expression {
     private int number;
 
     /**
-     * Constructor number method.
+     * Constructor number method by number.
      */
     public Number(int number) {
         this.number = number;
     }
 
+    /**
+     * Constructor number method by sentence.
+     */
     public Number(String string) {
         int number;
         try {
@@ -30,8 +33,11 @@ public class Number extends Expression {
         }
     }
 
+    /**
+     * Constructor number method by file.
+     */
     public Number(File file) {
-        try(Scanner fileScanner = new Scanner(new FileInputStream(file))) {
+        try (Scanner fileScanner = new Scanner(new FileInputStream(file))) {
             try {
                 String string = fileScanner.nextLine();
                 this.number = Integer.parseInt(string);

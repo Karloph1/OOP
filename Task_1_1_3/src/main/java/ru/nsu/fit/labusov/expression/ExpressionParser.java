@@ -1,7 +1,13 @@
 package ru.nsu.fit.labusov.expression;
 
+/**
+ * ExpressionParser class.
+ */
 public class ExpressionParser {
 
+    /**
+     * Parsing expression method.
+     */
     public String[][] parseExpression(String string, char e) {
         int index = string.indexOf(e);
 
@@ -62,6 +68,6 @@ public class ExpressionParser {
         String string2 = string.substring(index + 1, string.length() - 1);
 
         return new String[][]{{string1, Character.toString(expression1)},
-                {string2, Character.toString(expression2)}};
+                              {string2, Character.toString(expression2)}};
     }
 }
