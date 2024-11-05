@@ -47,7 +47,7 @@ public class ExpressionTest {
         Expression e1 = new Number("10");
         Assertions.assertEquals(e, e1);
 
-        Expression e2 = new Number(new File("numberTest.txt"));
+        Expression e2 = new Number(new File("tests/numberTest.txt"));
         Assertions.assertEquals("100", e2.showExpression());
     }
 
@@ -60,7 +60,7 @@ public class ExpressionTest {
         Assertions.assertEquals(new Number(0), e.derivative("y"));
         Assertions.assertEquals(10, e.eval("abc = 10"));
 
-        Expression e1 = new Variable(new File("variableTest.txt"));
+        Expression e1 = new Variable(new File("tests/variableTest.txt"));
         Assertions.assertEquals(e, e1);
     }
 
@@ -75,7 +75,7 @@ public class ExpressionTest {
         Expression e1 = new Add("(3+2)");
         Assertions.assertEquals("(3+2)", e1.showExpression());
 
-        Expression e2 = new Add(new File("addTest.txt"));
+        Expression e2 = new Add(new File("tests/addTest.txt"));
         Assertions.assertEquals("(3+2)", e2.showExpression());
 
         Assertions.assertEquals(e1, e2);
@@ -92,7 +92,7 @@ public class ExpressionTest {
         Expression e1 = new Sub("(x-10)");
         Assertions.assertEquals("(x-10)", e1.showExpression());
 
-        Expression e2 = new Sub(new File("subTest.txt"));
+        Expression e2 = new Sub(new File("tests/subTest.txt"));
         Assertions.assertEquals("(x-10)", e2.showExpression());
 
         Assertions.assertEquals(e1, e2);
@@ -110,7 +110,7 @@ public class ExpressionTest {
         Expression e1 = new Mul("(10*a)");
         Assertions.assertEquals("(10*a)", e1.showExpression());
 
-        Expression e2 = new Mul(new File("mulTest.txt"));
+        Expression e2 = new Mul(new File("tests/mulTest.txt"));
         Assertions.assertEquals("(10*a)", e2.showExpression());
 
         Assertions.assertEquals(e1, e2);
@@ -129,7 +129,7 @@ public class ExpressionTest {
         Expression e1 = new Div("(o/-200)");
         Assertions.assertEquals("(o/-200)", e1.showExpression());
 
-        Expression e2 = new Div(new File("divTest.txt"));
+        Expression e2 = new Div(new File("tests/divTest.txt"));
         Assertions.assertEquals("(o/-200)", e2.showExpression());
     }
 
