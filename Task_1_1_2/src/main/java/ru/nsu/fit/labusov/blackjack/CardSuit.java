@@ -20,7 +20,7 @@ public enum CardSuit {
             case SPADES:
                 return ("Крести");
             default:
-                return null;
+                throw new IllegalArgumentException("Incorrect Suit");
         }
     }
 
