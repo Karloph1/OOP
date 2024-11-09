@@ -16,6 +16,28 @@ public class HashTableTest {
     }
 
     @Test
+    void hashTablePutTest() {
+        HashTable<Object, Object> c = new HashTable<>();
+        c.put(1, 3);
+
+        HashTable<Object, Object> c1 = new HashTable<>();
+
+        Assertions.assertNotEquals(c1, c);
+    }
+
+    @Test
+    void hashTableRemoveTest() {
+        HashTable<Object, Object> c = new HashTable<>();
+        c.put(1, 3);
+
+        HashTable<Object, Object> c1 = new HashTable<>();
+        Assertions.assertNotEquals(c1, c);
+
+        c.remove(1, 3);
+        Assertions.assertEquals(c1, c);
+    }
+
+    @Test
     void hashTableGetTest() {
         HashTable<Integer, Integer> c = new HashTable<>();
         c.put(1, 5);
@@ -55,15 +77,15 @@ public class HashTableTest {
     void hashTableEqualsTest() {
         HashTable<Integer, Double> c = new HashTable<>();
         c.put(10, 1.0);
-        c.put(2, null);
-        c.put(-10, null);
+        c.put(2, 0.0);
+        c.put(-10, 2.5);
 
-        HashTable<Integer, Integer> c1 = new HashTable<>();
-        c1.put(2, null);
-        c1.put(-10, null);
-        c1.put(10, 1);
+        HashTable<Integer, Double> c1 = new HashTable<>();
+        c1.put(2, 0.0);
+        c1.put(-10, 2.5);
+        c1.put(10, 1.0);
 
-        Assertions.assertNotEquals(c1, c);
+        Assertions.assertEquals(c1, c);
     }
 
     @Test
