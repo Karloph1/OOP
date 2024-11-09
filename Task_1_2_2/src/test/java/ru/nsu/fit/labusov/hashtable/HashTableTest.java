@@ -3,6 +3,9 @@ package ru.nsu.fit.labusov.hashtable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * HashTable test.
+ */
 public class HashTableTest {
 
     @Test

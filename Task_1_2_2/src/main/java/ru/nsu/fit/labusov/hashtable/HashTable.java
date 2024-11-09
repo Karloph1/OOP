@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+/**
+ * HashTable class.
+ */
 public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> {
     private final ArrayList<K> keys;
     private final ArrayList<V> values;
@@ -17,6 +20,9 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
         values = new ArrayList<>();
     }
 
+    /**
+     * Put pair in HashTable method.
+     */
     public void put(K key, V value) {
         try {
             int index = keys.indexOf(key);
@@ -34,6 +40,9 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
 
     }
 
+    /**
+     * Remove pair in HashTable method.
+     */
     public void remove(K key, V value) {
         try {
             if (!keys.contains(key) || !value.equals(this.get(key))) {
@@ -49,6 +58,9 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
         }
     }
 
+    /**
+     * Update pair in HashTable method.
+     */
     public void update(K key, V value) {
         try {
             int index = keys.indexOf(key);
@@ -60,6 +72,9 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
         }
     }
 
+    /**
+     * Get value in HashTable method.
+     */
     public V get(K key) {
         int index = keys.indexOf(key);
 
@@ -70,6 +85,9 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
         return values.get(index);
     }
 
+    /**
+     * Has key value in HashTable method.
+     */
     public boolean hasValue(K key) {
         int index = keys.indexOf(key);
 
@@ -106,7 +124,8 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
             K thisKey = this.next().getKey();
             V thisValue = this.get(thisKey);
 
-            if (thisValue == null && table.get(thisKey) != null || thisValue != null && table.get(thisKey) == null) {
+            if (thisValue == null && table.get(thisKey) != null ||
+                    thisValue != null && table.get(thisKey) == null) {
                 return false;
             }
 
@@ -138,10 +157,12 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
         StringBuilder stringBuilder = new StringBuilder("{");
 
         for (K key : keys) {
-            stringBuilder.append(key).append("=").append(values.get(keys.indexOf(key))).append(", ");
+            stringBuilder.append(key).append("=").append(values.get(keys.indexOf(key)))
+                    .append(", ");
         }
 
-        return stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length()).append("}").toString();
+        return stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length())
+                .append("}").toString();
     }
 
     @Override
@@ -152,7 +173,8 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
     @Override
     public AbstractMap.SimpleEntry<K, V> next() {
         if (keysIndex < keys.size()) {
-            return new AbstractMap.SimpleEntry<>(keys.get(keysIndex), this.get(keys.get(keysIndex++)));
+            return new AbstractMap.SimpleEntry<>(keys.get(keysIndex),
+                    this.get(keys.get(keysIndex++)));
         }
 
         throw new NoSuchElementException("No elements");
