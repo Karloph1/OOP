@@ -124,8 +124,8 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
             K thisKey = this.next().getKey();
             V thisValue = this.get(thisKey);
 
-            if (thisValue == null && table.get(thisKey) != null ||
-                    thisValue != null && table.get(thisKey) == null) {
+            if (thisValue == null && table.get(thisKey) != null
+                    || thisValue != null && table.get(thisKey) == null) {
                 return false;
             }
 
