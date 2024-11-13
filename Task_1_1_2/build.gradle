@@ -24,3 +24,8 @@ jacocoTestReport {
         xml.required = true
     }
 }
+
+java {
+    sourceCompatibility = VERSION_17
+    targetCompatibility = VERSION_17
+}
