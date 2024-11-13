@@ -33,10 +33,10 @@ public class Card {
     /**
      * Constructor single card method.
      */
-    public Card(CardSuit numberSuit, int value, int blackJackValue) {
+    public Card(CardSuit numberSuit, int value) {
         suit = numberSuit;
         this.value = value;
-        this.blackJackValue = blackJackValue;
+        blackJackValue = 11;
     }
 
     public CardSuit getSuit() {
@@ -51,7 +51,6 @@ public class Card {
      * Get BlackJack value method.
      */
     public int getBlackJackValue() {
-
         int cardWeight = value;
 
         if (value == 14) {

@@ -29,7 +29,7 @@ public class BlackJack {
         dealer = new Dealer(decksAmount);
     }
 
-    public void changePlayerCards(ArrayList<Card> cards) {
+    public void changePlayerCards(List<Card> cards) {
         dealer.setPlayerCards(cards);
     }
 

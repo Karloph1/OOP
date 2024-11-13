@@ -2,7 +2,6 @@ package ru.nsu.fit.labusov.blackjack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Deck of cards class.
@@ -19,15 +18,15 @@ public class CardsDeck {
         for (int i = 2; i < 15; i++) {
             if (i == 14) {
                 cards.addAll(Arrays.stream(CardSuit.values())
-                        .map(suit -> new Card(suit, 14, 11)).collect(Collectors.toList()));
+                        .map(suit -> new Card(suit, 14)).toList());
             } else if (i > 10) {
                 final int j = i;
                 cards.addAll(Arrays.stream(CardSuit.values())
-                        .map(suit -> new Card(suit, j, 10)).collect(Collectors.toList()));
+                        .map(suit -> new Card(suit, j)).toList());
             } else {
                 final int k = i;
                 cards.addAll(Arrays.stream(CardSuit.values())
-                        .map(suit -> new Card(suit, k, k)).collect(Collectors.toList()));
+                        .map(suit -> new Card(suit, k)).toList());
             }
         }
     }

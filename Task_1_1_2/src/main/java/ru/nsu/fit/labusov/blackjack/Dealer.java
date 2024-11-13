@@ -47,8 +47,8 @@ public class Dealer {
         return playerCards;
     }
 
-    public void setPlayerCards(ArrayList<Card> cards) {
-        playerCards = cards;
+    public void setPlayerCards(List<Card> cards) {
+        playerCards = (ArrayList<Card>) cards;
     }
 
     public List<Card> getDealerCards() {

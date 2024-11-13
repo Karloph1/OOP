@@ -10,18 +10,12 @@ public enum CardSuit {
 
     @Override
     public String toString() {
-        switch (this) {
-            case HEARTS:
-                return ("Черви");
-            case DIAMONDS:
-                return ("Буби");
-            case CROSSES:
-                return ("Пики");
-            case SPADES:
-                return ("Крести");
-            default:
-                throw new IllegalArgumentException("Incorrect Suit");
-        }
+        return switch (this) {
+            case HEARTS -> ("Черви");
+            case DIAMONDS -> ("Буби");
+            case CROSSES -> ("Пики");
+            case SPADES -> ("Крести");
+        };
     }
 
     /**
