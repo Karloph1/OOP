@@ -1,12 +1,15 @@
 package ru.nsu.fit.labusov.stringfinder;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.util.Objects;
 import java.nio.charset.StandardCharsets;
 import java.net.URL;
 import java.net.URLDecoder;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
+/**
+ * StringFinder test.
+ */
 public class StringFinderTest {
 
     @Test
@@ -47,9 +50,9 @@ public class StringFinderTest {
         int[] a = StringFinder.find(file, "вы");
 
         Assertions.assertArrayEquals(new int[]{290, 338, 420, 668, 1159, 1227, 1485, 1879, 1898,
-                2558, 2817, 3053, 3223, 3241, 3297, 3437, 3921, 4229, 4285, 4341, 4545, 6054,
-                6911, 9577, 10082, 10109, 10187, 11187, 11247, 11355, 11573, 12410, 12509,
-                12755, 13451, 14117, 14701}, a);
+           2558, 2817, 3053, 3223, 3241, 3297, 3437, 3921, 4229, 4285, 4341, 4545, 6054,
+           6911, 9577, 10082, 10109, 10187, 11187, 11247, 11355, 11573, 12410, 12509,
+           12755, 13451, 14117, 14701}, a);
     }
 
     @Test
