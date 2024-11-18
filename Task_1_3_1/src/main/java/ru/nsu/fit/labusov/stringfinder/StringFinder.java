@@ -23,8 +23,8 @@ public class StringFinder {
         char[] buffer = new char[capacity];
         char[] copyBuffer = new char[capacity - subString.length() + 1];
 
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader
-                (new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+        new FileInputStream(fileName), StandardCharsets.UTF_8))) {
             int readBuffer = bufferedReader.read(buffer);
 
             if (readBuffer == -1) {
