@@ -23,10 +23,11 @@ public class StringFinder {
         char[] buffer = new char[capacity];
         char[] copyBuffer = new char[capacity - subString.length() + 1];
 
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))) {
-            int nBuffer = bufferedReader.read(buffer);
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader
+                (new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+            int readBuffer = bufferedReader.read(buffer);
 
-            if (nBuffer == -1) {
+            if (readBuffer == -1) {
                 return new int[0];
             }
 
@@ -34,7 +35,7 @@ public class StringFinder {
 
             boolean subFind;
             while (true) {
-                for (int i = 0; i < nBuffer - utf8SubString.length() + 1; i++) {
+                for (int i = 0; i < readBuffer - utf8SubString.length() + 1; i++) {
                     if (buffer[i] == utf8SubString.charAt(0)) {
                         subFind = true;
                         for (int j = i; j < i + utf8SubString.length(); j++) {
@@ -51,15 +52,16 @@ public class StringFinder {
                     curIndex++;
                 }
 
-                System.arraycopy(buffer, nBuffer - utf8SubString.length() + 1, buffer, 0, utf8SubString.length() - 1);
-                nBuffer = bufferedReader.read(copyBuffer);
+                System.arraycopy(buffer, readBuffer - utf8SubString.length() + 1, buffer,
+                        0, utf8SubString.length() - 1);
+                readBuffer = bufferedReader.read(copyBuffer);
 
-                if (nBuffer == -1) {
+                if (readBuffer == -1) {
                     break;
                 }
 
-                System.arraycopy(copyBuffer, 0, buffer, utf8SubString.length() - 1, nBuffer);
-                nBuffer += utf8SubString.length() - 1;
+                System.arraycopy(copyBuffer, 0, buffer, utf8SubString.length() - 1, readBuffer);
+                readBuffer += utf8SubString.length() - 1;
             }
         } catch (IOException e) {
             throw new Exception("No file to read");
