@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 /**
  * StringFinder class.
@@ -19,12 +19,12 @@ public class StringFinder {
         ArrayList<Integer> indices = new ArrayList<>();
         String utf8SubString = new String(subString.getBytes(), StandardCharsets.UTF_8);
 
-        int Capacity = Math.max(2, utf8SubString.length() * 2);
-        char[] Buffer = new char[Capacity];
-        char[] CopyBuffer = new char[Capacity - subString.length() + 1];
+        int capacity = Math.max(2, utf8SubString.length() * 2);
+        char[] buffer = new char[capacity];
+        char[] copyBuffer = new char[capacity - subString.length() + 1];
 
         try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))) {
-            int nBuffer = bufferedReader.read(Buffer);
+            int nBuffer = bufferedReader.read(buffer);
 
             if (nBuffer == -1) {
                 return new int[0];
@@ -35,10 +35,10 @@ public class StringFinder {
             boolean subFind;
             while (true) {
                 for (int i = 0; i < nBuffer - utf8SubString.length() + 1; i++) {
-                    if (Buffer[i] == utf8SubString.charAt(0)) {
+                    if (buffer[i] == utf8SubString.charAt(0)) {
                         subFind = true;
                         for (int j = i; j < i + utf8SubString.length(); j++) {
-                            if (Buffer[j] != utf8SubString.charAt(j - i)) {
+                            if (buffer[j] != utf8SubString.charAt(j - i)) {
                                 subFind = false;
                                 break;
                             }
@@ -51,14 +51,14 @@ public class StringFinder {
                     curIndex++;
                 }
 
-                System.arraycopy(Buffer, nBuffer - utf8SubString.length() + 1, Buffer, 0, utf8SubString.length() - 1);
-                nBuffer = bufferedReader.read(CopyBuffer);
+                System.arraycopy(buffer, nBuffer - utf8SubString.length() + 1, buffer, 0, utf8SubString.length() - 1);
+                nBuffer = bufferedReader.read(copyBuffer);
 
                 if (nBuffer == -1) {
                     break;
                 }
 
-                System.arraycopy(CopyBuffer, 0, Buffer, utf8SubString.length() - 1, nBuffer);
+                System.arraycopy(copyBuffer, 0, buffer, utf8SubString.length() - 1, nBuffer);
                 nBuffer += utf8SubString.length() - 1;
             }
         } catch (IOException e) {
