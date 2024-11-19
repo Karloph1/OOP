@@ -27,9 +27,9 @@ public class StringFinderTest {
         URL url = this.getClass().getClassLoader().getResource("MediumTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "Жди");
+        int[] a = StringFinder.find(file, "answer");
 
-        Assertions.assertArrayEquals(new int[]{0, 43, 85, 110, 128, 172, 218, 265, 478, 518}, a);
+        Assertions.assertArrayEquals(new int[]{1317}, a);
     }
 
     @Test
@@ -37,9 +37,9 @@ public class StringFinderTest {
         URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "фвы");
+        int[] a = StringFinder.find(file, "appe");
 
-        Assertions.assertArrayEquals(new int[]{4, 9}, a);
+        Assertions.assertArrayEquals(new int[]{5, 170, 217}, a);
     }
 
     /*@Test
