@@ -24,7 +24,7 @@ public class StringFinderTest {
 
     @Test
     void stringFinderMediumTextTest() throws Exception {
-        URL url = this.getClass().getClassLoader().getResource("mediumTest.txt");
+        URL url = this.getClass().getClassLoader().getResource("MediumTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "Жди");
@@ -34,7 +34,7 @@ public class StringFinderTest {
 
     @Test
     void stringFinderSeparateWordTest() throws Exception {
-        URL url = this.getClass().getClassLoader().getResource("separateWordTest.txt");
+        URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "фвы");
