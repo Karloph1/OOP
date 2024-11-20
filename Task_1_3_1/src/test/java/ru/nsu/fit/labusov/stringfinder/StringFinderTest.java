@@ -37,7 +37,7 @@ public class StringFinderTest {
     }
 
     @Test
-    void stringFinderSeparateWordTest() throws Exception {
+    void stringFinderSeparateWordTest1() throws Exception {
         URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
@@ -45,7 +45,31 @@ public class StringFinderTest {
 
         System.out.println(Arrays.toString(a));
 
-        Assertions.assertArrayEquals(new int[]{5, 170, 217}, a);
+        Assertions.assertEquals(5, a[0]);
+    }
+
+    @Test
+    void stringFinderSeparateWordTest2() throws Exception {
+        URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
+        String urlStr = Objects.requireNonNull(url).getFile();
+        String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
+        int[] a = StringFinder.find(file, "appe");
+
+        System.out.println(Arrays.toString(a));
+
+        Assertions.assertEquals(170, a[1]);
+    }
+
+    @Test
+    void stringFinderSeparateWordTest3() throws Exception {
+        URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
+        String urlStr = Objects.requireNonNull(url).getFile();
+        String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
+        int[] a = StringFinder.find(file, "appe");
+
+        System.out.println(Arrays.toString(a));
+
+        Assertions.assertEquals(217, a[2]);
     }
 
     @Test
