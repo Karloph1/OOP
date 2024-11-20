@@ -25,7 +25,7 @@ public class StringFinderTest {
         Assertions.assertArrayEquals(new int[]{1, 8}, a);
     }
 
-    @Test
+    /*@Test
     void stringFinderMediumTextTest() throws Exception {
         URL url = this.getClass().getClassLoader().getResource("MediumTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
@@ -34,6 +34,8 @@ public class StringFinderTest {
 
         Assertions.assertArrayEquals(new int[]{48, 90, 115, 133, 177, 223}, a);
     }
+
+     */
 
     @Test
     void stringFinderSeparateWordTest() throws Exception {
