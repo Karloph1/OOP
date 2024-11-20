@@ -50,7 +50,9 @@ public class StringFinder {
                         }
                     }
 
-                    curIndex++;
+                    if (buffer[i] != '\r') {
+                        curIndex++;
+                    }
                 }
 
                 System.arraycopy(buffer, readBuffer - utf8SubString.length() + 1, buffer,

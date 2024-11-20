@@ -52,7 +52,7 @@ public class StringFinderTest {
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        Assertions.assertEquals(168, a[1]);
+        Assertions.assertEquals(169, a[1]);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class StringFinderTest {
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        Assertions.assertEquals(213, a[2]);
+        Assertions.assertEquals(216, a[2]);
     }
 
     @Test
