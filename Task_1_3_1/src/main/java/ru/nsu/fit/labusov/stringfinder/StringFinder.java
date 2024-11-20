@@ -21,7 +21,7 @@ public class StringFinder {
 
         int capacity = Math.max(2, utf8SubString.length() * 2);
         char[] buffer = new char[capacity];
-        char[] copyBuffer = new char[capacity - subString.length() + 1];
+        char[] copyBuffer = new char[capacity - utf8SubString.length() + 1];
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
         new FileInputStream(fileName), StandardCharsets.UTF_8))) {

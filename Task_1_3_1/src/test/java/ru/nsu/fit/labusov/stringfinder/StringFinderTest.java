@@ -25,17 +25,15 @@ public class StringFinderTest {
         Assertions.assertArrayEquals(new int[]{1, 8}, a);
     }
 
-    /*@Test
+    @Test
     void stringFinderMediumTextTest() throws Exception {
         URL url = this.getClass().getClassLoader().getResource("MediumTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "когда");
+        int[] a = StringFinder.find(file, "собака");
 
-        Assertions.assertArrayEquals(new int[]{48, 90, 115, 133, 177, 223}, a);
+        Assertions.assertArrayEquals(new int[]{0, 108, 239}, a);
     }
-
-     */
 
     @Test
     void stringFinderSeparateWordTest() throws Exception {
