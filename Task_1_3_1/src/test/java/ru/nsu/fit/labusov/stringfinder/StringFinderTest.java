@@ -36,33 +36,13 @@ public class StringFinderTest {
     }
 
     @Test
-    void stringFinderSeparateWordTest1() throws Exception {
+    void stringFinderSeparateWordTest() throws Exception {
         URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        Assertions.assertEquals(5, a[0]);
-    }
-
-    @Test
-    void stringFinderSeparateWordTest2() throws Exception {
-        URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
-        String urlStr = Objects.requireNonNull(url).getFile();
-        String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "appe");
-
-        Assertions.assertEquals(168, a[1]);
-    }
-
-    @Test
-    void stringFinderSeparateWordTest3() throws Exception {
-        URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
-        String urlStr = Objects.requireNonNull(url).getFile();
-        String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "appe");
-
-        Assertions.assertEquals(215, a[2]);
+        Assertions.assertArrayEquals(new int[]{5, 168, 215}, a);
     }
 
     @Test

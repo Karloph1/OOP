@@ -24,7 +24,7 @@ public class StringFinder {
         char[] copyBuffer = new char[capacity - utf8SubString.length() + 1];
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-        new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+            new FileInputStream(fileName), StandardCharsets.UTF_8))) {
             int readBuffer = bufferedReader.read(buffer);
 
             if (readBuffer == -1) {
