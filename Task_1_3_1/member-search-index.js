@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ru.nsu.fit.labusov.stringfinder","c":"StringFinder","l":"find(String, String)","url":"find(java.lang.String,java.lang.String)"},{"p":"ru.nsu.fit.labusov.stringfinder","c":"StringFinder","l":"StringFinder()","url":"%3Cinit%3E()"}]
