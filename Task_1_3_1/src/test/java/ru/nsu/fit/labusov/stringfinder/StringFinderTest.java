@@ -30,9 +30,9 @@ public class StringFinderTest {
         URL url = this.getClass().getClassLoader().getResource("MediumTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "answer");
+        int[] a = StringFinder.find(file, "когда");
 
-        Assertions.assertArrayEquals(new int[]{1317}, a);
+        Assertions.assertArrayEquals(new int[]{48, 90, 115, 133, 177, 223}, a);
     }
 
     @Test
