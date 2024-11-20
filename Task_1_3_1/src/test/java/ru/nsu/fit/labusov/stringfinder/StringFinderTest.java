@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Objects;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -43,8 +42,6 @@ public class StringFinderTest {
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        System.out.println(Arrays.toString(a));
-
         Assertions.assertEquals(5, a[0]);
     }
 
@@ -55,9 +52,7 @@ public class StringFinderTest {
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        System.out.println(Arrays.toString(a));
-
-        Assertions.assertEquals(170, a[1]);
+        Assertions.assertEquals(166, a[1]);
     }
 
     @Test
@@ -67,9 +62,7 @@ public class StringFinderTest {
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        System.out.println(Arrays.toString(a));
-
-        Assertions.assertEquals(217, a[2]);
+        Assertions.assertEquals(213, a[2]);
     }
 
     @Test

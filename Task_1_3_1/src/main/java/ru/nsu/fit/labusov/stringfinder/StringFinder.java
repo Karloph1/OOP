@@ -49,7 +49,10 @@ public class StringFinder {
                             indices.add(curIndex);
                         }
                     }
-                    curIndex++;
+
+                    if (buffer[i] != '\n' && buffer[i] != '\r') {
+                        curIndex++;
+                    }
                 }
 
                 System.arraycopy(buffer, readBuffer - utf8SubString.length() + 1, buffer,
