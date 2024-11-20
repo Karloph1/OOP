@@ -42,9 +42,9 @@ public class StringFinderTest {
         URL url = this.getClass().getClassLoader().getResource("SeparateWordTest.txt");
         String urlStr = Objects.requireNonNull(url).getFile();
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "ик");
+        int[] a = StringFinder.find(file, "appe");
 
-        Assertions.assertArrayEquals(new int[]{3}, a);
+        Assertions.assertArrayEquals(new int[]{5, 170, 217}, a);
     }
 
     @Test
