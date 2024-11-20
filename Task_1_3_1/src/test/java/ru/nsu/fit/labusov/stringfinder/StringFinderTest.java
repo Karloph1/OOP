@@ -1,5 +1,8 @@
 package ru.nsu.fit.labusov.stringfinder;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -42,20 +45,33 @@ public class StringFinderTest {
         Assertions.assertArrayEquals(new int[]{5, 170, 217}, a);
     }
 
-    /*@Test
-    void stringFinderLongTextTest() throws Exception {
-        URL url = this.getClass().getClassLoader().getResource("LongTest.txt");
-        String urlStr = Objects.requireNonNull(url).getFile();
-        String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
-        int[] a = StringFinder.find(file, "вы");
+    @Test
+    void stringFinderLongTestTest() throws Exception {
+        String filePath = "LongTest.txt";
+        BufferedWriter writer = null;
 
-        Assertions.assertArrayEquals(new int[]{290, 338, 420, 668, 1159, 1227, 1485, 1879, 1898,
-            2558, 2817, 3053, 3223, 3241, 3297, 3437, 3921, 4229, 4285, 4341, 4545, 6054,
-            6911, 9577, 10082, 10109, 10187, 11187, 11247, 11355, 11573, 12410, 12509,
-            12755, 13451, 14117, 14701}, a);
+        try {
+            writer = new BufferedWriter(new FileWriter(filePath));
+
+            for (int i = 0; i < 10000000; i++) {
+                writer.write("abc");
+            }
+
+            int[] a = StringFinder.find(filePath, "d");
+
+            Assertions.assertArrayEquals(new int[]{}, a);
+        } catch (IOException e) {
+            throw new Exception("No text");
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
-
-     */
 
     @Test
     void stringFinderEmptyTextTest() throws Exception {
