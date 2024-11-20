@@ -52,7 +52,7 @@ public class StringFinderTest {
         String file = URLDecoder.decode(urlStr, StandardCharsets.UTF_8);
         int[] a = StringFinder.find(file, "appe");
 
-        Assertions.assertEquals(166, a[1]);
+        Assertions.assertEquals(168, a[1]);
     }
 
     @Test
