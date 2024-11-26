@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * GradeBook class.
+ */
 public class GradeBook {
     private final ScholarShip scholarship;
     private final ArrayList<Semester> semesters;

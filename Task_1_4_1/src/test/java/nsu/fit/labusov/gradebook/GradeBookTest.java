@@ -125,8 +125,8 @@ public class GradeBookTest {
     @Test
     void controlTypeExceptionTest1() {
         try {
-            Subject a = new Subject
-                    ("OOP", FormsOfControlType.CREDIT, FormsOfMark.FIVE, false);
+            Subject a = new Subject(
+            "OOP", FormsOfControlType.CREDIT, FormsOfMark.FIVE, false);
 
             System.out.println(a);
         } catch (IllegalArgumentException e) {
@@ -137,8 +137,8 @@ public class GradeBookTest {
     @Test
     void controlTypeExceptionTest2() {
         try {
-            Subject a = new Subject
-                    ("OOP", FormsOfControlType.EXAM, FormsOfMark.FAILURE, false);
+            Subject a = new Subject(
+            "OOP", FormsOfControlType.EXAM, FormsOfMark.FAILURE, false);
 
             System.out.println(a);
         } catch (IllegalArgumentException e) {
@@ -148,48 +148,48 @@ public class GradeBookTest {
 
     @Test
     void controlTypeGetControlTypeNameTest() {
-        Subject a = new Subject
-                ("OOP", FormsOfControlType.COLLOQUIUM, FormsOfMark.FOUR, true);
+        Subject a = new Subject(
+                "OOP", FormsOfControlType.COLLOQUIUM, FormsOfMark.FOUR, true);
 
         Assertions.assertEquals(FormsOfControlType.COLLOQUIUM, a.getWorkType());
     }
 
     @Test
     void controlTypeGetControlGradeTest() {
-        Subject a = new Subject
-                ("Math", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, true);
+        Subject a = new Subject(
+                "Math", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, true);
 
         Assertions.assertEquals(3, a.getControlGrade());
     }
 
     @Test
     void controlTypeGetIsCountedInDiplomaTest() {
-        Subject a = new Subject
-                ("Math", FormsOfControlType.PRACTICEREPORTDEFENCE, FormsOfMark.TWO, true);
+        Subject a = new Subject(
+                "Math", FormsOfControlType.PRACTICEREPORTDEFENCE, FormsOfMark.TWO, true);
 
         Assertions.assertTrue(a.getIsCountedInDiploma());
     }
 
     @Test
     void controlTypeCheckRatingForScholarshipTest1() {
-        Subject a = new Subject
-                ("History", FormsOfControlType.EXAM, FormsOfMark.THREE, true);
+        Subject a = new Subject(
+                "History", FormsOfControlType.EXAM, FormsOfMark.THREE, true);
 
         Assertions.assertFalse(a.checkRatingForBudget());
     }
 
     @Test
     void controlTypeCheckRatingForScholarshipTest2() {
-        Subject a = new Subject
-                ("History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false);
+        Subject a = new Subject(
+                "History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false);
 
         Assertions.assertTrue(a.checkRatingForBudget());
     }
 
     @Test
     void controlTypeCheckRatingForScholarshipTest3() {
-        Subject a = new Subject
-                ("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, true);
+        Subject a = new Subject(
+                "PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, true);
 
         Assertions.assertTrue(a.checkRatingForBudget());
     }

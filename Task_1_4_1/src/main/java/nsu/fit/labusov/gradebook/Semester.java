@@ -2,6 +2,9 @@ package nsu.fit.labusov.gradebook;
 
 import java.util.Arrays;
 
+/**
+ * Semester class.
+ */
 public class Semester {
     private final Subject[] subjects;
     private final int semesterNumber;

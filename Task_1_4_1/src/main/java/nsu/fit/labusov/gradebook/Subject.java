@@ -1,5 +1,8 @@
 package nsu.fit.labusov.gradebook;
 
+/**
+ * Subject class.
+ */
 public class Subject {
     private final String subjectName;
     private final FormsOfControlType countableName;
