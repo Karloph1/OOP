@@ -8,6 +8,14 @@ public class Subject {
 
     public Subject(String subjectName, FormsOfControlType controlTypeName,
                    FormsOfMark controlTypeGrade, boolean isCountedInDiploma) {
+
+        if ((controlTypeName == FormsOfControlType.CREDIT
+                && (controlTypeGrade != FormsOfMark.PASS && controlTypeGrade != FormsOfMark.FAILURE))
+                || (controlTypeName != FormsOfControlType.CREDIT
+                && (controlTypeGrade == FormsOfMark.PASS || controlTypeGrade == FormsOfMark.FAILURE))) {
+            throw new IllegalArgumentException("Incorrect grade for test");
+        }
+
         this.subjectName = subjectName;
         this.countableName = controlTypeName;
         this.countableMark = controlTypeGrade;

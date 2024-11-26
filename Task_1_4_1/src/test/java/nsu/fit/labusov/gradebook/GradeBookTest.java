@@ -142,7 +142,7 @@ public class GradeBookTest {
 
             System.out.println(a);
         } catch (IllegalArgumentException e) {
-            Assertions.assertTrue(e.getMessage().contains("Incorrect grade for countable grade"));
+            Assertions.assertTrue(e.getMessage().contains("Incorrect grade for test"));
         }
     }
 
