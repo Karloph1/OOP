@@ -126,7 +126,7 @@ public class GradeBookTest {
     void controlTypeExceptionTest1() {
         try {
             Subject a = new Subject(
-            "OOP", FormsOfControlType.CREDIT, FormsOfMark.FIVE, false);
+                "OOP", FormsOfControlType.CREDIT, FormsOfMark.FIVE, false);
 
             System.out.println(a);
         } catch (IllegalArgumentException e) {
@@ -138,7 +138,7 @@ public class GradeBookTest {
     void controlTypeExceptionTest2() {
         try {
             Subject a = new Subject(
-            "OOP", FormsOfControlType.EXAM, FormsOfMark.FAILURE, false);
+                "OOP", FormsOfControlType.EXAM, FormsOfMark.FAILURE, false);
 
             System.out.println(a);
         } catch (IllegalArgumentException e) {
@@ -199,13 +199,16 @@ public class GradeBookTest {
      */
     @Test
     void semesterToStringTest() {
-        Subject[] controlTypes = new Subject[]{new Subject("OOP", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("English", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-                new Subject("Philosophy", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        Subject[] controlTypes = new Subject[]{new Subject("OOP",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+            new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+            new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+            new Subject("English", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+            new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+            new Subject("History",
+                    FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+            new Subject("Philosophy",
+                    FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
         };
 
         Semester a = new Semester(controlTypes, 5);
@@ -222,13 +225,17 @@ public class GradeBookTest {
 
     @Test
     void semesterGetSubjectsTest() {
-        Subject[] controlTypes = new Subject[]{new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("OOP", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Imperative programming", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("PE", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-                new Subject("Operation systems", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("OOP", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("Imperative programming",
+                        FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+        new Subject("PE", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("History",
+                        FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        new Subject("Operation systems",
+                        FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
         };
 
         Semester a = new Semester(controlTypes, 2);
@@ -238,12 +245,13 @@ public class GradeBookTest {
 
     @Test
     void semesterGetSemesterNumberTest() {
-        Subject[] controlTypes = new Subject[]{new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+        new Subject("History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
         };
 
         Semester a = new Semester(controlTypes, 4);
@@ -253,13 +261,16 @@ public class GradeBookTest {
 
     @Test
     void semesterGetGPATest() {
-        Subject[] controlTypes = new Subject[]{new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("Imperative programming", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Philosophy", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Operation systems", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-                new Subject("PE", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FOUR, false),
-                new Subject("History", FormsOfControlType.CREDIT, FormsOfMark.PASS, false)
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("Imperative programming",
+                FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Philosophy", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Operation systems",
+                FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        new Subject("PE", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FOUR, false),
+        new Subject("History", FormsOfControlType.CREDIT, FormsOfMark.PASS, false)
         };
 
         Semester a = new Semester(controlTypes, 5);
@@ -269,14 +280,16 @@ public class GradeBookTest {
 
     @Test
     void semesterGetCountableControlTypesLengthTest() {
-        Subject[] controlTypes = new Subject[]{new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Imperial programming", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-                new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Philosophy", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-                new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
-                new Subject("Operation systems", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("Imperial programming", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
+        new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Philosophy",
+                FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
+        new Subject("Operation systems", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
         };
 
         Semester a = new Semester(controlTypes, 2);
@@ -286,20 +299,22 @@ public class GradeBookTest {
 
     @Test
     void semesterCheckSemesterRatingFalseTest() {
-        Subject[] controlTypes = new Subject[]{new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("Imperial programming", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Russian", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("Artificial intelligent", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Probability theory", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-                new Subject("Economy", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-                new Subject("Chinese", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-                new Subject("French", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
-                new Subject("Declarative programming", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Imperial programming", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("Russian", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
+        new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+        new Subject("Artificial intelligent", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Probability theory",
+                FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        new Subject("Economy", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        new Subject("Chinese", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        new Subject("French", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
+        new Subject("Declarative programming", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
         };
 
         Semester a = new Semester(controlTypes, 2);
@@ -309,17 +324,20 @@ public class GradeBookTest {
 
     @Test
     void semesterCheckSemesterRatingTrueTest() {
-        Subject[] controlTypes = new Subject[]{new Subject("Math", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("Imperial programming", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
-                new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Declarative programming", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-                new Subject("Artificial intelligent", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-                new Subject("French", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-                new Subject("Probability theory", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Imperial programming", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
+        new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
+        new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Declarative programming",
+                FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        new Subject("Artificial intelligent",
+                FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        new Subject("French", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        new Subject("Probability theory", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
         };
 
         Semester a = new Semester(controlTypes, 2);
@@ -331,112 +349,112 @@ public class GradeBookTest {
      * GradeBook tests.
      */
     Subject[] controlTypes1 = new Subject[]{
-            new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-            new Subject("Algebra", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Algebra", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-            new Subject("Math logic", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-            new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-            new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-            new Subject("Math logic", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-            new Subject("Discrete math", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("Declarative programming",
+        new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+        new Subject("Algebra", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Algebra", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("Math logic", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
+        new Subject("Math logic", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+        new Subject("Discrete math", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Declarative programming",
                     FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("History",
+        new Subject("History",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FOUR, true),
-            new Subject("Imperative programming",
+        new Subject("Imperative programming",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-            new Subject("Fundamentals of speech culture",
+        new Subject("Fundamentals of speech culture",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-            new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-            new Subject("Digital platforms",
+        new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        new Subject("Digital platforms",
                     FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-            new Subject("English", FormsOfControlType.CREDIT, FormsOfMark.PASS, false)};
+        new Subject("English", FormsOfControlType.CREDIT, FormsOfMark.PASS, false)};
 
     Subject[] controlTypes2 = new Subject[]{new Subject("Algebra", FormsOfControlType.EXERCISE,
             FormsOfMark.THREE, false),
-            new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Algebra", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-            new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-            new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
-            new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("Declarative programming",
+        new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Algebra", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
+        new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
+        new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Declarative programming",
                     FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("Philosophy",
+        new Subject("Philosophy",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-            new Subject("Imperative programming",
+        new Subject("Imperative programming",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-            new Subject("Discrete math", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
-            new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        new Subject("Discrete math", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
+        new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
     };
 
     Subject[] controlTypes3 = new Subject[]{new Subject("Artificial intelligent",
             FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-            new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Philosophy", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.FOUR, false),
-            new Subject("Probability theory", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("French", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("OOP", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-            new Subject("Operation systems",
+        new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Philosophy", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.FOUR, false),
+        new Subject("Probability theory", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("French", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("OOP", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
+        new Subject("Operation systems",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-            new Subject("Artificial intelligent",
+        new Subject("Artificial intelligent",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true)};
 
     Subject[] controlTypes4 = new Subject[]{new Subject("Artificial intelligent",
             FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-            new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-            new Subject("Probability theory", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-            new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("French",
+        new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("Probability theory", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+        new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("French",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-            new Subject("Artificial intelligent",
+        new Subject("Artificial intelligent",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
     };
 
     Subject[] controlTypes5 = new Subject[]{new Subject("Security",
             FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-            new Subject("Algebra", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Web programming", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-            new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-            new Subject("Web programming", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-            new Subject("Philosophy",
+        new Subject("Algebra", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Web programming", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+        new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+        new Subject("Web programming", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+        new Subject("Philosophy",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
     };
 
     Subject[] controlTypes6 = new Subject[]{new Subject("English",
             FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-            new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("French", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("Discrete math", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-            new Subject("Philosophy",
+        new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("French", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Discrete math", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
+        new Subject("Philosophy",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FOUR, true),
-            new Subject("Imperial programming",
+        new Subject("Imperial programming",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
     };
 
     Subject[] controlTypes7 = new Subject[]{new Subject("English",
             FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-            new Subject("French", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
-            new Subject("Discrete math",
+        new Subject("French", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+        new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
+        new Subject("Discrete math",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-            new Subject("PE", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-            new Subject("OOP", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-            new Subject("Practice",
+        new Subject("PE", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
+        new Subject("OOP", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        new Subject("Practice",
                     FormsOfControlType.PRACTICEREPORTDEFENCE, FormsOfMark.FIVE, true),
     };
 
     Subject[] controlTypes8 = new Subject[]{new Subject("English",
             FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FOUR, true),
-            new Subject("History",
+        new Subject("History",
                     FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-            new Subject("Operation system", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-            new Subject("Math practice",
+        new Subject("Operation system", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
+        new Subject("Math practice",
                     FormsOfControlType.PRACTICEREPORTDEFENCE, FormsOfMark.FIVE, true),
-            new Subject("Programming practice",
+        new Subject("Programming practice",
                     FormsOfControlType.PRACTICEREPORTDEFENCE, FormsOfMark.FIVE, true),
-            new Subject("VCR protection",
+        new Subject("VCR protection",
                     FormsOfControlType.VCRPROTECTION, FormsOfMark.FIVE, false),
     };
 
@@ -489,7 +507,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void gradeBookGetWholeGPATest() {
+    void gradeBookGetWholeGpaTest() {
         GradeBook gradeBook = new GradeBook(Scholarship.NORMAL);
         gradeBook.add(controlTypes3);
         gradeBook.add(controlTypes2);
@@ -541,7 +559,8 @@ public class GradeBookTest {
         try {
             gradeBook.isPossibleToSwitchToIncreasedScholarship();
         } catch (IllegalArgumentException e) {
-            Assertions.assertTrue(e.getMessage().contains("You already have increased scholarship"));
+            Assertions.assertTrue(e.getMessage()
+                    .contains("You already have increased scholarship"));
         }
     }
 
