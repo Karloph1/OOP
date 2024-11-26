@@ -9,13 +9,18 @@ public class Subject {
     private final FormsOfMark countableMark;
     private final boolean isCountedInDiploma;
 
+    /**
+     * Subject constructor.
+     */
     public Subject(String subjectName, FormsOfControlType controlTypeName,
                    FormsOfMark controlTypeGrade, boolean isCountedInDiploma) {
 
         if ((controlTypeName == FormsOfControlType.CREDIT
-                && (controlTypeGrade != FormsOfMark.PASS && controlTypeGrade != FormsOfMark.FAILURE))
+                && (controlTypeGrade != FormsOfMark.PASS
+                && controlTypeGrade != FormsOfMark.FAILURE))
                 || (controlTypeName != FormsOfControlType.CREDIT
-                && (controlTypeGrade == FormsOfMark.PASS || controlTypeGrade == FormsOfMark.FAILURE))) {
+                && (controlTypeGrade == FormsOfMark.PASS
+                || controlTypeGrade == FormsOfMark.FAILURE))) {
             throw new IllegalArgumentException("Incorrect grade for test");
         }
 
@@ -33,6 +38,9 @@ public class Subject {
         return countableName;
     }
 
+    /**
+     * Get control grade method.
+     */
     public int getControlGrade() {
         return switch (countableMark) {
             case TWO -> 2;
@@ -47,6 +55,9 @@ public class Subject {
         return isCountedInDiploma;
     }
 
+    /**
+     * Check rating for budget method.
+     */
     public boolean checkRatingForBudget() {
         if (countableName == FormsOfControlType.EXAM) {
             return countableMark != FormsOfMark.TWO && countableMark != FormsOfMark.THREE;
@@ -59,6 +70,9 @@ public class Subject {
         return true;
     }
 
+    /**
+     * Check rating for increased scholarship method.
+     */
     public boolean checkRatingForIncreasedScholarship() {
         if (countableName == FormsOfControlType.EXAM
                 || countableName == FormsOfControlType.DIFFERENTIATEDCREDIT) {

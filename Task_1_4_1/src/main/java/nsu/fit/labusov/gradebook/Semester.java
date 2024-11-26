@@ -10,6 +10,9 @@ public class Semester {
     private final int semesterNumber;
     private final boolean isSemesterLast;
 
+    /**
+     * Semester constructor.
+     */
     public Semester(Subject[] controlTypes, int semesterNumber) {
         this.subjects = controlTypes;
         this.semesterNumber = semesterNumber;
@@ -31,12 +34,18 @@ public class Semester {
         return isSemesterLast;
     }
 
-    public double getGPA() {
+    /**
+     * get GPA method.
+     */
+    public double getGpa() {
         return (double) Arrays.stream(subjects)
                 .map(Subject::getControlGrade)
                 .reduce(0, Integer::sum);
     }
 
+    /**
+     * get length of Countable types method.
+     */
     public int getCountableControlTypesLength() {
         return (int) Arrays.stream(subjects)
                 .map(Subject::getControlGrade)

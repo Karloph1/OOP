@@ -264,7 +264,7 @@ public class GradeBookTest {
 
         Semester a = new Semester(controlTypes, 5);
 
-        Assertions.assertEquals(26, a.getGPA());
+        Assertions.assertEquals(26, a.getGpa());
     }
 
     @Test
@@ -442,7 +442,7 @@ public class GradeBookTest {
 
     @Test
     void gradeBookToStringTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.ABSENT);
+        GradeBook gradeBook = new GradeBook(Scholarship.ABSENT);
         gradeBook.add(controlTypes1);
         gradeBook.add(controlTypes2);
 
@@ -478,7 +478,7 @@ public class GradeBookTest {
 
     @Test
     void gradeBookAddExceptionTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.ABSENT);
+        GradeBook gradeBook = new GradeBook(Scholarship.ABSENT);
         gradeBook.add(controlTypes8);
 
         try {
@@ -490,18 +490,18 @@ public class GradeBookTest {
 
     @Test
     void gradeBookGetWholeGPATest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.NORMAL);
+        GradeBook gradeBook = new GradeBook(Scholarship.NORMAL);
         gradeBook.add(controlTypes3);
         gradeBook.add(controlTypes2);
         gradeBook.add(controlTypes1);
         gradeBook.add(controlTypes4);
 
-        Assertions.assertEquals(4.24, gradeBook.getWholeGPA());
+        Assertions.assertEquals(4.24, gradeBook.getWholeGpa());
     }
 
     @Test
     void gradeBookIsPossibleToSwitchToBudgetTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.ABSENT);
+        GradeBook gradeBook = new GradeBook(Scholarship.ABSENT);
         gradeBook.add(controlTypes3);
         gradeBook.add(controlTypes6);
         gradeBook.add(controlTypes7);
@@ -511,7 +511,7 @@ public class GradeBookTest {
 
     @Test
     void gradeBookIsPossibleToSwitchToBudgetExceptionTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.NORMAL);
+        GradeBook gradeBook = new GradeBook(Scholarship.NORMAL);
         gradeBook.add(controlTypes1);
 
         try {
@@ -523,7 +523,7 @@ public class GradeBookTest {
 
     @Test
     void gradeBookIsPossibleToSwitchToIncreasedScholarshipTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.NORMAL);
+        GradeBook gradeBook = new GradeBook(Scholarship.NORMAL);
         gradeBook.add(controlTypes1);
         gradeBook.add(controlTypes2);
         gradeBook.add(controlTypes5);
@@ -533,7 +533,7 @@ public class GradeBookTest {
 
     @Test
     void gradeBookIsPossibleToSwitchToIncreasedScholarshipExceptionTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.ABSENT);
+        GradeBook gradeBook = new GradeBook(Scholarship.ABSENT);
         gradeBook.add(controlTypes1);
         gradeBook.add(controlTypes2);
         gradeBook.add(controlTypes3);
@@ -547,7 +547,7 @@ public class GradeBookTest {
 
     @Test
     void gradeBookIsCountedInDiplomaWithLastSemesterTest() {
-        GradeBook gradeBook = new GradeBook(ScholarShip.ABSENT);
+        GradeBook gradeBook = new GradeBook(Scholarship.ABSENT);
 
         gradeBook.add(controlTypes3);
         gradeBook.add(controlTypes6);

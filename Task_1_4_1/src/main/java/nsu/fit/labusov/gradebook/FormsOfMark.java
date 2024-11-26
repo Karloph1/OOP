@@ -1,5 +1,8 @@
 package nsu.fit.labusov.gradebook;
 
+/**
+ * Forms of mark class.
+ */
 public enum FormsOfMark {
     TWO, THREE, FOUR, FIVE, PASS, FAILURE;
 

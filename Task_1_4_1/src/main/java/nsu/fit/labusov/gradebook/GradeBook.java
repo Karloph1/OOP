@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
  * GradeBook class.
  */
 public class GradeBook {
-    private final ScholarShip scholarship;
+    private final Scholarship scholarship;
     private final ArrayList<Semester> semesters;
 
-    public GradeBook(ScholarShip scholarship) {
+    public GradeBook(Scholarship scholarship) {
         semesters = new ArrayList<>();
         this.scholarship = scholarship;
     }
@@ -44,6 +44,9 @@ public class GradeBook {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Add semester method.
+     */
     public void add(Subject[] controlTypes) {
         if (canBeMoreSemesters()) {
             throw new IllegalArgumentException("Unable to add more semesters");
@@ -52,17 +55,27 @@ public class GradeBook {
         semesters.add(new Semester(controlTypes, semesters.size() + 1));
     }
 
-    public double getWholeGPA() {
+    /**
+     * Get whole gpa method.
+     */
+    public double getWholeGpa() {
         Semester[] ints = semesters.toArray(new Semester[0]);
 
-        double wholeGPA = Arrays.stream(ints).map(Semester::getGPA).reduce(0.0, Double::sum);
-        double controlTypeAmount = Arrays.stream(ints).map(Semester::getCountableControlTypesLength).reduce(0, Integer::sum);
+        double wholeGpa = Arrays.stream(ints)
+                .map(Semester::getGpa)
+                .reduce(0.0, Double::sum);
+        double controlTypeAmount = Arrays.stream(ints)
+                .map(Semester::getCountableControlTypesLength)
+                .reduce(0, Integer::sum);
 
-        return Math.round(wholeGPA / controlTypeAmount * 100.0) / 100.0;
+        return Math.round(wholeGpa / controlTypeAmount * 100.0) / 100.0;
     }
 
+    /**
+     * Is possible to switch to budget method.
+     */
     public boolean isPossibleToSwitchToBudget() {
-        if (scholarship == ScholarShip.ABSENT) {
+        if (scholarship == Scholarship.ABSENT) {
             return Arrays.stream(semesters.toArray(new Semester[0]))
                     .skip(semesters.size() - 2)
                     .allMatch(Semester::checkSemesterRatingForBudget);
@@ -71,12 +84,15 @@ public class GradeBook {
         }
     }
 
+    /**
+     * Is possible to switch to increased scholarship method.
+     */
     public boolean isPossibleToSwitchToIncreasedScholarship() {
         if (semesters.size() < 2) {
             return false;
-        } else if (scholarship == ScholarShip.ABSENT) {
+        } else if (scholarship == Scholarship.ABSENT) {
             return false;
-        } else if (scholarship == ScholarShip.INCREASED) {
+        } else if (scholarship == Scholarship.INCREASED) {
             throw new IllegalArgumentException("You already have increased scholarship");
         }
 
@@ -84,6 +100,9 @@ public class GradeBook {
                 .allMatch(Semester::checkSemesterRatingForIncreasedScholarShip);
     }
 
+    /**
+     * Is possible to get red diploma method.
+     */
     public boolean isPossibleToGetRedDiploma() {
         if (canBeMoreSemesters()) {
             if (!Arrays.stream(semesters.get(semesters.size() - 1).getSubjects())
@@ -131,42 +150,5 @@ public class GradeBook {
 
         return stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length())
                 .toString();
-    }
-
-    public static void main(String[] args) {
-        Subject[] controlTypes1 = new Subject[]{new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("Algebra", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("Algebra", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Math logic", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("English", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-                new Subject("Math logic", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("Discrete math", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Declarative programming", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FOUR, true),
-                new Subject("Imperative programming", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-                new Subject("Fundamentals of speech culture", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, true),
-                new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-                new Subject("Digital platforms", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-                new Subject("English", FormsOfControlType.CREDIT, FormsOfMark.PASS, false)};
-
-        Subject[] controlTypes2 = new Subject[]{new Subject("Algebra", FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("Algebra", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.FOUR, true),
-                new Subject("Digital platforms", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Declarative programming", FormsOfControlType.EXAM, FormsOfMark.FIVE, true),
-                new Subject("Philosophy", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
-                new Subject("Imperative programming", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.FIVE, false),
-                new Subject("Discrete math", FormsOfControlType.CREDIT, FormsOfMark.FAILURE, false),
-                new Subject("PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, false),
-        };
-
-        GradeBook gradeBook = new GradeBook(ScholarShip.ABSENT);
-
-        gradeBook.add(controlTypes1);
-        gradeBook.add(controlTypes2);
-        System.out.println(gradeBook);
     }
 }

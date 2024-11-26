@@ -1,5 +1,8 @@
 package nsu.fit.labusov.gradebook;
 
+/**
+ * Forms of control type class.
+ */
 public enum FormsOfControlType {
     EXERCISE, CONTROL, COLLOQUIUM, EXAM, DIFFERENTIATEDCREDIT,
     CREDIT, PRACTICEREPORTDEFENCE, VCRPROTECTION;

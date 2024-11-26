@@ -1,5 +1,8 @@
 package nsu.fit.labusov.gradebook;
 
-public enum ScholarShip {
+/**
+ *  Scholarship class.
+ */
+public enum Scholarship {
     ABSENT, NORMAL, INCREASED
 }
