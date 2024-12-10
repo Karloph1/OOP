@@ -24,7 +24,7 @@ public class StringFinder {
         char[] copyBuffer = new char[capacity - utf8SubString.length() + 1];
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-            new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+                new FileInputStream(fileName), StandardCharsets.UTF_8))) {
             int readBuffer = bufferedReader.read(buffer);
 
             if (readBuffer == -1) {
@@ -67,15 +67,9 @@ public class StringFinder {
                 readBuffer += utf8SubString.length() - 1;
             }
         } catch (IOException e) {
-            throw new Exception("No file to read");
+            throw new IOException("No file to read");
         }
 
-        int[] ints = new int[indices.size()];
-
-        for (int i = 0; i < indices.size(); i++) {
-            ints[i] = indices.get(i);
-        }
-
-        return ints;
+        return indices.stream().mapToInt(Integer::intValue).toArray();
     }
 }
