@@ -4,20 +4,23 @@ package nsu.fit.labusov.gradebook;
  * Forms of control type class.
  */
 public enum FormsOfControlType {
-    EXERCISE, CONTROL, COLLOQUIUM, EXAM, DIFFERENTIATEDCREDIT,
-    CREDIT, PRACTICEREPORTDEFENCE, VCRPROTECTION;
+    EXERCISE("Задание"),
+    CONTROL("Контрольная"),
+    COLLOQUIUM("Коллоквиум"),
+    EXAM("Экзамен"),
+    DIFFERENTIATEDCREDIT("Дифференцированный зачет"),
+    CREDIT("Зачет"),
+    PRACTICEREPORTDEFENCE("Защита отчета по практике"),
+    VCRPROTECTION("Защита ВКР");
+
+    private final String formName;
+
+    FormsOfControlType(String name) {
+        this.formName = name;
+    }
 
     @Override
     public String toString() {
-        return switch (this) {
-            case EXERCISE -> "Задание";
-            case CONTROL -> "Контрольная";
-            case COLLOQUIUM -> "Коллоквиум";
-            case EXAM -> "Экзамен";
-            case DIFFERENTIATEDCREDIT -> "Дифференцированный зачет";
-            case CREDIT -> "Зачет";
-            case PRACTICEREPORTDEFENCE -> "Защита отчета по практике";
-            case VCRPROTECTION -> "Защита ВКР";
-        };
+        return formName;
     }
 }

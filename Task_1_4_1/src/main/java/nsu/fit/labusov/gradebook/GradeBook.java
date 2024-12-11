@@ -18,7 +18,7 @@ public class GradeBook {
         this.scholarship = scholarship;
     }
 
-    private boolean canBeMoreSemesters() {
+    private boolean canNotBeMoreSemesters() {
         if (semesters.isEmpty()) {
             return false;
         }
@@ -48,7 +48,7 @@ public class GradeBook {
      * Add semester method.
      */
     public void add(Subject[] controlTypes) {
-        if (canBeMoreSemesters()) {
+        if (canNotBeMoreSemesters()) {
             throw new IllegalArgumentException("Unable to add more semesters");
         }
 
@@ -104,7 +104,7 @@ public class GradeBook {
      * Is possible to get red diploma method.
      */
     public boolean isPossibleToGetRedDiploma() {
-        if (canBeMoreSemesters()) {
+        if (canNotBeMoreSemesters()) {
             if (!Arrays.stream(semesters.get(semesters.size() - 1).getSubjects())
                     .filter(x -> x.getWorkType() == FormsOfControlType.VCRPROTECTION)
                     .allMatch(x -> x.getControlGrade() == 5)) {

@@ -4,17 +4,21 @@ package nsu.fit.labusov.gradebook;
  * Forms of mark class.
  */
 public enum FormsOfMark {
-    TWO, THREE, FOUR, FIVE, PASS, FAILURE;
+    TWO("Неудовлетворительно"),
+    THREE("Удовлетворительно"),
+    FOUR("Хорошо"),
+    FIVE("Отлично"),
+    PASS("Зачет"),
+    FAILURE("Незачет");
+
+    private final String markName;
+
+    FormsOfMark(String markName) {
+        this.markName = markName;
+    }
 
     @Override
     public String toString() {
-        return switch (this) {
-            case TWO -> ("Неудовлетворительно");
-            case THREE -> ("Удовлетворительно");
-            case FOUR -> ("Хорошо");
-            case FIVE -> ("Отлично");
-            case PASS -> ("Зачет");
-            case FAILURE -> ("Незачет");
-        };
+        return markName;
     }
 }
