@@ -15,14 +15,19 @@ public class Quote extends Element implements Serializable {
     public Quote(String text) {
         this.text = text;
     }
+
     public String getText() {
         return text;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Quote quote = (Quote) o;
 

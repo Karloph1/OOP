@@ -30,12 +30,19 @@ public class List extends Element implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         List list = (List) o;
 
-        if (hasOrder != list.hasOrder) return false;
+        if (hasOrder != list.hasOrder) {
+            return false;
+        }
+
         return Objects.equals(texts, list.texts);
     }
 
@@ -70,6 +77,9 @@ public class List extends Element implements Serializable {
         return stringBuilder.deleteCharAt(stringBuilder.length() - 1).toString();
     }
 
+    /**
+     * List builder class.
+     */
     public static class Builder {
         private final ArrayList<Object> texts;
         private boolean hasOrder;
@@ -85,6 +95,9 @@ public class List extends Element implements Serializable {
             return this;
         }
 
+        /**
+         * Text append method.
+         */
         public Builder append(Object text) {
             if (text instanceof Header || text instanceof Table || text instanceof List
                     || text instanceof Quote || text instanceof CodeBlock) {

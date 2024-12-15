@@ -576,7 +576,7 @@ public class MarkDownTest {
                 .build();
 
         Assertions.assertArrayEquals(new Table.ALIGN[]{Table.ALIGN.ALIGN_CENTER,
-                Table.ALIGN.ALIGN_LEFT, Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER},
+            Table.ALIGN.ALIGN_LEFT, Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER},
                 table.getAligns());
     }
 
