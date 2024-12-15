@@ -17,6 +17,9 @@ public class Image extends Element implements Serializable {
     private final Text name;
     private URL url;
 
+    /**
+     * Image constructor.
+     */
     public Image(Object name, String url) {
         this.name = new Text.Builder(name).build();
 
@@ -33,18 +36,27 @@ public class Image extends Element implements Serializable {
     public String getName() {
         return name.getText();
     }
+
     public String getUrl() {
         return String.valueOf(url);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Image image = (Image) o;
 
-        if (!Objects.equals(name, image.name)) return false;
+        if (!Objects.equals(name, image.name)) {
+            return false;
+        }
+
         return Objects.equals(url, image.url);
     }
 
@@ -52,6 +64,7 @@ public class Image extends Element implements Serializable {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (url != null ? url.toString().hashCode() : 0);
+
         return result;
     }
 

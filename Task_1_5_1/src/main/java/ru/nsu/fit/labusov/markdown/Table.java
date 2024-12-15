@@ -13,6 +13,9 @@ public class Table extends Element implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Align enum class.
+     */
     public enum Align {ALIGN_RIGHT, ALIGN_LEFT, ALIGN_DEFAULT, ALIGN_CENTER}
 
     private final Align[] aligns;
@@ -128,6 +131,8 @@ public class Table extends Element implements Serializable {
                                     + (rowsLength[j] - rows.get(i)[j].toString().length()) % 2;
 
                             break;
+                        default:
+                            break;
                     }
 
                     stringBuilder
@@ -172,6 +177,8 @@ public class Table extends Element implements Serializable {
                                     .append("|");
 
                             break;
+                        default:
+                            break;
                     }
                 }
 
@@ -182,6 +189,9 @@ public class Table extends Element implements Serializable {
         return stringBuilder.deleteCharAt(stringBuilder.length() - 1).toString();
     }
 
+    /**
+     * Table builder class.
+     */
     public static class Builder {
         private Align[] align;
         private final ArrayList<Object[]> rows;
@@ -192,12 +202,18 @@ public class Table extends Element implements Serializable {
             align = new Align[]{};
         }
 
+        /**
+         * Set alignments method.
+         */
         public Builder withAlignments(Align... align) {
             this.align = align;
 
             return this;
         }
 
+        /**
+         * Add row method.
+         */
         public Builder addRow(Object... rowName) {
             if (setRow == -1) {
                 setRow = rowName.length;

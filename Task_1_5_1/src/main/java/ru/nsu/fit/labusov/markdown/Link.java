@@ -17,6 +17,9 @@ public class Link extends Element implements Serializable {
     private final Text name;
     private URL url;
 
+    /**
+     * Link builder method.
+     */
     public Link(Object name, String url) {
         this.name = new Text.Builder(name).build();
 
@@ -40,12 +43,19 @@ public class Link extends Element implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Link link = (Link) o;
 
-        if (!Objects.equals(name, link.name)) return false;
+        if (!Objects.equals(name, link.name)) {
+            return false;
+        }
+
         return Objects.equals(url, link.url);
     }
 

@@ -62,14 +62,25 @@ public class Text extends Element implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Text text1 = (Text) o;
 
-        if (hasBold != text1.hasBold) return false;
-        if (hasItalic != text1.hasItalic) return false;
-        if (hasStrikeThrough != text1.hasStrikeThrough) return false;
+        if (hasBold != text1.hasBold) {
+            return false;
+        }
+        if (hasItalic != text1.hasItalic) {
+            return false;
+        }
+        if (hasStrikeThrough != text1.hasStrikeThrough) {
+            return false;
+        }
+
         return Objects.equals(text, text1.text);
     }
 
@@ -82,13 +93,16 @@ public class Text extends Element implements Serializable {
         return result;
     }
 
+    /**
+     * Text builder class.
+     */
     public static class Builder {
         private final String text;
         private boolean hasBold;
         private boolean hasItalic;
         private boolean hasStrikeThrough;
 
-        public Builder (Object text) {
+        public Builder(Object text) {
             this.text = text.toString();
             hasBold = false;
             hasItalic = false;

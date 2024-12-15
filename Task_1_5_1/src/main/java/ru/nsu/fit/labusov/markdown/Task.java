@@ -28,12 +28,19 @@ public class Task extends Element implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Task task = (Task) o;
 
-        if (hasCompleted != task.hasCompleted) return false;
+        if (hasCompleted != task.hasCompleted) {
+            return false;
+        }
+
         return Objects.equals(text, task.text);
     }
 
@@ -49,12 +56,15 @@ public class Task extends Element implements Serializable {
         StringBuilder stringBuilder = new StringBuilder("- [ ] " + text);
 
         if (hasCompleted) {
-            stringBuilder.replace(3,4, "x");
+            stringBuilder.replace(3, 4, "x");
         }
 
         return stringBuilder.toString();
     }
 
+    /**
+     * Task builder class.
+     */
     public static class Builder {
         private final Text text;
         private boolean hasCompleted;
