@@ -245,8 +245,8 @@ public class MarkDownTest {
                 "https://img.freepik.com/free-photo/"
                         + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
-        Assertions.assertEquals("https://img.freepik.com/free-photo/" +
-                "view-beautiful-persian-domestic-cat_23-2151773826.jpg", image.getUrl());
+        Assertions.assertEquals("https://img.freepik.com/free-photo/"
+                + "view-beautiful-persian-domestic-cat_23-2151773826.jpg", image.getUrl());
     }
 
     @Test
@@ -287,18 +287,18 @@ public class MarkDownTest {
     @Test
     void linkToStringTest() {
         Link link = new Link(0.9,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
-        Assertions.assertEquals("[0.9](https://img.freepik.com/free-photo/" +
-                "view-beautiful-persian-domestic-cat_23-2151773826.jpg)", link.toString());
+        Assertions.assertEquals("[0.9](https://img.freepik.com/free-photo/"
+                + "view-beautiful-persian-domestic-cat_23-2151773826.jpg)", link.toString());
     }
 
     @Test
     void linkGetNamTest() {
         Link link = new Link(0.9,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Assertions.assertEquals("0.9", link.getName());
     }
@@ -306,21 +306,21 @@ public class MarkDownTest {
     @Test
     void linkGetUrlTest() {
         Link link = new Link(0.9,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
-        Assertions.assertEquals("https://img.freepik.com/free-photo/" +
-                "view-beautiful-persian-domestic-cat_23-2151773826.jpg", link.getUrl());
+        Assertions.assertEquals("https://img.freepik.com/free-photo/"
+                + "view-beautiful-persian-domestic-cat_23-2151773826.jpg", link.getUrl());
     }
 
     @Test
     void linkEqualsTest() {
         Link link = new Link(0.9,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
         Link link1 = new Link(0.9,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Assertions.assertEquals(link, link1);
     }
@@ -328,8 +328,8 @@ public class MarkDownTest {
     @Test
     void linkSerializeTest() throws IOException, ClassNotFoundException {
         Link link = new Link(0.9,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
         String file = "file1.txt";
 
         link.serialize(file);
@@ -400,8 +400,8 @@ public class MarkDownTest {
                 .append("Hello")
                 .append(false)
                 .append(new Link(0.9,
-                        "https://img.freepik.com/free-photo/" +
-                                "view-beautiful-persian-domestic-cat_23-2151773826.jpg"))
+                        "https://img.freepik.com/free-photo/"
+                                + "view-beautiful-persian-domestic-cat_23-2151773826.jpg"))
                 .append(new Text.Builder("Class").bold().italic().build())
                 .build();
 
@@ -410,8 +410,8 @@ public class MarkDownTest {
                 .append("Hello")
                 .append(false)
                 .append(new Link(0.9,
-                        "https://img.freepik.com/free-photo/" +
-                                "view-beautiful-persian-domestic-cat_23-2151773826.jpg"))
+                        "https://img.freepik.com/free-photo/"
+                                + "view-beautiful-persian-domestic-cat_23-2151773826.jpg"))
                 .append(new Text.Builder("Class").bold().italic().build())
                 .build();
 
@@ -426,8 +426,8 @@ public class MarkDownTest {
                 .append("Hello")
                 .append(false)
                 .append(new Link(0.9,
-                        "https://img.freepik.com/free-photo/" +
-                                "view-beautiful-persian-domestic-cat_23-2151773826.jpg"))
+                        "https://img.freepik.com/free-photo/"
+                                + "view-beautiful-persian-domestic-cat_23-2151773826.jpg"))
                 .append(new Text.Builder("Class").bold().italic().build())
                 .build();
 
