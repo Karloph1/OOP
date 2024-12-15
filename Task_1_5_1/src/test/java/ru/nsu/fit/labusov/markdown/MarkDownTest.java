@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * MarkDown tests.
+ */
 public class MarkDownTest {
 
     /**
@@ -119,8 +122,8 @@ public class MarkDownTest {
     void codeBlockToStringTest() {
         CodeBlock codeBlock = new CodeBlock("System.out.println('Hello world')");
 
-        Assertions.assertEquals("```\nSystem.out.println('Hello world')\n```"
-                , codeBlock.toString());
+        Assertions.assertEquals("```\nSystem.out.println('Hello world')\n```",
+                codeBlock.toString());
     }
 
     @Test
@@ -216,54 +219,54 @@ public class MarkDownTest {
      * Image tests.
      */
     @Test
-    void ImageToStringTest() {
+    void imageToStringTest() {
         Image image = new Image(123,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Assertions.assertEquals(
-                "![123](https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg)",
+                "![123](https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg)",
                 image.toString());
     }
 
     @Test
-    void ImageGetNameTest() {
+    void imageGetNameTest() {
         Image image = new Image(123,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Assertions.assertEquals("123", image.getName());
     }
 
     @Test
-    void ImageGetUrlTest() {
+    void imageGetUrlTest() {
         Image image = new Image(123,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Assertions.assertEquals("https://img.freepik.com/free-photo/" +
                 "view-beautiful-persian-domestic-cat_23-2151773826.jpg", image.getUrl());
     }
 
     @Test
-    void ImageEqualsTest() {
+    void imageEqualsTest() {
         Image image = new Image(123,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Image image1 = new Image(123,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
 
         Assertions.assertEquals(image, image1);
     }
 
     @Test
-    void ImageSerializeTest() throws IOException, ClassNotFoundException {
+    void imageSerializeTest() throws IOException, ClassNotFoundException {
         Image image = new Image(123,
-                "https://img.freepik.com/free-photo/" +
-                        "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
+                "https://img.freepik.com/free-photo/"
+                        + "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
         String file = "file1.txt";
 
         image.serialize(file);
@@ -282,7 +285,7 @@ public class MarkDownTest {
      * Link tests.
      */
     @Test
-    void LinkToStringTest() {
+    void linkToStringTest() {
         Link link = new Link(0.9,
                 "https://img.freepik.com/free-photo/" +
                         "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
@@ -292,7 +295,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void LinkGetNamTest() {
+    void linkGetNamTest() {
         Link link = new Link(0.9,
                 "https://img.freepik.com/free-photo/" +
                         "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
@@ -301,7 +304,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void LinkGetUrlTest() {
+    void linkGetUrlTest() {
         Link link = new Link(0.9,
                 "https://img.freepik.com/free-photo/" +
                         "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
@@ -311,7 +314,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void LinkEqualsTest() {
+    void linkEqualsTest() {
         Link link = new Link(0.9,
                 "https://img.freepik.com/free-photo/" +
                         "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
@@ -323,7 +326,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void LinkSerializeTest() throws IOException, ClassNotFoundException {
+    void linkSerializeTest() throws IOException, ClassNotFoundException {
         Link link = new Link(0.9,
                 "https://img.freepik.com/free-photo/" +
                         "view-beautiful-persian-domestic-cat_23-2151773826.jpg");
@@ -343,7 +346,7 @@ public class MarkDownTest {
      * List tests.
      */
     @Test
-    void ListOrderToStringTest() {
+    void listOrderToStringTest() {
         List.Builder builder = new List.Builder().setOrder(true);
 
         for (int i = 0; i < 4; i++) {
@@ -358,7 +361,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void ListNotOrderToStringTest() {
+    void listNotOrderToStringTest() {
         List.Builder builder = new List.Builder();
 
         for (int i = 0; i < 4; i++) {
@@ -373,7 +376,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void ListGetTextsTest() {
+    void listGetTextsTest() {
         List.Builder builder = new List.Builder().setOrder(true);
 
         for (int i = 0; i < 4; i++) {
@@ -384,14 +387,14 @@ public class MarkDownTest {
     }
 
     @Test
-    void ListGetHasOrder() {
+    void listGetHasOrder() {
         List list = new List.Builder().append(2).setOrder(true).build();
 
         Assertions.assertTrue(list.getHasOrder());
     }
 
     @Test
-    void ListEqualsTest() {
+    void listEqualsTest() {
         List list = new List.Builder()
                 .append(1)
                 .append("Hello")
@@ -417,7 +420,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void ListSerializeTest() throws IOException, ClassNotFoundException {
+    void listSerializeTest() throws IOException, ClassNotFoundException {
         List list = new List.Builder()
                 .append(1)
                 .append("Hello")
@@ -444,7 +447,7 @@ public class MarkDownTest {
      * Quote tests.
      */
     @Test
-    void QuoteToStringTest() {
+    void quoteToStringTest() {
         Quote quote = new Quote("Without changing anything, nothing will change");
 
         Assertions.assertEquals("> Without changing anything, nothing will change",
@@ -452,7 +455,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void QuoteGetTextTest() {
+    void quoteGetTextTest() {
         Quote quote = new Quote("Without changing anything, nothing will change");
 
         Assertions.assertEquals("Without changing anything, nothing will change",
@@ -460,7 +463,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void QuoteEqualsTest() {
+    void quoteEqualsTest() {
         Quote quote = new Quote("Without changing anything, nothing will change");
 
         Quote quote1 = new Quote("Without changing anything, nothing will change");
@@ -469,7 +472,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void QuoteSerializeTest() throws IOException, ClassNotFoundException {
+    void quoteSerializeTest() throws IOException, ClassNotFoundException {
         Quote quote = new Quote("Without changing anything, nothing will change");
 
         String file = "file1.txt";
@@ -488,35 +491,35 @@ public class MarkDownTest {
      * Task tests.
      */
     @Test
-    void TaskCompletedToStringTest() {
+    void taskCompletedToStringTest() {
         Task task = new Task.Builder("Wake up").isCompleted(true).build();
 
         Assertions.assertEquals("- [x] Wake up", task.toString());
     }
 
     @Test
-    void TaskNotCompletedToStringTest() {
+    void taskNotCompletedToStringTest() {
         Task task = new Task.Builder("Wake up").isCompleted(false).build();
 
         Assertions.assertEquals("- [ ] Wake up", task.toString());
     }
 
     @Test
-    void TaskGetTextTest() {
+    void taskGetTextTest() {
         Task task = new Task.Builder("Wake up").isCompleted(true).build();
 
         Assertions.assertEquals("Wake up", task.getText());
     }
 
     @Test
-    void TaskGetHasCompleted() {
+    void taskGetHasCompleted() {
         Task task = new Task.Builder("Wake up").isCompleted(true).build();
 
         Assertions.assertTrue(task.getHasCompleted());
     }
 
     @Test
-    void TaskEqualsTest() {
+    void taskEqualsTest() {
         Task task = new Task.Builder("Wake up").isCompleted(true).build();
 
         Task task1 = new Task.Builder("Wake up").isCompleted(true).build();
@@ -525,7 +528,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void TaskSerializeTest() throws IOException, ClassNotFoundException {
+    void taskSerializeTest() throws IOException, ClassNotFoundException {
         Task task = new Task.Builder("Wake up").isCompleted(true).build();
         String file = "file1.txt";
         task.serialize(file);
@@ -542,7 +545,7 @@ public class MarkDownTest {
      * Table tests.
      */
     @Test
-    void TableToStringTest() {
+    void tableToStringTest() {
         Table.Builder table = new Table.Builder()
                 .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
                         Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
@@ -565,7 +568,7 @@ public class MarkDownTest {
 
 
     @Test
-    void TableGetAlignsTest() {
+    void tableGetAlignsTest() {
         Table table = new Table.Builder()
                 .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
                         Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
@@ -578,7 +581,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void TableGetRowsTest() {
+    void tableGetRowsTest() {
         Table table = new Table.Builder()
                 .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
                         Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
@@ -594,7 +597,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void TableEqualsTest() {
+    void tableEqualsTest() {
         Table.Builder table = new Table.Builder()
                 .withAlignments(Table.ALIGN.ALIGN_LEFT, Table.ALIGN.ALIGN_LEFT)
                 .addRow("Number", "Bold");
@@ -613,7 +616,7 @@ public class MarkDownTest {
     }
 
     @Test
-    void TableSerializeTest() throws IOException, ClassNotFoundException {
+    void tableSerializeTest() throws IOException, ClassNotFoundException {
         Table.Builder table = new Table.Builder()
                 .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
                         Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
