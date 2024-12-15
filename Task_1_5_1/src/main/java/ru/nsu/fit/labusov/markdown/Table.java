@@ -16,7 +16,9 @@ public class Table extends Element implements Serializable {
     /**
      * Align enum class.
      */
-    public enum Align {ALIGN_RIGHT, ALIGN_LEFT, ALIGN_DEFAULT, ALIGN_CENTER}
+    public enum Align {
+        ALIGN_RIGHT, ALIGN_LEFT, ALIGN_DEFAULT, ALIGN_CENTER
+    }
 
     private final Align[] aligns;
     private final ArrayList<Object[]> rows;

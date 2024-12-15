@@ -73,6 +73,9 @@ public class Task extends Element implements Serializable {
             this.text = new Text.Builder(text).build();
         }
 
+        /**
+         * Set completed method.
+         */
         public Builder isCompleted(boolean hasCompleted) {
             this.hasCompleted = hasCompleted;
 

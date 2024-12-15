@@ -8,6 +8,9 @@ import java.io.ObjectOutputStream;
  * Element class.
  */
 public abstract class Element {
+    /**
+     * Serialize method.
+     */
     public void serialize(String fileName) throws IOException {
         FileOutputStream outputStream = new FileOutputStream(fileName);
 

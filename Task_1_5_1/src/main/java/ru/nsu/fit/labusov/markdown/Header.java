@@ -17,6 +17,9 @@ public class Header extends Element implements Serializable {
         this.text = new Text.Builder(text).build();
     }
 
+    /**
+     * Set title method.
+     */
     public Header titleDegree(int titleDegree) {
         if (titleDegree > 6) {
             throw new IllegalArgumentException("Title degree can be maximum 6");

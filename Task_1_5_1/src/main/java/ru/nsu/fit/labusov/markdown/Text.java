@@ -102,6 +102,9 @@ public class Text extends Element implements Serializable {
         private boolean hasItalic;
         private boolean hasStrikeThrough;
 
+        /**
+         * Builder method.
+         */
         public Builder(Object text) {
             this.text = text.toString();
             hasBold = false;
@@ -109,18 +112,27 @@ public class Text extends Element implements Serializable {
             hasStrikeThrough = false;
         }
 
+        /**
+         * Bold method.
+         */
         public Builder bold() {
             hasBold = true;
 
             return this;
         }
 
+        /**
+         * Italic method.
+         */
         public Builder italic() {
             hasItalic = true;
 
             return this;
         }
 
+        /**
+         * StrikeThrough method.
+         */
         public Builder strikeThrough() {
             hasStrikeThrough = true;
 
