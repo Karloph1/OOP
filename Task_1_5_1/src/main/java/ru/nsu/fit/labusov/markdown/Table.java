@@ -3,8 +3,8 @@ package ru.nsu.fit.labusov.markdown;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Table class.
@@ -12,8 +12,10 @@ import java.util.Arrays;
 public class Table extends Element implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    public enum ALIGN {ALIGN_RIGHT, ALIGN_LEFT, ALIGN_DEFAULT, ALIGN_CENTER}
-    private final ALIGN[] aligns;
+
+    public enum Align {ALIGN_RIGHT, ALIGN_LEFT, ALIGN_DEFAULT, ALIGN_CENTER}
+
+    private final Align[] aligns;
     private final ArrayList<Object[]> rows;
     private final int setRow;
 
@@ -21,21 +23,21 @@ public class Table extends Element implements Serializable {
         this.setRow = builder.setRow;
 
         if (builder.align.length >= setRow) {
-            this.aligns = (Arrays.stream(builder.align).limit(setRow).toArray(ALIGN[]::new));
+            this.aligns = (Arrays.stream(builder.align).limit(setRow).toArray(Align[]::new));
         } else {
-            this.aligns = new ALIGN[setRow];
+            this.aligns = new Align[setRow];
 
             System.arraycopy(builder.align, 0, this.aligns, 0, builder.align.length);
 
             for (int i = builder.align.length; i < setRow; i++) {
-                this.aligns[i] = ALIGN.ALIGN_DEFAULT;
+                this.aligns[i] = Align.ALIGN_DEFAULT;
             }
         }
 
         this.rows = builder.rows;
     }
 
-    public ALIGN[] getAligns() {
+    public Align[] getAligns() {
         return aligns;
     }
 
@@ -45,8 +47,12 @@ public class Table extends Element implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
 
         Table table = (Table) obj;
 
@@ -177,16 +183,16 @@ public class Table extends Element implements Serializable {
     }
 
     public static class Builder {
-        private ALIGN[] align;
+        private Align[] align;
         private final ArrayList<Object[]> rows;
         private int setRow = -1;
 
         public Builder() {
             rows = new ArrayList<>();
-            align = new ALIGN[]{};
+            align = new Align[]{};
         }
 
-        public Builder withAlignments(Table.ALIGN... align) {
+        public Builder withAlignments(Align... align) {
             this.align = align;
 
             return this;

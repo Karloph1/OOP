@@ -89,6 +89,9 @@ public class List extends Element implements Serializable {
             hasOrder = false;
         }
 
+        /**
+         * Order method.
+         */
         public Builder setOrder(boolean hasOrder) {
             this.hasOrder = hasOrder;
 

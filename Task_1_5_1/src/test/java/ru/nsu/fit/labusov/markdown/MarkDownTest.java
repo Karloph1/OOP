@@ -547,8 +547,8 @@ public class MarkDownTest {
     @Test
     void tableToStringTest() {
         Table.Builder table = new Table.Builder()
-                .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
-                        Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
+                .withAlignments(Table.Align.ALIGN_CENTER, Table.Align.ALIGN_LEFT,
+                        Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER)
                 .addRow("Number", "Bold", "Italic", "Boolean", "Empty");
 
         for (int i = 0; i < 5; i++) {
@@ -570,21 +570,21 @@ public class MarkDownTest {
     @Test
     void tableGetAlignsTest() {
         Table table = new Table.Builder()
-                .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
-                        Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
+                .withAlignments(Table.Align.ALIGN_CENTER, Table.Align.ALIGN_LEFT,
+                        Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER)
                 .addRow("Number", "Bold", "Italic", "Boolean")
                 .build();
 
-        Assertions.assertArrayEquals(new Table.ALIGN[]{Table.ALIGN.ALIGN_CENTER,
-            Table.ALIGN.ALIGN_LEFT, Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER},
+        Assertions.assertArrayEquals(new Table.Align[]{Table.Align.ALIGN_CENTER,
+            Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
                 table.getAligns());
     }
 
     @Test
     void tableGetRowsTest() {
         Table table = new Table.Builder()
-                .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
-                        Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
+                .withAlignments(Table.Align.ALIGN_CENTER, Table.Align.ALIGN_LEFT,
+                        Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER)
                 .addRow("Number", "Bold", "Italic", "Boolean", "Empty")
                 .addRow(true, false, false, false, true)
                 .build();
@@ -599,7 +599,7 @@ public class MarkDownTest {
     @Test
     void tableEqualsTest() {
         Table.Builder table = new Table.Builder()
-                .withAlignments(Table.ALIGN.ALIGN_LEFT, Table.ALIGN.ALIGN_LEFT)
+                .withAlignments(Table.Align.ALIGN_LEFT, Table.Align.ALIGN_LEFT)
                 .addRow("Number", "Bold");
 
         for (int i = 0; i < 5; i++) {
@@ -618,8 +618,8 @@ public class MarkDownTest {
     @Test
     void tableSerializeTest() throws IOException, ClassNotFoundException {
         Table.Builder table = new Table.Builder()
-                .withAlignments(Table.ALIGN.ALIGN_CENTER, Table.ALIGN.ALIGN_LEFT,
-                        Table.ALIGN.ALIGN_RIGHT, Table.ALIGN.ALIGN_CENTER)
+                .withAlignments(Table.Align.ALIGN_CENTER, Table.Align.ALIGN_LEFT,
+                        Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER)
                 .addRow("Number", "Bold", "Italic", "Boolean", "Empty");
 
         for (int i = 0; i < 5; i++) {
