@@ -15,7 +15,7 @@ public class StringFinder {
     /**
      * find string method.
      */
-    public static int[] find(String fileName, String subString) throws Exception {
+    public static int[] find(String fileName, String subString) throws IOException {
         ArrayList<Integer> indices = new ArrayList<>();
         String utf8SubString = new String(subString.getBytes(), StandardCharsets.UTF_8);
 
@@ -66,8 +66,6 @@ public class StringFinder {
                 System.arraycopy(copyBuffer, 0, buffer, utf8SubString.length() - 1, readBuffer);
                 readBuffer += utf8SubString.length() - 1;
             }
-        } catch (IOException e) {
-            throw new IOException("No file to read");
         }
 
         return indices.stream().mapToInt(Integer::intValue).toArray();
