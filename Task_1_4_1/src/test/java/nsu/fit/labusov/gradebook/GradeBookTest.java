@@ -1,10 +1,10 @@
 package nsu.fit.labusov.gradebook;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * GradeBook tests.
@@ -387,12 +387,12 @@ public class GradeBookTest {
     @Test
     void semesterEqualsTest() {
         Subject[] controlTypes = new Subject[]{new Subject("Math",
-                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("History",
+            FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+            new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+            new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+            new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+            new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+            new Subject("History",
                         FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
         };
 
@@ -407,8 +407,8 @@ public class GradeBookTest {
     void semesterSerializeTest() throws IOException, ClassNotFoundException {
         Subject[] controlTypes = new Subject[]{new Subject("Math",
                 FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
-                new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-                new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+            new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+            new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
                 new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
                 new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
                 new Subject("History",
