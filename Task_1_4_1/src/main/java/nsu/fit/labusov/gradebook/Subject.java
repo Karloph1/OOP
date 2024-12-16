@@ -1,9 +1,15 @@
 package nsu.fit.labusov.gradebook;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * Subject class.
  */
-public class Subject {
+public class Subject implements Serializable {
     private final String subjectName;
     private final FormsOfControlType countableName;
     private final FormsOfMark countableMark;
@@ -82,6 +88,45 @@ public class Subject {
         } else {
             return countableMark != FormsOfMark.TWO;
         }
+    }
+
+    public void serialize(String fileName) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(fileName);
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(this);
+
+        objectOutputStream.close();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Subject subject = (Subject) o;
+
+        if (isCountedInDiploma != subject.isCountedInDiploma) {
+            return false;
+        }
+        if (!Objects.equals(subjectName, subject.subjectName)) {
+            return false;
+        }
+        if (countableName != subject.countableName) {
+            return false;
+        }
+        return countableMark == subject.countableMark;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = subjectName != null ? subjectName.hashCode() : 0;
+        result = 31 * result + (countableName != null ? countableName.hashCode() : 0);
+        result = 31 * result + (countableMark != null ? countableMark.hashCode() : 0);
+        result = 31 * result + (isCountedInDiploma ? 1 : 0);
+        return result;
     }
 
     @Override

@@ -1,11 +1,15 @@
 package nsu.fit.labusov.gradebook;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Semester class.
  */
-public class Semester {
+public class Semester implements Serializable {
     private final Subject[] subjects;
     private final int semesterNumber;
     private final boolean isSemesterLast;
@@ -61,6 +65,42 @@ public class Semester {
     public boolean checkSemesterRatingForIncreasedScholarShip() {
         return Arrays.stream(subjects)
                 .allMatch(Subject::checkRatingForIncreasedScholarship);
+    }
+
+    public void serialize(String fileName) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(fileName);
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(this);
+
+        objectOutputStream.close();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Semester semester = (Semester) o;
+
+        if (semesterNumber != semester.semesterNumber) {
+            return false;
+        }
+        if (isSemesterLast != semester.isSemesterLast) {
+            return false;
+        }
+
+        return Arrays.equals(subjects, semester.subjects);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Arrays.hashCode(subjects);
+        result = 31 * result + semesterNumber;
+        result = 31 * result + (isSemesterLast ? 1 : 0);
+        return result;
     }
 
     @Override

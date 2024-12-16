@@ -1,5 +1,9 @@
 package nsu.fit.labusov.gradebook;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * GradeBook class.
  */
-public class GradeBook {
+public class GradeBook implements Serializable {
     private final Scholarship scholarship;
     private final ArrayList<Semester> semesters;
 
@@ -134,6 +138,39 @@ public class GradeBook {
                 .map(this::getExamAndDiffCreditSubjectMarks)
                 .filter(x -> !x.isEmpty())
                 .allMatch(x -> x.get(x.size() - 1) > 3);
+    }
+
+    public void serialize(String fileName) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(fileName);
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(this);
+
+        objectOutputStream.close();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        GradeBook gradeBook = (GradeBook) o;
+
+        if (scholarship != gradeBook.scholarship) {
+            return false;
+        }
+        return semesters.equals(gradeBook.semesters);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = scholarship != null ? scholarship.hashCode() : 0;
+        result = 31 * result + semesters.hashCode();
+        return result;
     }
 
     @Override

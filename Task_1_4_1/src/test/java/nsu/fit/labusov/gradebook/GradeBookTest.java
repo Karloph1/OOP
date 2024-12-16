@@ -2,6 +2,9 @@ package nsu.fit.labusov.gradebook;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 /**
  * GradeBook tests.
@@ -113,17 +116,17 @@ public class GradeBookTest {
     }
 
     /**
-     * ControlType tests.
+     * Subject tests.
      */
     @Test
-    void controlTypeToStringTest() {
+    void subjectToStringTest() {
         Subject a = new Subject("OOP", FormsOfControlType.EXAM, FormsOfMark.FIVE, false);
 
         Assertions.assertEquals("OOP(Экзамен) - Отлично", a.toString());
     }
 
     @Test
-    void controlTypeExceptionTest1() {
+    void subjectExceptionTest1() {
         try {
             Subject a = new Subject(
                 "OOP", FormsOfControlType.CREDIT, FormsOfMark.FIVE, false);
@@ -135,7 +138,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeExceptionTest2() {
+    void subjectExceptionTest2() {
         try {
             Subject a = new Subject(
                 "OOP", FormsOfControlType.EXAM, FormsOfMark.FAILURE, false);
@@ -147,7 +150,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeGetControlTypeNameTest() {
+    void subjectGetControlTypeNameTest() {
         Subject a = new Subject(
                 "OOP", FormsOfControlType.COLLOQUIUM, FormsOfMark.FOUR, true);
 
@@ -155,7 +158,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeGetControlGradeTest() {
+    void subjectGetControlGradeTest() {
         Subject a = new Subject(
                 "Math", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, true);
 
@@ -163,7 +166,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeGetIsCountedInDiplomaTest() {
+    void subjectGetIsCountedInDiplomaTest() {
         Subject a = new Subject(
                 "Math", FormsOfControlType.PRACTICEREPORTDEFENCE, FormsOfMark.TWO, true);
 
@@ -171,7 +174,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeCheckRatingForScholarshipTest1() {
+    void subjectCheckRatingForScholarshipTest1() {
         Subject a = new Subject(
                 "History", FormsOfControlType.EXAM, FormsOfMark.THREE, true);
 
@@ -179,7 +182,7 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeCheckRatingForScholarshipTest2() {
+    void subjectCheckRatingForScholarshipTest2() {
         Subject a = new Subject(
                 "History", FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false);
 
@@ -187,11 +190,39 @@ public class GradeBookTest {
     }
 
     @Test
-    void controlTypeCheckRatingForScholarshipTest3() {
+    void subjectCheckRatingForScholarshipTest3() {
         Subject a = new Subject(
                 "PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, true);
 
         Assertions.assertTrue(a.checkRatingForBudget());
+    }
+
+    @Test
+    void subjectEqualsTest() {
+        Subject a = new Subject(
+                "PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, true);
+
+        Subject b = new Subject(
+                "PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, true);
+
+        Assertions.assertEquals(a, b);
+    }
+
+    @Test
+    void subjectSerializeTest() throws IOException, ClassNotFoundException {
+        Subject a = new Subject(
+                "PE", FormsOfControlType.CREDIT, FormsOfMark.PASS, true);
+
+        String file = "file.txt";
+
+        a.serialize(file);
+
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        Subject b = (Subject) objectInputStream.readObject();
+
+        Assertions.assertEquals(a, b);
     }
 
     /**
@@ -334,7 +365,7 @@ public class GradeBookTest {
         Subject[] controlTypes = new Subject[]{new Subject("Math",
                 FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
             new Subject("English", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
-            new Subject("Imperial programming", 
+            new Subject("Imperial programming",
                     FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
             new Subject("PE", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
             new Subject("History", FormsOfControlType.COLLOQUIUM, FormsOfMark.FIVE, false),
@@ -351,6 +382,51 @@ public class GradeBookTest {
         Semester a = new Semester(controlTypes, 2);
 
         Assertions.assertTrue(a.checkSemesterRatingForBudget());
+    }
+
+    @Test
+    void semesterEqualsTest() {
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+                new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+                new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+                new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+                new Subject("History",
+                        FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        };
+
+        Semester a = new Semester(controlTypes, 4);
+
+        Semester b = new Semester(controlTypes, 4);
+
+        Assertions.assertEquals(a, b);
+    }
+
+    @Test
+    void semesterSerializeTest() throws IOException, ClassNotFoundException {
+        Subject[] controlTypes = new Subject[]{new Subject("Math",
+                FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
+                new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
+                new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
+                new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+                new Subject("History",
+                        FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
+        };
+
+        Semester a = new Semester(controlTypes, 4);
+
+        String file = "file.txt";
+
+        a.serialize(file);
+
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        Semester b = (Semester) objectInputStream.readObject();
+
+        Assertions.assertEquals(a, b);
     }
 
     /**
@@ -581,5 +657,44 @@ public class GradeBookTest {
         gradeBook.add(controlTypes8);
 
         Assertions.assertTrue(gradeBook.isPossibleToGetRedDiploma());
+    }
+
+    @Test
+    void gradeBookEqualsTest() {
+        GradeBook gradeBook = new GradeBook(Scholarship.ABSENT);
+        gradeBook.add(controlTypes1);
+        gradeBook.add(controlTypes2);
+        gradeBook.add(controlTypes3);
+
+        GradeBook gradeBook1 = new GradeBook(Scholarship.ABSENT);
+        gradeBook1.add(controlTypes1);
+        gradeBook1.add(controlTypes2);
+        gradeBook1.add(controlTypes3);
+
+        Assertions.assertEquals(gradeBook, gradeBook1);
+    }
+
+    @Test
+    void gradeBookSerializeTest() throws IOException, ClassNotFoundException {
+        GradeBook gradeBook = new GradeBook(Scholarship.INCREASED);
+        gradeBook.add(controlTypes1);
+        gradeBook.add(controlTypes2);
+        gradeBook.add(controlTypes3);
+        gradeBook.add(controlTypes4);
+        gradeBook.add(controlTypes5);
+        gradeBook.add(controlTypes6);
+        gradeBook.add(controlTypes7);
+        gradeBook.add(controlTypes8);
+
+        String file = "file.txt";
+
+        gradeBook.serialize(file);
+
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        GradeBook gradeBook1 = (GradeBook) objectInputStream.readObject();
+
+        Assertions.assertEquals(gradeBook, gradeBook1);
     }
 }
