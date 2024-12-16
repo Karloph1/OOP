@@ -600,7 +600,7 @@ public class MarkDownTest {
                 .build();
 
         Assertions.assertArrayEquals(new Table.Align[]{Table.Align.ALIGN_CENTER,
-                        Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
+            Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
                 table.getAligns());
     }
 
