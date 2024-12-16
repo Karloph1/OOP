@@ -90,6 +90,9 @@ public class Subject implements Serializable {
         }
     }
 
+    /**
+     * serialize method.
+     */
     public void serialize(String fileName) throws IOException {
         FileOutputStream outputStream = new FileOutputStream(fileName);
 
@@ -101,7 +104,9 @@ public class Subject implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }

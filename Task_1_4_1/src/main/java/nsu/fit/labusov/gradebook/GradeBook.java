@@ -140,6 +140,9 @@ public class GradeBook implements Serializable {
                 .allMatch(x -> x.get(x.size() - 1) > 3);
     }
 
+    /**
+     * serialize method.
+     */
     public void serialize(String fileName) throws IOException {
         FileOutputStream outputStream = new FileOutputStream(fileName);
 

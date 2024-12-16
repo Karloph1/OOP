@@ -67,6 +67,9 @@ public class Semester implements Serializable {
                 .allMatch(Subject::checkRatingForIncreasedScholarship);
     }
 
+    /**
+     * serialize method.
+     */
     public void serialize(String fileName) throws IOException {
         FileOutputStream outputStream = new FileOutputStream(fileName);
 
@@ -78,7 +81,9 @@ public class Semester implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }

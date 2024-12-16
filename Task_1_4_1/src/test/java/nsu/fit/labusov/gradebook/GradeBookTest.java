@@ -409,9 +409,9 @@ public class GradeBookTest {
                 FormsOfControlType.EXERCISE, FormsOfMark.THREE, false),
             new Subject("PE", FormsOfControlType.EXERCISE, FormsOfMark.FOUR, false),
             new Subject("OOP", FormsOfControlType.CONTROL, FormsOfMark.FIVE, false),
-                new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
-                new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
-                new Subject("History",
+            new Subject("Philosophy", FormsOfControlType.CONTROL, FormsOfMark.THREE, false),
+            new Subject("Operation systems", FormsOfControlType.EXAM, FormsOfMark.THREE, true),
+            new Subject("History",
                         FormsOfControlType.DIFFERENTIATEDCREDIT, FormsOfMark.THREE, false),
         };
 
