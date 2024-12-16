@@ -281,6 +281,18 @@ public class MarkDownTest {
         Assertions.assertEquals(image, image1);
     }
 
+    @Test
+    void imageExceptionTest() {
+        try {
+            Image image = new Image(123,
+                    "3826");
+
+            System.out.println(image);
+        } catch (IllegalArgumentException e) {
+            Assertions.assertTrue(e.getMessage().contains("URI is not absolute"));
+        }
+    }
+
     /**
      * Link tests.
      */
@@ -311,6 +323,18 @@ public class MarkDownTest {
 
         Assertions.assertEquals("https://img.freepik.com/free-photo/"
                 + "view-beautiful-persian-domestic-cat_23-2151773826.jpg", link.getUrl());
+    }
+
+    @Test
+    void linkExceptionTest() {
+        try {
+            Link link = new Link(123,
+                    "3826");
+
+            System.out.println(link);
+        } catch (IllegalArgumentException e) {
+            Assertions.assertTrue(e.getMessage().contains("URI is not absolute"));
+        }
     }
 
     @Test
@@ -576,7 +600,7 @@ public class MarkDownTest {
                 .build();
 
         Assertions.assertArrayEquals(new Table.Align[]{Table.Align.ALIGN_CENTER,
-            Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
+                        Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
                 table.getAligns());
     }
 

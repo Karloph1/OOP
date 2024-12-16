@@ -29,7 +29,7 @@ public class Image extends Element implements Serializable {
         } catch (MalformedURLException e) {
             System.out.println("Incorrect url");
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Incorrect url");
         }
     }
 
