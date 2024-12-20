@@ -27,7 +27,7 @@ public class Link extends Element implements Serializable {
             URI uri = new URI(url);
             this.url = uri.toURL();
         } catch (MalformedURLException e) {
-            System.out.println("Incorrect url");
+            System.err.println("Incorrect url");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
