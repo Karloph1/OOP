@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -600,7 +601,7 @@ public class MarkDownTest {
                 .build();
 
         Assertions.assertArrayEquals(new Table.Align[]{Table.Align.ALIGN_CENTER,
-            Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
+                        Table.Align.ALIGN_LEFT, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_CENTER},
                 table.getAligns());
     }
 
@@ -702,5 +703,69 @@ public class MarkDownTest {
         CodeLine codeLine1 = (CodeLine) objectInputStream.readObject();
 
         Assertions.assertEquals(codeLine, codeLine1);
+    }
+
+    @Test
+    void testForMarkDownEditorWithEveryElementTest() {
+        Table.Builder table = new Table.Builder();
+        table.withAlignments(Table.Align.ALIGN_CENTER, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_LEFT);
+        table.addRow("Math", "OOP", "English", "PE");
+
+        for (int i = 0; i < 5; i++) {
+            int a = new Random().nextInt(4) + 2;
+            int b = new Random().nextInt(4) + 2;
+            int c = new Random().nextInt(4) + 2;
+            int d = new Random().nextInt(4) + 2;
+            table.addRow(new Text.Builder(a).build(),
+                    new Text.Builder(b).bold().build(),
+                    new Text.Builder(c).strikeThrough().build(),
+                    new Text.Builder(d).italic().build());
+        }
+
+
+        table.addRow(new Image("Зачетная книжка",
+                        "https://encrypted-tbn0.gstatic.com/" +
+                                "images?q=tbn:ANd9GcSEj6lCYih2ZJ3HM19jkp4SMJ0r4WCHd3yCYQ&s"),
+                new Link("GitHub", "https://github.com/"),
+                new Image("English", "https://images.squarespace-cdn.com/" +
+                        "content/v1/5b57b5174cde7a6b7993cf09/" +
+                        "006a8bf5-edc2-48bc-8ef9-7b431e5d4452/Cambridge+English+Test"),
+                new CodeLine("System.out.println('Hello world');"));
+
+        System.out.println(table.build());
+
+        System.out.println("---");
+
+        List.Builder builder = new List.Builder();
+
+        builder.append(new Text.Builder("asd").bold().italic().build());
+        builder.append(new Header("header").titleDegree(2));
+        builder.append(new Image("Зачетная книжка",
+                "https://encrypted-tbn0.gstatic.com/" +
+                        "images?q=tbn:ANd9GcSEj6lCYih2ZJ3HM19jkp4SMJ0r4WCHd3yCYQ&s"));
+        builder.setOrder(true);
+
+        List.Builder builder1 = new List.Builder();
+        builder1.append(new List.Builder().append(new Link("GitHub", "https://github.com/"))
+                .append(1.2).setOrder(true).build());
+        builder1.append(false);
+
+        builder.append(builder1.build());
+        builder.append(new CodeLine("System.out.println('Hello world');"));
+        builder.append(new Quote("Cool"));
+
+        System.out.println(builder.build());
+
+        System.out.println("---");
+
+        CodeBlock codeBlock = new CodeBlock("""
+                public class Main {
+
+                    public static void main(String[] args) {
+                        System.out.println("Hello world");
+                    }
+                }""");
+
+        System.out.println(codeBlock);
     }
 }

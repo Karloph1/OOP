@@ -113,8 +113,7 @@ public class List extends Element implements Serializable {
          * Text append method.
          */
         public Builder append(Object text) {
-            if (text instanceof Header || text instanceof Table
-                    || text instanceof Quote || text instanceof CodeBlock) {
+            if (text instanceof Task || text instanceof Table || text instanceof CodeBlock) {
                 throw new IllegalArgumentException("Impossible to add such element in table");
             }
 
