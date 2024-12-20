@@ -1,6 +1,5 @@
 package ru.nsu.fit.labusov.markdown;
 
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,20 +56,32 @@ public class List extends Element implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (hasOrder) {
-            for (int i = 0; i < texts.size(); i++) {
+        for (int i = 0; i < texts.size(); i++) {
+            int index = stringBuilder.length();
+
+            if (hasOrder) {
                 stringBuilder
                         .append(i + 1)
-                        .append(". ")
+                        .append(".  ")
+                        .append(texts.get(i))
+                        .append("\n");
+            } else {
+                stringBuilder
+                        .append("-  ")
                         .append(texts.get(i))
                         .append("\n");
             }
-        } else {
-            for (Object text : texts) {
-                stringBuilder
-                        .append("- ")
-                        .append(text)
-                        .append("\n");
+
+            if (texts.get(i) instanceof List) {
+                for (int j = index; j < stringBuilder.length() - 1; j++) {
+                    if (stringBuilder.charAt(j) == '\n') {
+                        if (hasOrder) {
+                            stringBuilder.replace(j + 1, j + 1, "    ");
+                        } else {
+                            stringBuilder.replace(j + 1, j + 1, "   ");
+                        }
+                    }
+                }
             }
         }
 
@@ -102,7 +113,7 @@ public class List extends Element implements Serializable {
          * Text append method.
          */
         public Builder append(Object text) {
-            if (text instanceof Header || text instanceof Table || text instanceof List
+            if (text instanceof Header || text instanceof Table
                     || text instanceof Quote || text instanceof CodeBlock) {
                 throw new IllegalArgumentException("Impossible to add such element in table");
             }
