@@ -378,10 +378,10 @@ public class MarkDownTest {
         }
 
         Assertions.assertEquals("""
-                1. 0
-                2. 1
-                3. 2
-                4. 3""", builder.build().toString());
+                1.  0
+                2.  1
+                3.  2
+                4.  3""", builder.build().toString());
     }
 
     @Test
@@ -393,10 +393,10 @@ public class MarkDownTest {
         }
 
         Assertions.assertEquals("""
-                - 0
-                - 1
-                - 2
-                - 3""", builder.build().toString());
+                -  0
+                -  1
+                -  2
+                -  3""", builder.build().toString());
     }
 
     @Test
