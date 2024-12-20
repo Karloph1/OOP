@@ -708,7 +708,8 @@ public class MarkDownTest {
     @Test
     void testForMarkDownEditorWithEveryElementTest() {
         Table.Builder table = new Table.Builder();
-        table.withAlignments(Table.Align.ALIGN_CENTER, Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_LEFT);
+        table.withAlignments(Table.Align.ALIGN_CENTER,
+                Table.Align.ALIGN_RIGHT, Table.Align.ALIGN_LEFT);
         table.addRow("Math", "OOP", "English", "PE");
 
         for (int i = 0; i < 5; i++) {
@@ -724,12 +725,12 @@ public class MarkDownTest {
 
 
         table.addRow(new Image("Зачетная книжка",
-                        "https://encrypted-tbn0.gstatic.com/" +
-                                "images?q=tbn:ANd9GcSEj6lCYih2ZJ3HM19jkp4SMJ0r4WCHd3yCYQ&s"),
+                        "https://encrypted-tbn0.gstatic.com/"
+                                + "images?q=tbn:ANd9GcSEj6lCYih2ZJ3HM19jkp4SMJ0r4WCHd3yCYQ&s"),
                 new Link("GitHub", "https://github.com/"),
-                new Image("English", "https://images.squarespace-cdn.com/" +
-                        "content/v1/5b57b5174cde7a6b7993cf09/" +
-                        "006a8bf5-edc2-48bc-8ef9-7b431e5d4452/Cambridge+English+Test"),
+                new Image("English", "https://images.squarespace-cdn.com/"
+                        + "content/v1/5b57b5174cde7a6b7993cf09/"
+                        + "006a8bf5-edc2-48bc-8ef9-7b431e5d4452/Cambridge+English+Test"),
                 new CodeLine("System.out.println('Hello world');"));
 
         System.out.println(table.build());
@@ -741,8 +742,8 @@ public class MarkDownTest {
         builder.append(new Text.Builder("asd").bold().italic().build());
         builder.append(new Header("header").titleDegree(2));
         builder.append(new Image("Зачетная книжка",
-                "https://encrypted-tbn0.gstatic.com/" +
-                        "images?q=tbn:ANd9GcSEj6lCYih2ZJ3HM19jkp4SMJ0r4WCHd3yCYQ&s"));
+                "https://encrypted-tbn0.gstatic.com/"
+                        + "images?q=tbn:ANd9GcSEj6lCYih2ZJ3HM19jkp4SMJ0r4WCHd3yCYQ&s"));
         builder.setOrder(true);
 
         List.Builder builder1 = new List.Builder();
