@@ -662,4 +662,45 @@ public class MarkDownTest {
 
         Assertions.assertEquals(table.build(), table1);
     }
+
+    /**
+     * CodeLine tests.
+     */
+    @Test
+    void codeLineToStringTest() {
+        CodeLine codeLine = new CodeLine("System.out.println('Hello world')");
+
+        Assertions.assertEquals("`System.out.println('Hello world')`", codeLine.toString());
+    }
+
+    @Test
+    void codeLineGetTextTest() {
+        CodeLine codeLine = new CodeLine("System.out.println('Hello world')");
+
+        Assertions.assertEquals("System.out.println('Hello world')", codeLine.getText());
+    }
+
+    @Test
+    void codeLineEqualsTest() {
+        CodeLine codeLine = new CodeLine("System.out.println('Hello world')");
+        CodeLine codeLine1 = new CodeLine("System.out.println('Hello world')");
+
+        Assertions.assertEquals(codeLine, codeLine1);
+    }
+
+    @Test
+    void codeLineSerializeTest() throws IOException, ClassNotFoundException {
+        CodeLine codeLine = new CodeLine("System.out.println('Hello world')");
+
+        String file = "file1.txt";
+
+        codeLine.serialize(file);
+
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        CodeLine codeLine1 = (CodeLine) objectInputStream.readObject();
+
+        Assertions.assertEquals(codeLine, codeLine1);
+    }
 }
