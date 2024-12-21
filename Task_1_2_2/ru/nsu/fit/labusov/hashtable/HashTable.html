@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -131,12 +131,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code>java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V&gt;&gt;</code></dd>
+<dd><code>java.lang.Iterable&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V&gt;&gt;</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">HashTable&lt;K,&#8203;V&gt;</span>
 extends java.lang.Object
-implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V&gt;&gt;</pre>
+implements java.lang.Iterable&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V&gt;&gt;</pre>
 <div class="block">HashTable class.</div>
 </li>
 </ul>
@@ -181,7 +181,7 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;o)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -198,22 +198,17 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasNext()">hasNext</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasValue(K)">hasValue</a></span>&#8203;(<a href="HashTable.html" title="type parameter in HashTable">K</a>&nbsp;key)</code></th>
 <td class="colLast">
 <div class="block">Has key value in HashTable method.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.AbstractMap.SimpleEntry&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>,&#8203;<a href="HashTable.html" title="type parameter in HashTable">V</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#next()">next</a></span>()</code></th>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>,&#8203;<a href="HashTable.html" title="type parameter in HashTable">V</a>&gt;&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#iterator()">iterator</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#put(K,V)">put</a></span>&#8203;(<a href="HashTable.html" title="type parameter in HashTable">K</a>&nbsp;key,
    <a href="HashTable.html" title="type parameter in HashTable">V</a>&nbsp;value)</code></th>
@@ -221,7 +216,7 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 <div class="block">Put pair in HashTable method.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#remove(K,V)">remove</a></span>&#8203;(<a href="HashTable.html" title="type parameter in HashTable">K</a>&nbsp;key,
       <a href="HashTable.html" title="type parameter in HashTable">V</a>&nbsp;value)</code></th>
@@ -229,17 +224,17 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 <div class="block">Remove pair in HashTable method.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(K,V)">update</a></span>&#8203;(<a href="HashTable.html" title="type parameter in HashTable">K</a>&nbsp;key,
       <a href="HashTable.html" title="type parameter in HashTable">V</a>&nbsp;value)</code></th>
@@ -256,11 +251,11 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.java.util.Iterator">
+<li class="blockList"><a id="methods.inherited.from.class.java.lang.Iterable">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;java.util.Iterator</h3>
-<code>forEachRemaining, remove</code></li>
+<h3>Methods inherited from interface&nbsp;java.lang.Iterable</h3>
+<code>forEach, spliterator</code></li>
 </ul>
 </li>
 </ul>
@@ -375,7 +370,7 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 <ul class="blockList">
 <li class="blockList">
 <h4>equals</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;obj)</pre>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;o)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
@@ -408,29 +403,16 @@ implements java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;K,&#8203;V
 </dl>
 </li>
 </ul>
-<a id="hasNext()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hasNext</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;hasNext()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>hasNext</code>&nbsp;in interface&nbsp;<code>java.util.Iterator&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a id="next()">
+<a id="iterator()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>next</h4>
-<pre class="methodSignature">public&nbsp;java.util.AbstractMap.SimpleEntry&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>,&#8203;<a href="HashTable.html" title="type parameter in HashTable">V</a>&gt;&nbsp;next()</pre>
+<h4>iterator</h4>
+<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;java.util.AbstractMap.SimpleEntry&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>,&#8203;<a href="HashTable.html" title="type parameter in HashTable">V</a>&gt;&gt;&nbsp;iterator()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>next</code>&nbsp;in interface&nbsp;<code>java.util.Iterator&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>&gt;</code></dd>
+<dd><code>iterator</code>&nbsp;in interface&nbsp;<code>java.lang.Iterable&lt;<a href="HashTable.html" title="type parameter in HashTable">K</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
