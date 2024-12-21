@@ -1,8 +1,8 @@
 package ru.nsu.fit.labusov.hashtable;
 
+import java.util.AbstractMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.util.AbstractMap;
 
 /**
  * HashTable test.
