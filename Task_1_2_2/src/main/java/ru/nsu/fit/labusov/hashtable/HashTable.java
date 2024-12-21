@@ -2,7 +2,6 @@ package ru.nsu.fit.labusov.hashtable;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -10,7 +9,7 @@ import java.util.Objects;
 /**
  * HashTable class.
  */
-public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> {
+public class HashTable<K, V> implements Iterable<AbstractMap.SimpleEntry<K, V>> {
     private final ArrayList<K> keys;
     private final ArrayList<V> values;
     private int keysIndex = 0;
@@ -24,52 +23,36 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
      * Put pair in HashTable method.
      */
     public void put(K key, V value) {
-        try {
-            int index = keys.indexOf(key);
+        int index = keys.indexOf(key);
 
-            if (index == -1) {
-                keys.add(key);
-                values.add(value);
-            } else {
-                values.set(index, value);
-            }
-        } catch (ConcurrentModificationException e) {
-            System.out.println(e.getMessage());
-            throw new ConcurrentModificationException("Impossible to do this during iteration");
+        if (index == -1) {
+            keys.add(key);
+            values.add(value);
+        } else {
+            values.set(index, value);
         }
-
     }
 
     /**
      * Remove pair in HashTable method.
      */
     public void remove(K key, V value) {
-        try {
-            if (!keys.contains(key) || !value.equals(this.get(key))) {
-                throw new NoSuchElementException("No such pair in hash table");
-            }
-            int index = keys.indexOf(key);
-
-            keys.remove(key);
-            values.remove(index);
-        } catch (ConcurrentModificationException e) {
-            System.out.println(e.getMessage());
-            throw new ConcurrentModificationException("Impossible to do this during iteration");
+        if (!keys.contains(key) || !value.equals(this.get(key))) {
+            throw new NoSuchElementException("No such pair in hash table");
         }
+        int index = keys.indexOf(key);
+
+        keys.remove(key);
+        values.remove(index);
     }
 
     /**
      * Update pair in HashTable method.
      */
     public void update(K key, V value) {
-        try {
-            int index = keys.indexOf(key);
+        int index = keys.indexOf(key);
 
-            values.set(index, value);
-        } catch (ConcurrentModificationException e) {
-            System.out.println(e.getMessage());
-            throw new ConcurrentModificationException("Impossible to do this during iteration");
-        }
+        values.set(index, value);
     }
 
     /**
@@ -99,48 +82,24 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-
-        HashTable<Object, Object> table = (HashTable<Object, Object>) obj;
-
-        if (this.size() == 0 && this.size() == table.size()) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-
-        if (this.size() != table.size()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        if (this.keys.get(0).getClass() != table.keys.get(0).getClass()) {
+        HashTable<?, ?> hashTable = (HashTable<?, ?>) o;
+
+        if (keysIndex != hashTable.keysIndex) {
+            return false;
+        }
+        if (!keys.equals(hashTable.keys)) {
             return false;
         }
 
-        while (this.hasNext()) {
-            K thisKey = this.next().getKey();
-            V thisValue = this.get(thisKey);
-
-            if (thisValue == null && table.get(thisKey) != null
-                    || thisValue != null && table.get(thisKey) == null) {
-                return false;
-            }
-
-            if (!table.keys.contains(thisKey)) {
-                return false;
-            }
-
-            if (thisValue != null && table.get(thisKey) != null) {
-                if (!table.get(thisKey).equals(thisValue)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return values.equals(hashTable.values);
     }
 
     @Override
@@ -166,17 +125,22 @@ public class HashTable<K, V> implements Iterator<AbstractMap.SimpleEntry<K, V>> 
     }
 
     @Override
-    public boolean hasNext() {
-        return keysIndex < keys.size();
-    }
+    public Iterator<AbstractMap.SimpleEntry<K, V>> iterator() {
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return keysIndex < keys.size();
+            }
 
-    @Override
-    public AbstractMap.SimpleEntry<K, V> next() {
-        if (keysIndex < keys.size()) {
-            return new AbstractMap.SimpleEntry<>(keys.get(keysIndex),
-                    this.get(keys.get(keysIndex++)));
-        }
+            @Override
+            public AbstractMap.SimpleEntry<K, V> next() {
+                if (keysIndex < keys.size()) {
+                    return new AbstractMap.SimpleEntry<>(keys.get(keysIndex),
+                            values.get(keysIndex++));
+                }
 
-        throw new NoSuchElementException("No elements");
+                throw new NoSuchElementException("No elements");
+            }
+        };
     }
 }
