@@ -131,7 +131,7 @@ public class HashTableTest {
             Assertions.assertEquals(4, iterator.next().getValue());
         }
 
-        while(iterator1.hasNext()) {
+        while (iterator1.hasNext()) {
             Assertions.assertEquals(4, iterator1.next().getValue());
         }
 
