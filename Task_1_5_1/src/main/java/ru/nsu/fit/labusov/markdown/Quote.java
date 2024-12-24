@@ -12,6 +12,9 @@ public class Quote extends Element implements Serializable {
     private static final long serialVersionUID = 1L;
     private final Object text;
 
+    /**
+     * Quote constructor method.
+     */
     public Quote(Object text) {
         if (text instanceof Table || text instanceof Task) {
             throw new IllegalArgumentException("Impossible to add such element in table");

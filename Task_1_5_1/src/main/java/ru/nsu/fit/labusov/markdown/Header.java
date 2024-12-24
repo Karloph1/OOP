@@ -13,6 +13,9 @@ public class Header extends Element implements Serializable {
     private final Object text;
     private int titleDegree;
 
+    /**
+     * Header constructor method.
+     */
     public Header(Object text) {
         if (text instanceof CodeBlock || text instanceof CodeLine || text instanceof Header
                 || text instanceof List || text instanceof Quote || text instanceof Table
