@@ -12,7 +12,6 @@ import java.util.Objects;
 public class HashTable<K, V> implements Iterable<AbstractMap.SimpleEntry<K, V>> {
     private final ArrayList<K> keys;
     private final ArrayList<V> values;
-    private int keysIndex = 0;
 
     public HashTable() {
         keys = new ArrayList<>();
@@ -92,9 +91,6 @@ public class HashTable<K, V> implements Iterable<AbstractMap.SimpleEntry<K, V>> 
 
         HashTable<?, ?> hashTable = (HashTable<?, ?>) o;
 
-        if (keysIndex != hashTable.keysIndex) {
-            return false;
-        }
         if (!keys.equals(hashTable.keys)) {
             return false;
         }
@@ -126,21 +122,28 @@ public class HashTable<K, V> implements Iterable<AbstractMap.SimpleEntry<K, V>> 
 
     @Override
     public Iterator<AbstractMap.SimpleEntry<K, V>> iterator() {
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return keysIndex < keys.size();
+        return new MyIterator();
+    }
+
+    /**
+     * Private iterator class.
+     */
+    private class MyIterator implements Iterator<AbstractMap.SimpleEntry<K, V>> {
+        private int curIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return curIndex < keys.size();
+        }
+
+        @Override
+        public AbstractMap.SimpleEntry<K, V> next() {
+            if (curIndex < keys.size()) {
+                return new AbstractMap.SimpleEntry<>(keys.get(curIndex),
+                        values.get(curIndex++));
             }
 
-            @Override
-            public AbstractMap.SimpleEntry<K, V> next() {
-                if (keysIndex < keys.size()) {
-                    return new AbstractMap.SimpleEntry<>(keys.get(keysIndex),
-                            values.get(keysIndex++));
-                }
-
-                throw new NoSuchElementException("No elements");
-            }
-        };
+            throw new NoSuchElementException("No elements");
+        }
     }
 }

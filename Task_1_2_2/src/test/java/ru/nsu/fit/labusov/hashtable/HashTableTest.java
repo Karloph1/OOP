@@ -1,6 +1,7 @@
 package ru.nsu.fit.labusov.hashtable;
 
 import java.util.AbstractMap;
+import java.util.Iterator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -111,6 +112,31 @@ public class HashTableTest {
 
         for (AbstractMap.SimpleEntry<Integer, Integer> pair : c) {
             Assertions.assertEquals(4, pair.getValue());
+        }
+    }
+
+    @Test
+    void hashTableMultipleIteratorTest() {
+        HashTable<Integer, Integer> c = new HashTable<>();
+        c.put(10, 4);
+        c.put(2, 4);
+        c.put(3, 4);
+        c.put(1, 4);
+
+        Iterator<AbstractMap.SimpleEntry<Integer, Integer>> iterator = c.iterator();
+        Iterator<AbstractMap.SimpleEntry<Integer, Integer>> iterator1 = c.iterator();
+        Iterator<AbstractMap.SimpleEntry<Integer, Integer>> iterator2 = c.iterator();
+
+        while (iterator.hasNext()) {
+            Assertions.assertEquals(4, iterator.next().getValue());
+        }
+
+        while(iterator1.hasNext()) {
+            Assertions.assertEquals(4, iterator1.next().getValue());
+        }
+
+        while (iterator2.hasNext()) {
+            Assertions.assertEquals(4, iterator2.next().getValue());
         }
     }
 }
