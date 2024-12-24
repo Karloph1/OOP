@@ -473,7 +473,8 @@ public class MarkDownTest {
      */
     @Test
     void quoteToStringTest() {
-        Quote quote = new Quote("Without changing anything, nothing will change");
+        Quote quote = new Quote(new Text.Builder("Without changing anything, nothing will change")
+                .build());
 
         Assertions.assertEquals("> Without changing anything, nothing will change",
                 quote.toString());
@@ -481,7 +482,8 @@ public class MarkDownTest {
 
     @Test
     void quoteGetTextTest() {
-        Quote quote = new Quote("Without changing anything, nothing will change");
+        Quote quote = new Quote(new Text.Builder("Without changing anything, nothing will change")
+                .build());
 
         Assertions.assertEquals("Without changing anything, nothing will change",
                 quote.getText());
@@ -489,16 +491,19 @@ public class MarkDownTest {
 
     @Test
     void quoteEqualsTest() {
-        Quote quote = new Quote("Without changing anything, nothing will change");
+        Quote quote = new Quote(new Text.Builder("Without changing anything, nothing will change")
+                .build());
 
-        Quote quote1 = new Quote("Without changing anything, nothing will change");
+        Quote quote1 = new Quote(new Text.Builder("Without changing anything, nothing will change")
+                .build());
 
         Assertions.assertEquals(quote, quote1);
     }
 
     @Test
     void quoteSerializeTest() throws IOException, ClassNotFoundException {
-        Quote quote = new Quote("Without changing anything, nothing will change");
+        Quote quote = new Quote(new Text.Builder("Without changing anything, nothing will change")
+                .build());
 
         String file = "file1.txt";
 
@@ -753,7 +758,7 @@ public class MarkDownTest {
 
         builder.append(builder1.build());
         builder.append(new CodeLine("System.out.println('Hello world');"));
-        builder.append(new Quote("Cool"));
+        builder.append(new Quote(new Text.Builder("Cool").build()));
 
         System.out.println(builder.build());
 

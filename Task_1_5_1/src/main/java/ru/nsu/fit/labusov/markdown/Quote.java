@@ -10,14 +10,18 @@ import java.util.Objects;
 public class Quote extends Element implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private final String text;
+    private final Object text;
 
-    public Quote(String text) {
+    public Quote(Object text) {
+        if (text instanceof Table || text instanceof Task) {
+            throw new IllegalArgumentException("Impossible to add such element in table");
+        }
+
         this.text = text;
     }
 
     public String getText() {
-        return text;
+        return text.toString();
     }
 
     @Override

@@ -10,10 +10,16 @@ import java.util.Objects;
 public class Header extends Element implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private final Text text;
+    private final Object text;
     private int titleDegree;
 
     public Header(Object text) {
+        if (text instanceof CodeBlock || text instanceof CodeLine || text instanceof Header
+                || text instanceof List || text instanceof Quote || text instanceof Table
+                || text instanceof Task) {
+            throw new IllegalArgumentException("Impossible to add such element in table");
+        }
+
         this.text = new Text.Builder(text).build();
     }
 
