@@ -18,6 +18,9 @@ public class ThreadMethodThread extends Thread {
         thread = new Thread(this, threadName);
     }
 
+    /**
+     * run method.
+     */
     @Override
     public void run() {
         for (int num : cutOffArray) {
@@ -42,6 +45,9 @@ public class ThreadMethodThread extends Thread {
         return thread;
     }
 
+    /**
+     * find complex num method.
+     */
     private boolean isComplexNum(int num) {
         for (int i = 2; i <= Math.sqrt(num); i++) {
             if (num % i == 0) {

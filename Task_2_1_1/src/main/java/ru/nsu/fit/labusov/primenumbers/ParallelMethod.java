@@ -12,6 +12,9 @@ public class ParallelMethod {
         row = nums;
     }
 
+    /**
+     * find complex num method.
+     */
     public boolean hasComplexNum() {
         boolean result;
         result = row.parallelStream().anyMatch(ParallelMethod::complyCheck);

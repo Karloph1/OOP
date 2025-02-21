@@ -22,7 +22,9 @@ public class ThreadMethod {
         this.threadNum = threadNum;
     }
 
-
+    /**
+     * find complex num method.
+     */
     public boolean hasComplexNum() {
         if (rows.size() >= threadNum) {
             List<ThreadMethodThread> numThreads = new ArrayList<>();
