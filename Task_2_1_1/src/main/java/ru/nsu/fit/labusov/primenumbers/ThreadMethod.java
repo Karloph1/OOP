@@ -7,18 +7,17 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * Second class.
  */
-public class ThreadMethod {
+public class ThreadMethod extends Thread{
     private final ArrayList<Integer> rows;
     private final int threadNum;
-    protected static volatile boolean findingResult = false;
-    protected static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
-
+    private static volatile boolean findingResult = false;
+    private static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
      * Class's constructor.
      */
-    public ThreadMethod(ArrayList<Integer> rows, int threadNum) {
-        this.rows = rows;
+    public ThreadMethod(List<Integer> rows, int threadNum) {
+        this.rows = new ArrayList<>(rows);
         this.threadNum = threadNum;
     }
 
@@ -27,24 +26,24 @@ public class ThreadMethod {
      */
     public boolean hasComplexNum() {
         if (rows.size() >= threadNum) {
-            List<ThreadMethodThread> numThreads = new ArrayList<>();
+            Thread[] numThreads = new Thread[threadNum];
             for (int i = 0; i < threadNum; i++) {
                 if (i == threadNum - 1) {
-                    numThreads.add(new ThreadMethodThread(rows.subList(rows.size() / threadNum * i,
+                    numThreads[i] = new Thread(new ThreadMethod(rows.subList(rows.size() / threadNum * i,
                             rows.size()), i));
                 } else {
-                    numThreads.add(new ThreadMethodThread(rows.subList(rows.size() / threadNum * i,
+                    numThreads[i] = new Thread(new ThreadMethod(rows.subList(rows.size() / threadNum * i,
                             rows.size() / threadNum * (i + 1) - 1), i));
                 }
             }
 
-            for (ThreadMethodThread thr : numThreads) {
-                thr.getThread().start();
+            for (Thread thr : numThreads) {
+                thr.start();
             }
 
-            for (ThreadMethodThread thr : numThreads) {
+            for (Thread thr : numThreads) {
                 try {
-                    thr.getThread().join();
+                    thr.join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -53,6 +52,33 @@ public class ThreadMethod {
             return findingResult;
         } else {
             return false;
+        }
+    }
+
+    private boolean isComplexNum(int num) {
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void run() {
+        for (int num : rows) {
+            if (findingResult) {
+                return;
+            }
+
+            if (isComplexNum(num)) {
+                lock.writeLock().lock();
+                try {
+                    findingResult = true;
+                } finally {
+                    lock.writeLock().unlock();
+                }
+            }
         }
     }
 }

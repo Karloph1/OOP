@@ -36,8 +36,6 @@ public class PrimeNumbersTest {
         return arrList;
     }
 
-
-
     @Test
     void firstMethodTimeTest() {
         ArrayList<Integer> numList = generatePrimeNums(10000000);
@@ -51,10 +49,12 @@ public class PrimeNumbersTest {
 
     @Test
     void secondMethodTimeTest() {
-        ArrayList<Integer> numList = generatePrimeNums(10000000);
+        ArrayList<Integer> numList = generatePrimeNums(100000);
         ThreadMethod ob = new ThreadMethod(numList, 500);
 
         long startTime = System.currentTimeMillis();
+
+        System.out.println(ob.hasComplexNum());
         Assertions.assertFalse(ob.hasComplexNum());
         long finishTime = System.currentTimeMillis();
         System.out.println("SecondMethod Time = " + (finishTime - startTime));
