@@ -13,7 +13,7 @@ public class ConsistentMethod implements Method {
     @Override
     public boolean hasComplexNum(ArrayList<Integer> row) {
         for (int num : row) {
-            if (complexNumSearcher.isComplexNum(num)) {
+            if (ComplexNumSearcher.isComplexNum(num)) {
                 return true;
             }
         }

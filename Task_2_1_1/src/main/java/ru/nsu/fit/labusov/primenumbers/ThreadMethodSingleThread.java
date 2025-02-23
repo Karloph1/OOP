@@ -15,7 +15,8 @@ public class ThreadMethodSingleThread implements Runnable {
     /**
      * Extra second class's constructor.
      */
-    public ThreadMethodSingleThread(List<Integer> numsList, int indexStart, int indexEnd, int threadNum) {
+    public ThreadMethodSingleThread(List<Integer> numsList,
+                                    int indexStart, int indexEnd, int threadNum) {
         cutOffArray = numsList;
         String threadName = "Thread " + threadNum;
         thread = new Thread(this, threadName);
@@ -30,7 +31,7 @@ public class ThreadMethodSingleThread implements Runnable {
                 return;
             }
 
-            if (complexNumSearcher.isComplexNum(cutOffArray.get(i))) {
+            if (ComplexNumSearcher.isComplexNum(cutOffArray.get(i))) {
                 ThreadMethod.lock.writeLock().lock();
                 try {
                     ThreadMethod.findingResult = true;

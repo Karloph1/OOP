@@ -3,7 +3,7 @@ package ru.nsu.fit.labusov.primenumbers;
 /**
  * Complex num searcher class.
  */
-public class complexNumSearcher {
+public class ComplexNumSearcher {
 
     /**
      * is num complex method.

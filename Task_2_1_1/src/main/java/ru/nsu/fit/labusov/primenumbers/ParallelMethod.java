@@ -19,6 +19,6 @@ public class ParallelMethod implements Method {
     }
 
     private static boolean complyCheck(int num) {
-        return complexNumSearcher.isComplexNum(num);
+        return ComplexNumSearcher.isComplexNum(num);
     }
 }

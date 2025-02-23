@@ -16,7 +16,7 @@ public class PrimeNumbersTest {
         ArrayList<Integer> arrList = new ArrayList<>();
 
         for (int i = 1; i <= maxNum; i++) {
-            if (!complexNumSearcher.isComplexNum(i)) {
+            if (!ComplexNumSearcher.isComplexNum(i)) {
                 arrList.add(i);
             }
         }
