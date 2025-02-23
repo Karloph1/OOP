@@ -5,23 +5,16 @@ import java.util.ArrayList;
 /**
  * First class.
  */
-public class ConsistentMethod {
-    private final int[] row;
-
-    public ConsistentMethod(ArrayList<Integer> nums) {
-        row = nums.stream().mapToInt(i -> i).toArray();
-    }
+public class ConsistentMethod implements Method {
 
     /**
      * find complex num method.
      */
-    public boolean hasComplexNum() {
-
+    @Override
+    public boolean hasComplexNum(ArrayList<Integer> row) {
         for (int num : row) {
-            for (int i = 2; i <= Math.sqrt(num); i++) {
-                if (num % i == 0) {
-                    return true;
-                }
+            if (complexNumSearcher.isComplexNum(num)) {
+                return true;
             }
         }
 

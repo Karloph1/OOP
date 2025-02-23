@@ -5,17 +5,13 @@ import java.util.ArrayList;
 /**
  * Third class.
  */
-public class ParallelMethod {
-    private final ArrayList<Integer> row;
-
-    public ParallelMethod(ArrayList<Integer> nums) {
-        row = nums;
-    }
+public class ParallelMethod implements Method {
 
     /**
      * find complex num method.
      */
-    public boolean hasComplexNum() {
+    @Override
+    public boolean hasComplexNum(ArrayList<Integer> row) {
         boolean result;
         result = row.parallelStream().anyMatch(ParallelMethod::complyCheck);
 
@@ -23,12 +19,6 @@ public class ParallelMethod {
     }
 
     private static boolean complyCheck(int num) {
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return complexNumSearcher.isComplexNum(num);
     }
 }

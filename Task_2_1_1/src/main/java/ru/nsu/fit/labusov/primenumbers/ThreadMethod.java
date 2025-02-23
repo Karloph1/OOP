@@ -1,49 +1,50 @@
 package ru.nsu.fit.labusov.primenumbers;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Second class.
  */
-public class ThreadMethod extends Thread{
-    private final ArrayList<Integer> rows;
+public class ThreadMethod implements Method {
     private final int threadNum;
-    private static volatile boolean findingResult = false;
-    private static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+    protected static volatile boolean findingResult = false;
+    protected static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
      * Class's constructor.
      */
-    public ThreadMethod(List<Integer> rows, int threadNum) {
-        this.rows = new ArrayList<>(rows);
+    public ThreadMethod(int threadNum) {
         this.threadNum = threadNum;
     }
 
     /**
      * find complex num method.
      */
-    public boolean hasComplexNum() {
+    @Override
+    public boolean hasComplexNum(ArrayList<Integer> rows) {
         if (rows.size() >= threadNum) {
-            Thread[] numThreads = new Thread[threadNum];
+            ThreadMethodSingleThread[] numThreads = new ThreadMethodSingleThread[threadNum];
+
             for (int i = 0; i < threadNum; i++) {
                 if (i == threadNum - 1) {
-                    numThreads[i] = new Thread(new ThreadMethod(rows.subList(rows.size() / threadNum * i,
-                            rows.size()), i));
+                    numThreads[i] = new ThreadMethodSingleThread(rows,
+                            rows.size() / threadNum * i,
+                            rows.size(), i);
                 } else {
-                    numThreads[i] = new Thread(new ThreadMethod(rows.subList(rows.size() / threadNum * i,
-                            rows.size() / threadNum * (i + 1) - 1), i));
+                    numThreads[i] = new ThreadMethodSingleThread(rows,
+                            rows.size() / threadNum * i,
+                            rows.size() / threadNum * (i + 1), i);
                 }
             }
 
-            for (Thread thr : numThreads) {
-                thr.start();
+            for (ThreadMethodSingleThread thr : numThreads) {
+                thr.getThread().start();
             }
 
-            for (Thread thr : numThreads) {
+            for (ThreadMethodSingleThread thr : numThreads) {
                 try {
-                    thr.join();
+                    thr.getThread().join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -52,33 +53,6 @@ public class ThreadMethod extends Thread{
             return findingResult;
         } else {
             return false;
-        }
-    }
-
-    private boolean isComplexNum(int num) {
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void run() {
-        for (int num : rows) {
-            if (findingResult) {
-                return;
-            }
-
-            if (isComplexNum(num)) {
-                lock.writeLock().lock();
-                try {
-                    findingResult = true;
-                } finally {
-                    lock.writeLock().unlock();
-                }
-            }
         }
     }
 }
