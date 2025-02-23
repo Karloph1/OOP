@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ThreadMethod implements Method {
     private final int threadNum;
-    protected static volatile boolean findingResult = false;
+    protected static volatile boolean findingResult;
     protected static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
@@ -16,6 +16,7 @@ public class ThreadMethod implements Method {
      */
     public ThreadMethod(int threadNum) {
         this.threadNum = threadNum;
+        findingResult = false;
     }
 
     /**
