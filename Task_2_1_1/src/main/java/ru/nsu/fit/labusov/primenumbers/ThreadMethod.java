@@ -6,17 +6,19 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * Second class.
  */
-public class ThreadMethod implements Method {
+public class ThreadMethod implements ComplexNummarable {
     private final int threadNum;
-    protected static volatile boolean findingResult;
-    protected static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+    private final Boolean[] findingResult;
+    private final ReentrantReadWriteLock lock;
 
     /**
      * Class's constructor.
      */
     public ThreadMethod(int threadNum) {
         this.threadNum = threadNum;
-        findingResult = false;
+        findingResult = new Boolean[1];
+        findingResult[0] = false;
+        lock = new ReentrantReadWriteLock(true);
     }
 
     /**
@@ -28,15 +30,16 @@ public class ThreadMethod implements Method {
             ThreadMethodSingleThread[] numThreads = new ThreadMethodSingleThread[threadNum];
 
             for (int i = 0; i < threadNum; i++) {
+                int indexStart = rows.size() / threadNum * i;
+                int indexEnd;
+
                 if (i == threadNum - 1) {
-                    numThreads[i] = new ThreadMethodSingleThread(rows,
-                            rows.size() / threadNum * i,
-                            rows.size(), i);
+                    indexEnd = rows.size();
                 } else {
-                    numThreads[i] = new ThreadMethodSingleThread(rows,
-                            rows.size() / threadNum * i,
-                            rows.size() / threadNum * (i + 1), i);
+                    indexEnd = rows.size() / threadNum * (i + 1);
                 }
+
+                numThreads[i] = new ThreadMethodSingleThread(rows, indexStart, indexEnd, i, findingResult, lock);
             }
 
             for (ThreadMethodSingleThread thr : numThreads) {
@@ -51,7 +54,7 @@ public class ThreadMethod implements Method {
                 }
             }
 
-            return findingResult;
+            return findingResult[0];
         } else {
             return false;
         }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Third class.
  */
-public class ParallelMethod implements Method {
+public class ParallelMethod implements ComplexNummarable {
 
     /**
      * find complex num method.

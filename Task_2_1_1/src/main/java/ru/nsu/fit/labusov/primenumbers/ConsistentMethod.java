@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * First class.
  */
-public class ConsistentMethod implements Method {
+public class ConsistentMethod implements ComplexNummarable {
 
     /**
      * find complex num method.

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Method interface.
  */
-public interface Method {
+public interface ComplexNummarable {
     boolean hasComplexNum(ArrayList<Integer> row);
 }
+

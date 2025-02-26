@@ -1,6 +1,7 @@
 package ru.nsu.fit.labusov.primenumbers;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Extra second class.
@@ -11,32 +12,37 @@ public class ThreadMethodSingleThread implements Runnable {
     private final List<Integer> cutOffArray;
     private final int indexStart;
     private final int indexEnd;
+    private final Boolean[] findingResult;
+    private final ReentrantReadWriteLock lock;
 
     /**
      * Extra second class's constructor.
      */
     public ThreadMethodSingleThread(List<Integer> numsList,
-                                    int indexStart, int indexEnd, int threadNum) {
+                                    int indexStart, int indexEnd, int threadNum,
+                                    Boolean[] findingResult, ReentrantReadWriteLock lock) {
         cutOffArray = numsList;
         String threadName = "Thread " + threadNum;
         thread = new Thread(this, threadName);
         this.indexStart = indexStart;
         this.indexEnd = indexEnd;
+        this.findingResult = findingResult;
+        this.lock = lock;
     }
 
     @Override
     public void run() {
         for (int i = indexStart; i < indexEnd; i++) {
-            if (ThreadMethod.findingResult) {
+            if (findingResult[0]) {
                 return;
             }
 
             if (ComplexNumSearcher.isComplexNum(cutOffArray.get(i))) {
-                ThreadMethod.lock.writeLock().lock();
+                this.lock.writeLock().lock();
                 try {
-                    ThreadMethod.findingResult = true;
+                    this.findingResult[0] = true;
                 } finally {
-                    ThreadMethod.lock.writeLock().unlock();
+                    this.lock.writeLock().unlock();
                 }
 
                 return;
