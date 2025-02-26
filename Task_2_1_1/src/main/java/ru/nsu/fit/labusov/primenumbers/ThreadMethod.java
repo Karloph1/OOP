@@ -39,7 +39,8 @@ public class ThreadMethod implements ComplexNummarable {
                     indexEnd = rows.size() / threadNum * (i + 1);
                 }
 
-                numThreads[i] = new ThreadMethodSingleThread(rows, indexStart, indexEnd, i, findingResult, lock);
+                numThreads[i] = new ThreadMethodSingleThread(rows,
+                        indexStart, indexEnd, i, findingResult, lock);
             }
 
             for (ThreadMethodSingleThread thr : numThreads) {
