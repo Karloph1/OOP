@@ -93,10 +93,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List,int,int,int)" class="member-name-link">ThreadMethodSingleThread</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;numsList,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List,int,int,int,java.lang.Boolean%5B%5D,java.util.concurrent.locks.ReentrantReadWriteLock)" class="member-name-link">ThreadMethodSingleThread</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;numsList,
  int&nbsp;indexStart,
  int&nbsp;indexEnd,
- int&nbsp;threadNum)</code></div>
+ int&nbsp;threadNum,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>[]&nbsp;findingResult,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html" title="class or interface in java.util.concurrent.locks" class="external-link">ReentrantReadWriteLock</a>&nbsp;lock)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Extra second class's constructor.</div>
 </div>
@@ -138,12 +140,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.util.List,int,int,int)">
+<section class="detail" id="&lt;init&gt;(java.util.List,int,int,int,java.lang.Boolean[],java.util.concurrent.locks.ReentrantReadWriteLock)">
 <h3>ThreadMethodSingleThread</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ThreadMethodSingleThread</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;numsList,
  int&nbsp;indexStart,
  int&nbsp;indexEnd,
- int&nbsp;threadNum)</span></div>
+ int&nbsp;threadNum,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>[]&nbsp;findingResult,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html" title="class or interface in java.util.concurrent.locks" class="external-link">ReentrantReadWriteLock</a>&nbsp;lock)</span></div>
 <div class="block">Extra second class's constructor.</div>
 </section>
 </li>
