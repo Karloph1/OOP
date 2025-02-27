@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ThreadMethod implements ComplexNummarable {
     private final int threadNum;
-    private final Boolean[] findingResult;
+    private final FindingResult findingResult;
     private final ReentrantReadWriteLock lock;
 
     /**
@@ -16,8 +16,7 @@ public class ThreadMethod implements ComplexNummarable {
      */
     public ThreadMethod(int threadNum) {
         this.threadNum = threadNum;
-        findingResult = new Boolean[1];
-        findingResult[0] = false;
+        findingResult = new FindingResult();
         lock = new ReentrantReadWriteLock(true);
     }
 
@@ -55,7 +54,7 @@ public class ThreadMethod implements ComplexNummarable {
                 }
             }
 
-            return findingResult[0];
+            return findingResult.getFindingResult();
         } else {
             return false;
         }

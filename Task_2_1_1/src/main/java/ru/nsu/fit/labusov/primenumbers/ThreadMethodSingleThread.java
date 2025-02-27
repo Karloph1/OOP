@@ -12,7 +12,7 @@ public class ThreadMethodSingleThread implements Runnable {
     private final List<Integer> cutOffArray;
     private final int indexStart;
     private final int indexEnd;
-    private final Boolean[] findingResult;
+    private final FindingResult findingResult;
     private final ReentrantReadWriteLock lock;
 
     /**
@@ -20,7 +20,7 @@ public class ThreadMethodSingleThread implements Runnable {
      */
     public ThreadMethodSingleThread(List<Integer> numsList,
                                     int indexStart, int indexEnd, int threadNum,
-                                    Boolean[] findingResult, ReentrantReadWriteLock lock) {
+                                    FindingResult findingResult, ReentrantReadWriteLock lock) {
         cutOffArray = numsList;
         String threadName = "Thread " + threadNum;
         thread = new Thread(this, threadName);
@@ -33,14 +33,14 @@ public class ThreadMethodSingleThread implements Runnable {
     @Override
     public void run() {
         for (int i = indexStart; i < indexEnd; i++) {
-            if (findingResult[0]) {
+            if (findingResult.getFindingResult()) {
                 return;
             }
 
             if (ComplexNumSearcher.isComplexNum(cutOffArray.get(i))) {
                 this.lock.writeLock().lock();
                 try {
-                    this.findingResult[0] = true;
+                    findingResult.setFindingResult(true);
                 } finally {
                     this.lock.writeLock().unlock();
                 }

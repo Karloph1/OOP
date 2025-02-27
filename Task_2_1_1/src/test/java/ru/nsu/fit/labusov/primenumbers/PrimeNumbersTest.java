@@ -27,37 +27,37 @@ public class PrimeNumbersTest {
     ArrayList<Integer> numList = generatePrimeNums(10000000);
 
     @Test
-    void firstMethodMeasureTimeTest() {
+    void consistentMethodMeasureTimeTest() {
         ConsistentMethod ob = new ConsistentMethod();
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum(numList));
         long finishTime = System.currentTimeMillis();
-        System.out.println("FirstMethod Time = " + (finishTime - startTime));
+        System.out.println("ConsistentMethod Time = " + (finishTime - startTime));
     }
 
     @Test
-    void secondMethodMeasureTimeTest() {
+    void threadMethodMeasureTimeTest() {
         ThreadMethod ob = new ThreadMethod(4);
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum(numList));
         long finishTime = System.currentTimeMillis();
-        System.out.println("SecondMethod Time = " + (finishTime - startTime));
+        System.out.println("ThreadMethod Time = " + (finishTime - startTime));
     }
 
     @Test
-    void thirdMethodMeasureTimeTest() {
+    void parallelMethodMeasureTimeTest() {
         ParallelMethod ob = new ParallelMethod();
 
         long startTime = System.currentTimeMillis();
         Assertions.assertFalse(ob.hasComplexNum(numList));
         long finishTime = System.currentTimeMillis();
-        System.out.println("ThirdMethod Time = " + (finishTime - startTime));
+        System.out.println("ParallelMethod Time = " + (finishTime - startTime));
     }
 
     @Test
-    void firstMethodHasComplexNumTest() {
+    void consistentMethodHasComplexNumTest() {
         numList.add(10);
         ConsistentMethod ob = new ConsistentMethod();
 
@@ -65,7 +65,7 @@ public class PrimeNumbersTest {
     }
 
     @Test
-    void secondMethodHasComplexNumTest() {
+    void threadMethodHasComplexNumTest() {
         numList.add(10);
         ThreadMethod ob = new ThreadMethod(4);
 
@@ -73,7 +73,7 @@ public class PrimeNumbersTest {
     }
 
     @Test
-    void thirdMethodHasComplexNumTest() {
+    void parallelMethodHasComplexNumTest() {
         numList.add(10);
         ParallelMethod ob = new ParallelMethod();
 
