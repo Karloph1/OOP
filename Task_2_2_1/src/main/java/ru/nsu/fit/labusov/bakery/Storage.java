@@ -1,0 +1,73 @@
+package ru.nsu.fit.labusov.bakery;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+/**
+ * Storage class.
+ */
+public class Storage {
+    private static final Queue<Order> completedOrders = new ArrayDeque<>();
+    private static volatile Queue<String> queue;
+    private static int capacity;
+    protected static final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
+
+    public Storage(int capacity) {
+        Storage.capacity = capacity;
+        queue = new ArrayDeque<>();
+    }
+
+    public static int getCurrentStorage() {
+        return completedOrders.size();
+    }
+
+    /**
+     * get function.
+     */
+    public static ArrayList<Order> getOrders(int maxCount) {
+        ArrayList<Order> selectedOrders = new ArrayList<>();
+
+        for (int i = 0; i < maxCount; i++) {
+            if (!completedOrders.isEmpty()) {
+                selectedOrders.add(completedOrders.poll());
+            } else {
+                break;
+            }
+        }
+        return selectedOrders;
+    }
+
+    public static boolean isExistFreeSpace() {
+        return (completedOrders.size() < capacity);
+    }
+
+    public static boolean cantTransferOrderToStorage() {
+        return (!isExistFreeSpace() || !queue.isEmpty());
+    }
+
+    public static void putToStorage(Order order) {
+        completedOrders.add(order);
+    }
+
+    public static void reservePlace(String orderNumber) {
+        queue.add(orderNumber);
+    }
+
+    public static void unReservePlace() {
+        String a = queue.remove();
+    }
+
+    /**
+     * check function.
+     */
+    public static boolean checkFirstReservedPlace(String orderNumber) {
+        if (!queue.isEmpty()) {
+            return (orderNumber.equals(queue.peek())); // нет элементов в очереди?
+        } else {
+            return true;
+        }
+    }
+
+}

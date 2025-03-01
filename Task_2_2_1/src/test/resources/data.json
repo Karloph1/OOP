@@ -1,0 +1,18 @@
+{
+  "bakers": [
+    { "velocity": "500", "threadName": "1" },
+    { "velocity": "1000", "threadName": "2" },
+    { "velocity": "200", "threadName": "3" },
+    { "velocity": "1001", "threadName": "4" },
+    { "velocity": "467", "threadName": "5" },
+    { "velocity": "786", "threadName": "6" }
+  ],
+  "couriers": [
+    { "capacity": "3", "threadName": "1" },
+    { "capacity": "7", "threadName": "2" },
+    { "capacity": "1", "threadName": "3" },
+    { "capacity": "4", "threadName": "4" },
+    { "capacity": "2", "threadName": "5" }
+  ],
+  "storage": "8"
+}
