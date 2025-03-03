@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * Parser class.
  */
 public class Parser {
+    private static Bakery bakery;
     private static JsonArray bakers = new JsonArray();
     private static JsonArray couriers = new JsonArray();
     private static int storage;
@@ -44,7 +45,6 @@ public class Parser {
         }
         return bakersList;
     }
-
 
     /**
      * get function.

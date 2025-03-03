@@ -2,6 +2,8 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -9,56 +11,103 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Bakery class.
  */
 public class Bakery {
-    private static ArrayList<Baker> bakers = new ArrayList<>();
-    private static ArrayList<Courier> couriers = new ArrayList<>();
-    private static final LinkedList<Order> freeOrders = new LinkedList<>();
-    private static Storage storage;
-    private static boolean isEndOfDay; // конец дня
-    private static AtomicInteger workingBakerCounter;
-    protected static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+    private final ArrayList<Baker> bakers;
+    private final ArrayList<Courier> couriers;
+    private final Storage storage;
+    private final LinkedList<Order> freeOrders = new LinkedList<>();
+    private boolean isEndOfDay; // конец дня
+    private final AtomicInteger workingBakerCounter;
+    protected final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
      * bakery constructor.
      */
     public Bakery(ArrayList<Baker> bakers, ArrayList<Courier> couriers, Storage storage) {
-        Bakery.bakers = bakers;
-        Bakery.couriers = couriers;
+        this.bakers = bakers;
+        this.couriers = couriers;
         isEndOfDay = false;
-        Bakery.storage = storage;
+        this.storage = storage;
         workingBakerCounter = new AtomicInteger(0);
+
+        for (Baker baker : bakers) {
+            baker.setBakery(this);
+        }
+
+        for (Courier courier : couriers) {
+            courier.setBakery(this);
+        }
     }
 
-    public static void unregisterBaker() {
-        workingBakerCounter.decrementAndGet();
+    public List<Baker> getBakers() {
+        return bakers;
     }
 
-    public static void registerBaker() {
-        workingBakerCounter.incrementAndGet();
+    public List<Courier> getCouriers() {
+        return couriers;
     }
 
-    public static int getWorkingBakers() {
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public int getWorkingBakers() {
         return workingBakerCounter.get();
     }
 
-    public static boolean hasWorkedBakers() {
+    public boolean hasWorkedBakers() {
         return workingBakerCounter.get() <= 0;
     }
 
-    public static boolean hasFreeOrders() {
+    public boolean hasFreeOrders() {
         return !freeOrders.isEmpty();
     }
 
-    public static void addOrder(Order order) {
-        freeOrders.add(order);
+    public boolean isEndOfDay() {
+        return isEndOfDay;
     }
 
-    public static Order takeOrder() {
+    protected void addOrder(Order order) {
+        try {
+            lock.writeLock().lock();
+            freeOrders.add(order);
+
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    protected Order takeFirstOrder() {
         return freeOrders.removeFirst();
     }
 
-    public static boolean isEndOfDay() {
-        return isEndOfDay;
+    protected void registerBaker(boolean needRegister) {
+        try {
+            lock.writeLock().lock();
+            if (needRegister) {
+                workingBakerCounter.incrementAndGet();
+            } else {
+                workingBakerCounter.decrementAndGet();
+            }
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
+
+    protected Order takeOrder() {
+        Order order;
+
+        try {
+            lock.writeLock().lock();
+            order = takeFirstOrder();
+        } catch (NoSuchElementException e) {
+            order = null;
+        } finally {
+            lock.writeLock().unlock();
+        }
+
+        return order;
+    }
+
 
     /**
      * start function.
@@ -80,7 +129,7 @@ public class Bakery {
             thr.getThread().start();
         }
 
-        OrderGenerator thrr = new OrderGenerator();
+        OrderGenerator thrr = new OrderGenerator(this);
         thrr.getThread().start();
         long dayStart = System.currentTimeMillis();
         while (true) {

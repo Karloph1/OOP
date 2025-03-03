@@ -1,7 +1,5 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.NoSuchElementException;
-
 /**
  * Baker class.
  */
@@ -9,6 +7,7 @@ public class Baker implements Runnable {
     private final int velocity; // скорость готовки
     private final String threadName;
     private final Thread thread;
+    private Bakery bakery;
 
     /**
      * Baker constructor.
@@ -19,61 +18,36 @@ public class Baker implements Runnable {
         thread = new Thread(this, threadName);
     }
 
+    public void setBakery(Bakery bakery) {
+        this.bakery = bakery;
+    }
+
     public Thread getThread() {
         return this.thread;
     }
 
+    public int getVelocity() {
+        return this.velocity;
+    }
+
+    public String getThreadName() {
+        return this.threadName;
+    }
+
     private void pizzaTransfer(Order order) throws InterruptedException {
-        boolean isReserved = false;
-
-        try {
-            Storage.lock1.writeLock().lock();
-            if (Storage.cantTransferOrderToStorage()) {
-                Storage.reservePlace(threadName);
-                isReserved = true;
-            } else {
-                Storage.putToStorage(order);
-            }
-        } finally {
-            Storage.lock1.writeLock().unlock();
-        }
-
-        if (isReserved) {
-            while (true) {
-                try {
-                    Storage.lock1.writeLock().lock();
-                    if (Storage.isExistFreeSpace()
-                            && Storage.checkFirstReservedPlace(this.threadName)) {
-                        Storage.unReservePlace();
-                        Storage.putToStorage(order);
-                        break;
-                    }
-                } finally {
-                    Storage.lock1.writeLock().unlock();
-                }
-
-                Thread.sleep(100);
-            }
-        }
+        bakery.getStorage().getPizza(this, order);
     }
 
     private boolean tryToCook() { // готовка пиццы
         Order order = null;
         boolean result = false;
-        if (Bakery.hasFreeOrders()) {
-            try {
-                Bakery.lock.writeLock().lock();
-                order = Bakery.takeOrder();
-            } catch (NoSuchElementException e) {
-                return false;
-            } finally {
-                Bakery.lock.writeLock().unlock();
-            }
+        if (bakery.hasFreeOrders()) {
+            order = bakery.takeOrder();
         }
 
         if (order != null) {
             order.reserveOrder();
-            System.out.printf("[%d] [%s]\n", order.orderNumber, order.status);
+            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             try {
                 Thread.sleep(this.velocity);
             } catch (InterruptedException e) {
@@ -85,30 +59,24 @@ public class Baker implements Runnable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.printf("[%d] [%s]\n", order.orderNumber, order.status);
+            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             result = true;
         }
+
         return result;
     }
-
 
     /**
      * run function.
      */
     @Override
     public void run() {
-
-        try {
-            Storage.lock1.writeLock().lock();
-            Bakery.registerBaker();
-        } finally {
-            Storage.lock1.writeLock().unlock();
-        }
+        bakery.registerBaker(true);
 
         try {
             while (thread.isAlive()) { // пока поток жив
                 if (!tryToCook()) { // если не получилось взять заказ
-                    if (Bakery.isEndOfDay()) { // если день закончился
+                    if (bakery.isEndOfDay()) { // если день закончился
                         return;
                     } else {
                         try {
@@ -120,12 +88,7 @@ public class Baker implements Runnable {
                 }
             }
         } finally {
-            try {
-                Storage.lock1.writeLock().lock();
-                Bakery.unregisterBaker();
-            } finally {
-                Storage.lock1.writeLock().unlock();
-            }
+            bakery.registerBaker(false);
         }
     }
 }

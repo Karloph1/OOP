@@ -4,9 +4,9 @@ package ru.nsu.fit.labusov.bakery;
  * Order class.
  */
 public class Order {
-    String name;
-    int orderNumber;
-    String status;
+    private final String name;
+    private final int orderNumber;
+    private String status;
 
     /**
      * Order constructor.
@@ -17,19 +17,27 @@ public class Order {
         this.status = "free";
     }
 
-    public void reserveOrder() {
+    public String getName() {
+        return this.name;
+    }
+
+    public int getOrderNumber() {
+        return this.orderNumber;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    protected void reserveOrder() {
         this.status = "reserved";
     }
 
-    public void readyOrder() {
+    protected void readyOrder() {
         this.status = "ready to send";
     }
 
-    public void sentOrder() {
+    protected void sentOrder() {
         this.status = "delivered";
-    }
-
-    public Order getOrder() {
-        return this;
     }
 }

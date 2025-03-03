@@ -1,6 +1,7 @@
 package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Courier class.
@@ -9,6 +10,7 @@ public class Courier implements Runnable {
     private final int capacity; // вместимость сумки
     private final Thread thread;
     private ArrayList<Order> takenOrders; // взятые заказы
+    private Bakery bakery;
 
     /**
      * courier constructor.
@@ -19,22 +21,27 @@ public class Courier implements Runnable {
         takenOrders = new ArrayList<>();
     }
 
+    public void setBakery(Bakery bakery) {
+        this.bakery = bakery;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
     public Thread getThread() {
         return this.thread;
     }
+    public List<Order> getTakenOrders() {
+        return takenOrders;
+    }
 
     private void pizzaDelivery() throws InterruptedException {
-        try {
-            Storage.lock1.writeLock().lock();
-            takenOrders = Storage.getOrders(capacity);
-        } finally {
-            Storage.lock1.writeLock().unlock();
-        }
+        takenOrders = (ArrayList<Order>) bakery.getStorage().takePizzas(this);
 
         if (!takenOrders.isEmpty()) {
             for (Order order : takenOrders) {
                 order.sentOrder();
-                System.out.printf("[%d] [%s]\n", order.orderNumber, order.status);
+                System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             }
             Thread.sleep(100L * takenOrders.size());
             takenOrders.clear();
@@ -48,15 +55,15 @@ public class Courier implements Runnable {
      */
     @Override
     public void run() {
-        while (true) { // пока поток жив
-            if (Storage.getCurrentStorage() != 0) { // если есть готовые пиццы
+        while (true) {
+            if (bakery.getStorage().getCompletedOrdersNumber() != 0) { // если есть готовые пиццы
                 try {
                     pizzaDelivery();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             } else {
-                if (Bakery.hasWorkedBakers() && Storage.getCurrentStorage() == 0) {
+                if (bakery.hasWorkedBakers() && bakery.getStorage().getCompletedOrdersNumber() == 0) {
                     return;
                 } else {
                     try {

@@ -8,8 +8,10 @@ public class OrderGenerator implements Runnable {
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders = 0;
     private final Thread thread;
+    private final Bakery bakery;
 
-    public OrderGenerator() {
+    public OrderGenerator(Bakery bakery) {
+        this.bakery = bakery;
         thread = new Thread(this, "orders");
     }
 
@@ -32,12 +34,12 @@ public class OrderGenerator implements Runnable {
     @Override
     public void run() {
         while (thread.isAlive()) {
-            if (Bakery.isEndOfDay()) {
+            if (bakery.isEndOfDay()) {
                 return;
             } else {
                 Order b = generateNewOrder();
-                Bakery.addOrder(b);
-                System.out.printf("[%d] [%s]\n", totalOrders, b.status);
+                bakery.addOrder(b);
+                System.out.printf("[%d] [%s]\n", totalOrders, b.getStatus());
                 try {
                     Thread.sleep((int) (Math.random() * 500) + 1);
                 } catch (InterruptedException e) {

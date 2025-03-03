@@ -2,6 +2,7 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -9,24 +10,52 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Storage class.
  */
 public class Storage {
-    private static final Queue<Order> completedOrders = new ArrayDeque<>();
-    private static volatile Queue<String> queue;
-    private static int capacity;
-    protected static final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
+    private final Queue<Order> completedOrders = new ArrayDeque<>();
+    private final Queue<String> queue;
+    private final int capacity;
+    protected final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
 
     public Storage(int capacity) {
-        Storage.capacity = capacity;
+        this.capacity = capacity;
         queue = new ArrayDeque<>();
     }
 
-    public static int getCurrentStorage() {
+    public Queue<Order> getCompletedOrders() {
+        return completedOrders;
+    }
+
+    public Queue<String> getQueue() {
+        return queue;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCompletedOrdersNumber() {
         return completedOrders.size();
+    }
+
+    public boolean isExistFreeSpace() {
+        return (completedOrders.size() < capacity);
+    }
+
+
+    /**
+     * check function.
+     */
+    public boolean checkFirstReservedPlace(String orderNumber) {
+        if (!queue.isEmpty()) {
+            return (orderNumber.equals(queue.peek()));
+        } else {
+            return true;
+        }
     }
 
     /**
      * get function.
      */
-    public static ArrayList<Order> getOrders(int maxCount) {
+    private List<Order> getOrders(int maxCount) {
         ArrayList<Order> selectedOrders = new ArrayList<>();
 
         for (int i = 0; i < maxCount; i++) {
@@ -36,38 +65,58 @@ public class Storage {
                 break;
             }
         }
+
         return selectedOrders;
     }
 
-    public static boolean isExistFreeSpace() {
-        return (completedOrders.size() < capacity);
-    }
+    protected void getPizza(Baker baker, Order order) {
+        boolean isReserved = false;
 
-    public static boolean cantTransferOrderToStorage() {
-        return (!isExistFreeSpace() || !queue.isEmpty());
-    }
+        try {
+            lock1.writeLock().lock();
+            if (!isExistFreeSpace() || !queue.isEmpty()) {
+                queue.add(baker.getThreadName());
+                isReserved = true;
+            } else {
+                completedOrders.add(order);
+            }
+        } finally {
+            lock1.writeLock().unlock();
+        }
 
-    public static void putToStorage(Order order) {
-        completedOrders.add(order);
-    }
+        if (isReserved) {
+            while (true) {
+                try {
+                    lock1.writeLock().lock();
+                    if (isExistFreeSpace()
+                            && checkFirstReservedPlace(baker.getThreadName())) {
+                        queue.remove();
+                        completedOrders.add(order);
+                        break;
+                    }
+                } finally {
+                    lock1.writeLock().unlock();
+                }
 
-    public static void reservePlace(String orderNumber) {
-        queue.add(orderNumber);
-    }
-
-    public static void unReservePlace() {
-        String a = queue.remove();
-    }
-
-    /**
-     * check function.
-     */
-    public static boolean checkFirstReservedPlace(String orderNumber) {
-        if (!queue.isEmpty()) {
-            return (orderNumber.equals(queue.peek())); // нет элементов в очереди?
-        } else {
-            return true;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
+    protected List<Order> takePizzas(Courier courier) {
+        List<Order> takenOrders;
+
+        try {
+            lock1.writeLock().lock();
+            takenOrders = getOrders(courier.getCapacity());
+        } finally {
+            lock1.writeLock().unlock();
+        }
+
+        return takenOrders;
+    }
 }
