@@ -1,7 +1,11 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.Objects;
 
 /**
  * Storage class.
@@ -62,6 +66,9 @@ public class Storage {
         return selectedOrders;
     }
 
+    /**
+     * get pizza to storage.
+     */
     protected void getPizza(Baker baker, Order order) {
         boolean isReserved = false;
 
@@ -100,6 +107,9 @@ public class Storage {
         }
     }
 
+    /**
+     * take pizzas from storage.
+     */
     protected List<Order> takePizzas(Courier courier) {
         List<Order> takenOrders;
 

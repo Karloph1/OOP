@@ -45,13 +45,22 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Order order = (Order) o;
 
-        if (orderNumber != order.orderNumber) return false;
-        if (!Objects.equals(name, order.name)) return false;
+        if (orderNumber != order.orderNumber) {
+            return false;
+        }
+        if (!Objects.equals(name, order.name)) {
+            return false;
+        }
+
         return Objects.equals(status, order.status);
     }
 

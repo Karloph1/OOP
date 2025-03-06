@@ -49,7 +49,6 @@ public class OrderGenerator implements Runnable {
             } else {
                 Order b = generateNewOrder();
                 bakery.addOrder(b);
-                //System.out.printf("[%d] [%s]\n", totalOrders, b.getStatus());
                 try {
                     Thread.sleep((int) (Math.random() * 500) + 1);
                 } catch (InterruptedException e) {
@@ -61,12 +60,19 @@ public class OrderGenerator implements Runnable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         OrderGenerator that = (OrderGenerator) o;
 
-        if (!Objects.equals(thread, that.thread)) return false;
+        if (!Objects.equals(thread, that.thread)) {
+            return false;
+        }
+
         return Objects.equals(bakery, that.bakery);
     }
 

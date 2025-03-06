@@ -96,12 +96,20 @@ public class Baker implements Runnable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Baker baker = (Baker) o;
 
-        if (velocity != baker.velocity) return false;
+        if (velocity != baker.velocity) {
+            return false;
+        }
+
         return threadName.equals(baker.threadName);
     }
 
