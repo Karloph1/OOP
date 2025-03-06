@@ -2,6 +2,7 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Courier class.
@@ -24,11 +25,10 @@ public class Courier implements Runnable {
     public void setBakery(Bakery bakery) {
         this.bakery = bakery;
     }
-
     public int getCapacity() {
         return this.capacity;
     }
-    public Thread getThread() {
+    protected Thread getThread() {
         return this.thread;
     }
     public List<Order> getTakenOrders() {
@@ -41,7 +41,7 @@ public class Courier implements Runnable {
         if (!takenOrders.isEmpty()) {
             for (Order order : takenOrders) {
                 order.sentOrder();
-                System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
+                //System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             }
             Thread.sleep(100L * takenOrders.size());
             takenOrders.clear();
@@ -56,14 +56,14 @@ public class Courier implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (bakery.getStorage().getCompletedOrdersNumber() != 0) { // если есть готовые пиццы
+            if (!bakery.getStorage().getCompletedOrders().isEmpty()) { // если есть готовые пиццы
                 try {
                     pizzaDelivery();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             } else {
-                if (bakery.hasWorkedBakers() && bakery.getStorage().getCompletedOrdersNumber() == 0) {
+                if (bakery.hasNotWorkedBakers() && bakery.getStorage().getCompletedOrders().isEmpty()) {
                     return;
                 } else {
                     try {
@@ -74,5 +74,23 @@ public class Courier implements Runnable {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Courier courier = (Courier) o;
+
+        if (capacity != courier.capacity) return false;
+        return Objects.equals(takenOrders, courier.takenOrders);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = capacity;
+        result = 31 * result + (takenOrders != null ? takenOrders.hashCode() : 0);
+        return result;
     }
 }

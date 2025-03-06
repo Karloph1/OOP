@@ -1,28 +1,37 @@
 package ru.nsu.fit.labusov.bakery;
 
+import java.util.Objects;
+
 /**
  *Order generator class.
  */
 public class OrderGenerator implements Runnable {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
-    private static int totalOrders = 0;
+    private static int totalOrders;
     private final Thread thread;
-    private final Bakery bakery;
+    private Bakery bakery;
 
-    public OrderGenerator(Bakery bakery) {
-        this.bakery = bakery;
+    public OrderGenerator() {
+        totalOrders = 0;
         thread = new Thread(this, "orders");
     }
 
-    public Thread getThread() {
+    public void setBakery (Bakery bakery) {
+        this.bakery = bakery;
+    }
+    public int getTotalOrders() {
+        return totalOrders;
+    }
+
+    protected Thread getThread() {
         return this.thread;
     }
 
     /**
      * generate function.
      */
-    public static Order generateNewOrder() {
+    public Order generateNewOrder() {
         String pizza = pizzaNames[(int) (Math.random() * pizzaNames.length)];
         totalOrders++;
         return new Order(pizza, totalOrders);
@@ -39,7 +48,7 @@ public class OrderGenerator implements Runnable {
             } else {
                 Order b = generateNewOrder();
                 bakery.addOrder(b);
-                System.out.printf("[%d] [%s]\n", totalOrders, b.getStatus());
+                //System.out.printf("[%d] [%s]\n", totalOrders, b.getStatus());
                 try {
                     Thread.sleep((int) (Math.random() * 500) + 1);
                 } catch (InterruptedException e) {
@@ -47,5 +56,23 @@ public class OrderGenerator implements Runnable {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderGenerator that = (OrderGenerator) o;
+
+        if (!Objects.equals(thread, that.thread)) return false;
+        return Objects.equals(bakery, that.bakery);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = thread != null ? thread.hashCode() : 0;
+        result = 31 * result + (bakery != null ? bakery.hashCode() : 0);
+        return result;
     }
 }

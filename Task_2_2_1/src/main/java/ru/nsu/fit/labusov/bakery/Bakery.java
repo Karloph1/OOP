@@ -14,8 +14,9 @@ public class Bakery {
     private final ArrayList<Baker> bakers;
     private final ArrayList<Courier> couriers;
     private final Storage storage;
-    private final LinkedList<Order> freeOrders = new LinkedList<>();
-    private boolean isEndOfDay; // конец дня
+    private final LinkedList<Order> freeOrders;
+    private final ArrayList<Order> totalOrders;
+    private boolean isEndOfDay; //конец дня
     private final AtomicInteger workingBakerCounter;
     protected final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
@@ -27,6 +28,8 @@ public class Bakery {
         this.couriers = couriers;
         isEndOfDay = false;
         this.storage = storage;
+        freeOrders = new LinkedList<>();
+        totalOrders = new ArrayList<>();
         workingBakerCounter = new AtomicInteger(0);
 
         for (Baker baker : bakers) {
@@ -54,7 +57,11 @@ public class Bakery {
         return workingBakerCounter.get();
     }
 
-    public boolean hasWorkedBakers() {
+    public List<Order> getTotalOrders() {
+        return totalOrders;
+    }
+
+    public boolean hasNotWorkedBakers() {
         return workingBakerCounter.get() <= 0;
     }
 
@@ -70,14 +77,10 @@ public class Bakery {
         try {
             lock.writeLock().lock();
             freeOrders.add(order);
-
+            totalOrders.add(order);
         } finally {
             lock.writeLock().unlock();
         }
-    }
-
-    protected Order takeFirstOrder() {
-        return freeOrders.removeFirst();
     }
 
     protected void registerBaker(boolean needRegister) {
@@ -98,7 +101,7 @@ public class Bakery {
 
         try {
             lock.writeLock().lock();
-            order = takeFirstOrder();
+            order = freeOrders.removeFirst();
         } catch (NoSuchElementException e) {
             order = null;
         } finally {
@@ -117,7 +120,7 @@ public class Bakery {
             thr.getThread().start();
         }
 
-        while (!bakers.isEmpty() && hasWorkedBakers()) {
+        while (!bakers.isEmpty() && hasNotWorkedBakers()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -129,12 +132,32 @@ public class Bakery {
             thr.getThread().start();
         }
 
-        OrderGenerator thrr = new OrderGenerator(this);
+        OrderGenerator thrr = new OrderGenerator();
+        thrr.setBakery(this);
         thrr.getThread().start();
         long dayStart = System.currentTimeMillis();
         while (true) {
+            boolean allThreadsDead = true;
+
             if (System.currentTimeMillis() - dayStart >= 10000) {
                 isEndOfDay = true;
+            }
+
+            for (Baker thr : bakers) {
+                if (thr.getThread().isAlive()) {
+                    allThreadsDead = false;
+                    break;
+                }
+            }
+
+            for (Courier thr : couriers) {
+                if (!allThreadsDead || thr.getThread().isAlive()) {
+                    allThreadsDead = false;
+                    break;
+                }
+            }
+
+            if (isEndOfDay && allThreadsDead) {
                 break;
             }
         }

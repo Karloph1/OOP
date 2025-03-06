@@ -22,7 +22,7 @@ public class Baker implements Runnable {
         this.bakery = bakery;
     }
 
-    public Thread getThread() {
+    protected Thread getThread() {
         return this.thread;
     }
 
@@ -47,19 +47,21 @@ public class Baker implements Runnable {
 
         if (order != null) {
             order.reserveOrder();
-            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
+            //System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             try {
                 Thread.sleep(this.velocity);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
             order.readyOrder();
+
             try {
                 pizzaTransfer(order);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
+            //System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             result = true;
         }
 
@@ -90,5 +92,28 @@ public class Baker implements Runnable {
         } finally {
             bakery.registerBaker(false);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Baker baker = (Baker) o;
+
+        if (velocity != baker.velocity) return false;
+        return threadName.equals(baker.threadName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = velocity;
+        result = 31 * result + threadName.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Baker " + threadName + " - " + velocity;
     }
 }

@@ -1,22 +1,20 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Storage class.
  */
 public class Storage {
-    private final Queue<Order> completedOrders = new ArrayDeque<>();
+    private final Queue<Order> completedOrders;
     private final Queue<String> queue;
     private final int capacity;
     protected final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
 
     public Storage(int capacity) {
         this.capacity = capacity;
+        completedOrders = new ArrayDeque<>();
         queue = new ArrayDeque<>();
     }
 
@@ -32,14 +30,9 @@ public class Storage {
         return capacity;
     }
 
-    public int getCompletedOrdersNumber() {
-        return completedOrders.size();
-    }
-
     public boolean isExistFreeSpace() {
         return (completedOrders.size() < capacity);
     }
-
 
     /**
      * check function.
@@ -118,5 +111,61 @@ public class Storage {
         }
 
         return takenOrders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Storage storage = (Storage) o;
+
+        if (capacity != storage.capacity) return false;
+
+        if (this.getCompletedOrders().size() != storage.getCompletedOrders().size() || this.getQueue().size() != storage.getQueue().size()) {
+            return false;
+        }
+
+        Queue<Order> tmp = this.completedOrders;
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.remove() != storage.completedOrders.remove()) {
+                return false;
+            }
+        }
+
+        Queue<String> tmp2 = this.queue;
+        for (int i = 0; i < tmp2.size(); i++) {
+            if (!Objects.equals(tmp2.remove(), storage.queue.remove())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = completedOrders.hashCode();
+        result = 31 * result + queue.hashCode();
+        result = 31 * result + capacity;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("Storage: capacity - ");
+        stringBuilder.append(capacity).append(", Completed orders - [");
+
+        for (int i = 0; i < completedOrders.size(); i++) {
+            stringBuilder.append(completedOrders.peek()).append(", ");
+        }
+
+        stringBuilder.append("], queue - [");
+
+        for (int i = 0; i < queue.size(); i++) {
+            stringBuilder.append(queue.peek()).append(", ");
+        }
+
+        return stringBuilder.append("]").toString();
     }
 }

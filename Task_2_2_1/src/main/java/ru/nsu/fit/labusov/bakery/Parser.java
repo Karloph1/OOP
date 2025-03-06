@@ -12,15 +12,14 @@ import java.util.ArrayList;
  * Parser class.
  */
 public class Parser {
-    private static Bakery bakery;
-    private static JsonArray bakers = new JsonArray();
-    private static JsonArray couriers = new JsonArray();
-    private static int storage;
+    private JsonArray bakers = new JsonArray();
+    private JsonArray couriers = new JsonArray();
+    private int storage;
 
     /**
      * parser function.
      */
-    public static void parser(String fileName) {
+    public void parse (String fileName) {
         try (FileReader reader = new FileReader(fileName)) {
             JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
             bakers = json.getAsJsonArray("bakers");
@@ -34,7 +33,7 @@ public class Parser {
     /**
      * get function.
      */
-    public static ArrayList<Baker> getBakers() {
+    public ArrayList<Baker> getBakers() {
         ArrayList<Baker> bakersList = new ArrayList<>();
         for (JsonElement bakerElement : bakers) {
             JsonObject bakerObj = bakerElement.getAsJsonObject();
@@ -43,13 +42,14 @@ public class Parser {
             Baker baker = new Baker(velocity, threadName);
             bakersList.add(baker);
         }
+
         return bakersList;
     }
 
     /**
      * get function.
      */
-    public static ArrayList<Courier> getCouriers() {
+    public ArrayList<Courier> getCouriers() {
         ArrayList<Courier> couriersList = new ArrayList<>();
         for (JsonElement courierElement : couriers) {
             JsonObject bakerObj = courierElement.getAsJsonObject();
@@ -58,11 +58,12 @@ public class Parser {
             Courier courier = new Courier(capacity, threadName);
             couriersList.add(courier);
         }
+
         return couriersList;
     }
 
 
-    public static int getStorage() {
-        return storage;
+    public Storage getStorage() {
+        return new Storage(storage);
     }
 }
