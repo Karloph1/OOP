@@ -1,10 +1,10 @@
 package ru.nsu.fit.labusov.bakery;
 
-import org.junit.jupiter.api.Assertions;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**

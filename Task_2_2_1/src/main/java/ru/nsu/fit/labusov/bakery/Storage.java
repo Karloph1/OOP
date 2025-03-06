@@ -3,9 +3,9 @@ package ru.nsu.fit.labusov.bakery;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.Objects;
 
 /**
  * Storage class.
@@ -16,6 +16,9 @@ public class Storage {
     private final int capacity;
     protected final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
 
+    /**
+     * storage constructor method.
+     */
     public Storage(int capacity) {
         this.capacity = capacity;
         completedOrders = new ArrayDeque<>();
@@ -125,14 +128,22 @@ public class Storage {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Storage storage = (Storage) o;
 
-        if (capacity != storage.capacity) return false;
+        if (capacity != storage.capacity) {
+            return false;
+        }
 
-        if (this.getCompletedOrders().size() != storage.getCompletedOrders().size() || this.getQueue().size() != storage.getQueue().size()) {
+        if (this.getCompletedOrders().size() != storage.getCompletedOrders().size()
+                || this.getQueue().size() != storage.getQueue().size()) {
             return false;
         }
 
