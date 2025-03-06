@@ -25,12 +25,15 @@ public class Courier implements Runnable {
     public void setBakery(Bakery bakery) {
         this.bakery = bakery;
     }
+
     public int getCapacity() {
         return this.capacity;
     }
+
     protected Thread getThread() {
         return this.thread;
     }
+
     public List<Order> getTakenOrders() {
         return takenOrders;
     }
@@ -63,7 +66,8 @@ public class Courier implements Runnable {
                     throw new RuntimeException(e);
                 }
             } else {
-                if (bakery.hasNotWorkedBakers() && bakery.getStorage().getCompletedOrders().isEmpty()) {
+                if (bakery.hasNotWorkedBakers()
+                        && bakery.getStorage().getCompletedOrders().isEmpty()) {
                     return;
                 } else {
                     try {
@@ -78,12 +82,19 @@ public class Courier implements Runnable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Courier courier = (Courier) o;
 
-        if (capacity != courier.capacity) return false;
+        if (capacity != courier.capacity) {
+            return false;
+        }
+
         return Objects.equals(takenOrders, courier.takenOrders);
     }
 

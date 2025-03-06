@@ -3,7 +3,7 @@ package ru.nsu.fit.labusov.bakery;
 import java.util.Objects;
 
 /**
- *Order generator class.
+ * Order generator class.
  */
 public class OrderGenerator implements Runnable {
     private static final String[] pizzaNames =
@@ -17,9 +17,10 @@ public class OrderGenerator implements Runnable {
         thread = new Thread(this, "orders");
     }
 
-    public void setBakery (Bakery bakery) {
+    public void setBakery(Bakery bakery) {
         this.bakery = bakery;
     }
+
     public int getTotalOrders() {
         return totalOrders;
     }
