@@ -1,6 +1,10 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -159,17 +163,33 @@ public class Bakery {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Bakery bakery = (Bakery) o;
 
-        if (isEndOfDay != bakery.isEndOfDay) return false;
-        if (!bakers.equals(bakery.bakers)) return false;
-        if (!Objects.equals(couriers, bakery.couriers)) return false;
-        if (!Objects.equals(storage, bakery.storage)) return false;
-        if (!freeOrders.equals(bakery.freeOrders)) return false;
-        if (!totalOrders.equals(bakery.totalOrders)) return false;
+        if (isEndOfDay != bakery.isEndOfDay) {
+            return false;
+        }
+        if (!bakers.equals(bakery.bakers)) {
+            return false;
+        }
+        if (!Objects.equals(couriers, bakery.couriers)) {
+            return false;
+        }
+        if (!Objects.equals(storage, bakery.storage)) {
+            return false;
+        }
+        if (!freeOrders.equals(bakery.freeOrders)) {
+            return false;
+        }
+        if (!totalOrders.equals(bakery.totalOrders)) {
+            return false;
+        }
         return workingBakerCounter.get() == bakery.workingBakerCounter.get();
     }
 

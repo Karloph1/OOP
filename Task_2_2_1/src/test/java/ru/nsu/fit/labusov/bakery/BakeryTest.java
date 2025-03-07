@@ -1,7 +1,8 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -58,7 +59,7 @@ public class BakeryTest {
     void orderToStringTest() {
         Order order = new Order("123", 1);
 
-        Assertions.assertEquals("Order 1, 123", order.toString());
+        Assertions.assertEquals("Order 1, 123. free", order.toString());
     }
 
 

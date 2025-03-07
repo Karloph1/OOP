@@ -67,7 +67,7 @@ public class Baker implements Runnable {
      * run function.
      */
     @Override
-    public synchronized void run() {
+    public void run() {
         bakery.registerBaker(true);
 
         try {
