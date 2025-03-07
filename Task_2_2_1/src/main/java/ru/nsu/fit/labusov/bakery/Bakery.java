@@ -1,9 +1,6 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -41,20 +38,16 @@ public class Bakery {
         }
     }
 
-    public List<Baker> getBakers() {
-        return bakers;
+    public boolean checkStorageEmpty() {
+        return storage.isCompletedOrdersEmpty();
     }
 
-    public List<Courier> getCouriers() {
-        return couriers;
+    public List<Order> takePizzasFormStorage(Courier courier) {
+        return storage.takePizzas(courier);
     }
 
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public int getWorkingBakers() {
-        return workingBakerCounter.get();
+    public void putPizzaToStorage(Baker baker, Order order) {
+        storage.putPizza(baker, order);
     }
 
     public List<Order> getTotalOrders() {
@@ -161,5 +154,34 @@ public class Bakery {
                 break;
             }
         }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bakery bakery = (Bakery) o;
+
+        if (isEndOfDay != bakery.isEndOfDay) return false;
+        if (!bakers.equals(bakery.bakers)) return false;
+        if (!Objects.equals(couriers, bakery.couriers)) return false;
+        if (!Objects.equals(storage, bakery.storage)) return false;
+        if (!freeOrders.equals(bakery.freeOrders)) return false;
+        if (!totalOrders.equals(bakery.totalOrders)) return false;
+        return workingBakerCounter.get() == bakery.workingBakerCounter.get();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = bakers.hashCode();
+        result = 31 * result + (couriers != null ? couriers.hashCode() : 0);
+        result = 31 * result + (storage != null ? storage.hashCode() : 0);
+        result = 31 * result + freeOrders.hashCode();
+        result = 31 * result + totalOrders.hashCode();
+        result = 31 * result + (isEndOfDay ? 1 : 0);
+        result = 31 * result + workingBakerCounter.hashCode();
+        return result;
     }
 }

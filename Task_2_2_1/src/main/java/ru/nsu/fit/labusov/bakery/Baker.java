@@ -26,16 +26,12 @@ public class Baker implements Runnable {
         return this.thread;
     }
 
-    public int getVelocity() {
-        return this.velocity;
-    }
-
     public String getThreadName() {
         return this.threadName;
     }
 
     private void pizzaTransfer(Order order) throws InterruptedException {
-        bakery.getStorage().getPizza(this, order);
+        bakery.putPizzaToStorage(this, order);
     }
 
     private boolean tryToCook() { // готовка пиццы
@@ -47,7 +43,7 @@ public class Baker implements Runnable {
 
         if (order != null) {
             order.reserveOrder();
-            //System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
+            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             try {
                 Thread.sleep(this.velocity);
             } catch (InterruptedException e) {
@@ -55,13 +51,12 @@ public class Baker implements Runnable {
             }
 
             order.readyOrder();
-
+            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             try {
                 pizzaTransfer(order);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            //System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             result = true;
         }
 
@@ -72,7 +67,7 @@ public class Baker implements Runnable {
      * run function.
      */
     @Override
-    public void run() {
+    public synchronized void run() {
         bakery.registerBaker(true);
 
         try {
@@ -83,6 +78,7 @@ public class Baker implements Runnable {
                     } else {
                         try {
                             Thread.sleep(100);
+                            //wait();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }

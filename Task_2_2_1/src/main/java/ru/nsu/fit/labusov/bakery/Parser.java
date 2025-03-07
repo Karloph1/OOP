@@ -14,26 +14,29 @@ import java.util.ArrayList;
 public class Parser {
     private JsonArray bakers = new JsonArray();
     private JsonArray couriers = new JsonArray();
-    private int storage;
 
     /**
      * parser function.
      */
-    public void parse(String fileName) {
+    public Bakery parse(String fileName) {
         try (FileReader reader = new FileReader(fileName)) {
             JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
             bakers = json.getAsJsonArray("bakers");
             couriers = json.getAsJsonArray("couriers");
-            storage = json.get("storage").getAsInt();
+            int storageCapacity = json.get("storage").getAsInt();
+
+            return new Bakery(getBakers(), getCouriers(), new Storage(storageCapacity));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
     /**
      * get function.
      */
-    public ArrayList<Baker> getBakers() {
+    private ArrayList<Baker> getBakers() {
         ArrayList<Baker> bakersList = new ArrayList<>();
         for (JsonElement bakerElement : bakers) {
             JsonObject bakerObj = bakerElement.getAsJsonObject();
@@ -49,7 +52,7 @@ public class Parser {
     /**
      * get function.
      */
-    public ArrayList<Courier> getCouriers() {
+    private ArrayList<Courier> getCouriers() {
         ArrayList<Courier> couriersList = new ArrayList<>();
         for (JsonElement courierElement : couriers) {
             JsonObject bakerObj = courierElement.getAsJsonObject();
@@ -60,10 +63,5 @@ public class Parser {
         }
 
         return couriersList;
-    }
-
-
-    public Storage getStorage() {
-        return new Storage(storage);
     }
 }

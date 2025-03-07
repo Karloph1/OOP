@@ -1,7 +1,6 @@
 package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -34,17 +33,13 @@ public class Courier implements Runnable {
         return this.thread;
     }
 
-    public List<Order> getTakenOrders() {
-        return takenOrders;
-    }
-
     private void pizzaDelivery() throws InterruptedException {
-        takenOrders = (ArrayList<Order>) bakery.getStorage().takePizzas(this);
+        takenOrders = (ArrayList<Order>) bakery.takePizzasFormStorage(this);
 
         if (!takenOrders.isEmpty()) {
             for (Order order : takenOrders) {
                 order.sentOrder();
-                //System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
+                System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
             }
             Thread.sleep(100L * takenOrders.size());
             takenOrders.clear();
@@ -59,7 +54,7 @@ public class Courier implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (!bakery.getStorage().getCompletedOrders().isEmpty()) { // если есть готовые пиццы
+            if (!bakery.checkStorageEmpty()) { // если есть готовые пиццы
                 try {
                     pizzaDelivery();
                 } catch (InterruptedException e) {
@@ -67,7 +62,7 @@ public class Courier implements Runnable {
                 }
             } else {
                 if (bakery.hasNotWorkedBakers()
-                        && bakery.getStorage().getCompletedOrders().isEmpty()) {
+                        && bakery.checkStorageEmpty()) {
                     return;
                 } else {
                     try {

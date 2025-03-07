@@ -21,10 +21,6 @@ public class OrderGenerator implements Runnable {
         this.bakery = bakery;
     }
 
-    public int getTotalOrders() {
-        return totalOrders;
-    }
-
     protected Thread getThread() {
         return this.thread;
     }
@@ -48,6 +44,8 @@ public class OrderGenerator implements Runnable {
                 return;
             } else {
                 Order b = generateNewOrder();
+                System.out.printf("[%d] [%s]\n", b.getOrderNumber(), b.getStatus());
+
                 bakery.addOrder(b);
                 try {
                     Thread.sleep((int) (Math.random() * 500) + 1);

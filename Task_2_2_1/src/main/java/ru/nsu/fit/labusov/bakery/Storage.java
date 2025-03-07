@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class Storage {
     private final Queue<Order> completedOrders;
-    private final Queue<String> queue;
+    private final Queue<String> incomingOrders;
     private final int capacity;
     protected final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
 
@@ -22,19 +22,11 @@ public class Storage {
     public Storage(int capacity) {
         this.capacity = capacity;
         completedOrders = new ArrayDeque<>();
-        queue = new ArrayDeque<>();
+        incomingOrders = new ArrayDeque<>();
     }
 
-    public Queue<Order> getCompletedOrders() {
-        return completedOrders;
-    }
-
-    public Queue<String> getQueue() {
-        return queue;
-    }
-
-    public int getCapacity() {
-        return capacity;
+    public boolean isCompletedOrdersEmpty() {
+        return completedOrders.isEmpty();
     }
 
     public boolean isExistFreeSpace() {
@@ -45,8 +37,8 @@ public class Storage {
      * check function.
      */
     public boolean checkFirstReservedPlace(String orderNumber) {
-        if (!queue.isEmpty()) {
-            return (orderNumber.equals(queue.peek()));
+        if (!incomingOrders.isEmpty()) {
+            return (orderNumber.equals(incomingOrders.peek()));
         } else {
             return true;
         }
@@ -72,13 +64,13 @@ public class Storage {
     /**
      * get pizza to storage.
      */
-    protected void getPizza(Baker baker, Order order) {
+    protected void putPizza(Baker baker, Order order) {
         boolean isReserved = false;
 
         try {
             lock1.writeLock().lock();
-            if (!isExistFreeSpace() || !queue.isEmpty()) {
-                queue.add(baker.getThreadName());
+            if (!isExistFreeSpace() || !incomingOrders.isEmpty()) {
+                incomingOrders.add(baker.getThreadName());
                 isReserved = true;
             } else {
                 completedOrders.add(order);
@@ -93,7 +85,7 @@ public class Storage {
                     lock1.writeLock().lock();
                     if (isExistFreeSpace()
                             && checkFirstReservedPlace(baker.getThreadName())) {
-                        queue.remove();
+                        incomingOrders.remove();
                         completedOrders.add(order);
                         break;
                     }
@@ -142,8 +134,8 @@ public class Storage {
             return false;
         }
 
-        if (this.getCompletedOrders().size() != storage.getCompletedOrders().size()
-                || this.getQueue().size() != storage.getQueue().size()) {
+        if (this.completedOrders.size() != storage.completedOrders.size()
+                || this.incomingOrders.size() != storage.incomingOrders.size()) {
             return false;
         }
 
@@ -154,9 +146,9 @@ public class Storage {
             }
         }
 
-        Queue<String> tmp2 = this.queue;
+        Queue<String> tmp2 = this.incomingOrders;
         for (int i = 0; i < tmp2.size(); i++) {
-            if (!Objects.equals(tmp2.remove(), storage.queue.remove())) {
+            if (!Objects.equals(tmp2.remove(), storage.incomingOrders.remove())) {
                 return false;
             }
         }
@@ -167,7 +159,7 @@ public class Storage {
     @Override
     public int hashCode() {
         int result = completedOrders.hashCode();
-        result = 31 * result + queue.hashCode();
+        result = 31 * result + incomingOrders.hashCode();
         result = 31 * result + capacity;
         return result;
     }
@@ -183,8 +175,8 @@ public class Storage {
 
         stringBuilder.append("], queue - [");
 
-        for (int i = 0; i < queue.size(); i++) {
-            stringBuilder.append(queue.peek()).append(", ");
+        for (int i = 0; i < incomingOrders.size(); i++) {
+            stringBuilder.append(incomingOrders.peek()).append(", ");
         }
 
         return stringBuilder.append("]").toString();

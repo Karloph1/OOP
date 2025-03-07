@@ -1,9 +1,7 @@
 package ru.nsu.fit.labusov.bakery;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,58 +10,8 @@ import org.junit.jupiter.api.Test;
  */
 public class BakeryTest {
     /**
-     * Baker tests.
-     */
-    @Test
-    void bakerGetVelocityTest() {
-        Baker baker = new Baker(100, "test");
-
-        Assertions.assertEquals(100, baker.getVelocity());
-    }
-
-    @Test
-    void bakerGetThreadNameTest() {
-        Baker baker = new Baker(100, "test");
-
-        Assertions.assertEquals("test", baker.getThreadName());
-    }
-
-
-    /**
-     * Courier tests.
-     */
-    @Test
-    void courierGetCapacityTest() {
-        Courier courier = new Courier(100, "test");
-
-        Assertions.assertEquals(100, courier.getCapacity());
-    }
-
-    @Test
-    void courierGetTakenOrdersTest() {
-        Courier courier = new Courier(100, "test");
-
-        Assertions.assertEquals(new ArrayList<>(), courier.getTakenOrders());
-    }
-
-
-    /**
      * Order tests.
      */
-    @Test
-    void orderGetNameTest() {
-        Order order = new Order("test", 1);
-
-        Assertions.assertEquals("test", order.getName());
-    }
-
-    @Test
-    void orderGetOrderNumberTest() {
-        Order order = new Order("test", 1);
-
-        Assertions.assertEquals(1, order.getOrderNumber());
-    }
-
     @Test
     void orderGetStatusAfterCreatingTest() {
         Order order = new Order("test", 1);
@@ -98,6 +46,21 @@ public class BakeryTest {
         Assertions.assertEquals("delivered", order.getStatus());
     }
 
+    @Test
+    void orderEqualsTest() {
+        Order order1 = new Order("123", 1);
+        Order order2 = new Order("123", 1);
+
+        Assertions.assertEquals(order1, order2);
+    }
+
+    @Test
+    void orderToStringTest() {
+        Order order = new Order("123", 1);
+
+        Assertions.assertEquals("Order 1, 123", order.toString());
+    }
+
 
     /**
      * Order generator tests.
@@ -113,42 +76,12 @@ public class BakeryTest {
         Assertions.assertEquals(1, order.getOrderNumber());
     }
 
-    @Test
-    void orderGeneratorGetTotalOrders() {
-        OrderGenerator orderGenerator = new OrderGenerator();
-        orderGenerator.generateNewOrder();
-        orderGenerator.generateNewOrder();
-
-        Assertions.assertEquals(2, orderGenerator.getTotalOrders());
-    }
-
 
     /**
      * Storage tests.
      */
     @Test
-    void storageGetCompletedOrdersTest() {
-        Storage storage = new Storage(10);
-
-        Assertions.assertIterableEquals(new ArrayDeque<>(), storage.getCompletedOrders());
-    }
-
-    @Test
-    void storageGetQueueTest() {
-        Storage storage = new Storage(10);
-
-        Assertions.assertIterableEquals(new ArrayDeque<>(), storage.getQueue());
-    }
-
-    @Test
-    void storageGetCapacityTest() {
-        Storage storage = new Storage(10);
-
-        Assertions.assertEquals(10, storage.getCapacity());
-    }
-
-    @Test
-    void storageIsExistFreeSpaceTest() {
+    void storageIsExistFreeSpaceTrueTest() {
         Storage storage = new Storage(10);
 
         Assertions.assertTrue(storage.isExistFreeSpace());
@@ -171,9 +104,9 @@ public class BakeryTest {
 
         Storage storage = new Storage(10);
 
-        storage.getPizza(baker, order);
-        storage.getPizza(baker, order1);
-        storage.getPizza(baker, order2);
+        storage.putPizza(baker, order);
+        storage.putPizza(baker, order1);
+        storage.putPizza(baker, order2);
 
         List<Order> orders = new ArrayList<>();
         orders.add(order);
@@ -187,9 +120,9 @@ public class BakeryTest {
      * Parser tests.
      */
     @Test
-    void parserGetBakersTest() {
+    void parserParseTest() {
         Parser parser = new Parser();
-        parser.parse("build/resources/test/data.json");
+        Bakery bakery = parser.parse("build/resources/test/data.json");
 
         ArrayList<Baker> bakers = new ArrayList<>();
         bakers.add(new Baker(500, "1"));
@@ -199,14 +132,6 @@ public class BakeryTest {
         bakers.add(new Baker(467, "5"));
         bakers.add(new Baker(786, "6"));
 
-        Assertions.assertEquals(parser.getBakers(), bakers);
-    }
-
-    @Test
-    void parserGetCouriersTest() {
-        Parser parser = new Parser();
-        parser.parse("build/resources/test/data.json");
-
         ArrayList<Courier> couriers = new ArrayList<>();
         couriers.add(new Courier(3, "1"));
         couriers.add(new Courier(7, "2"));
@@ -214,118 +139,17 @@ public class BakeryTest {
         couriers.add(new Courier(4, "4"));
         couriers.add(new Courier(2, "5"));
 
-        Assertions.assertEquals(parser.getCouriers(), couriers);
-    }
-
-    @Test
-    void parserGetStorageTest() {
-        Parser parser = new Parser();
-        parser.parse("build/resources/test/data.json");
-
         Storage storage = new Storage(8);
 
-        Assertions.assertEquals(parser.getStorage(), storage);
+        Bakery bakery1 = new Bakery(bakers, couriers, storage);
+
+        Assertions.assertEquals(bakery, bakery1);
     }
 
 
     /**
      * Bakery tests.
      */
-    @Test
-    void bakeryGetBakersTest() {
-        ArrayList<Baker> bakers = new ArrayList<>();
-        bakers.add(new Baker(500, "1"));
-        bakers.add(new Baker(1000, "2"));
-        bakers.add(new Baker(200, "3"));
-        bakers.add(new Baker(1001, "4"));
-        bakers.add(new Baker(467, "5"));
-        bakers.add(new Baker(786, "6"));
-
-        List<Baker> bakers1 = new ArrayList<>();
-        bakers1.add(new Baker(500, "1"));
-        bakers1.add(new Baker(1000, "2"));
-        bakers1.add(new Baker(200, "3"));
-        bakers1.add(new Baker(1001, "4"));
-        bakers1.add(new Baker(467, "5"));
-        bakers1.add(new Baker(786, "6"));
-
-        ArrayList<Courier> couriers = new ArrayList<>();
-        Storage storage = new Storage(10);
-        Bakery bakery = new Bakery(bakers, couriers, storage);
-
-        Assertions.assertEquals(bakers1, bakery.getBakers());
-    }
-
-    @Test
-    void bakeryGetCouriersTest() {
-        ArrayList<Baker> bakers = new ArrayList<>();
-
-        ArrayList<Courier> couriers = new ArrayList<>();
-        couriers.add(new Courier(3, "1"));
-        couriers.add(new Courier(7, "2"));
-        couriers.add(new Courier(1, "3"));
-        couriers.add(new Courier(4, "4"));
-        couriers.add(new Courier(2, "5"));
-
-        ArrayList<Courier> couriers1 = new ArrayList<>();
-        couriers1.add(new Courier(3, "1"));
-        couriers1.add(new Courier(7, "2"));
-        couriers1.add(new Courier(1, "3"));
-        couriers1.add(new Courier(4, "4"));
-        couriers1.add(new Courier(2, "5"));
-
-        Storage storage = new Storage(10);
-        Bakery bakery = new Bakery(bakers, couriers, storage);
-
-        Assertions.assertEquals(couriers1, bakery.getCouriers());
-    }
-
-    @Test
-    void bakeryGetStorageTest() {
-        ArrayList<Baker> bakers = new ArrayList<>();
-        ArrayList<Courier> couriers = new ArrayList<>();
-        Storage storage = new Storage(10);
-        Storage storage1 = new Storage(10);
-
-        Bakery bakery = new Bakery(bakers, couriers, storage);
-
-        Assertions.assertEquals(storage1, bakery.getStorage());
-    }
-
-    @Test
-    void bakeryGetTotalOrders() {
-        ArrayList<Baker> bakers = new ArrayList<>();
-        ArrayList<Courier> couriers = new ArrayList<>();
-        Storage storage = new Storage(10);
-
-        Bakery bakery = new Bakery(bakers, couriers, storage);
-
-        Order order = new Order("hs", 1);
-        Order order1 = new Order("h", 2);
-
-        ArrayList<Order> orders = new ArrayList<>();
-        orders.add(order);
-        orders.add(order1);
-
-        bakery.addOrder(order);
-        bakery.addOrder(order1);
-
-        Assertions.assertEquals(orders, bakery.getTotalOrders());
-    }
-
-    @Test
-    void bakeryGetWorkingBakersTest() {
-        ArrayList<Baker> bakers = new ArrayList<>();
-        ArrayList<Courier> couriers = new ArrayList<>();
-
-        Storage storage = new Storage(10);
-
-        Bakery bakery = new Bakery(bakers, couriers, storage);
-        bakery.registerBaker(true);
-
-        Assertions.assertEquals(1, bakery.getWorkingBakers());
-    }
-
     @Test
     void bakeryHasWorkedBakersTest() {
         ArrayList<Baker> bakers = new ArrayList<>();
