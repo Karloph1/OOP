@@ -71,7 +71,8 @@ public class BakeryTest {
         OrderGenerator orderGenerator = new OrderGenerator();
 
         Order order = orderGenerator.generateNewOrder();
-        String[] species = new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
+        String[] species = new String[]
+                {"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
 
         Assertions.assertTrue(Arrays.stream(species).anyMatch(x -> x.equals(order.getName())));
         Assertions.assertEquals(1, order.getOrderNumber());
@@ -98,7 +99,6 @@ public class BakeryTest {
     @Test
     void storageTakePizzasTest() {
         Baker baker = new Baker(200, "1");
-        Courier courier = new Courier(2, "1");
         Order order = new Order("4 Cheeses", 1);
         Order order1 = new Order("Margarita", 2);
         Order order2 = new Order("Hawaii", 3);
@@ -113,6 +113,8 @@ public class BakeryTest {
         orders.add(order);
         orders.add(order1);
 
+        Courier courier = new Courier(2, "1");
+
         Assertions.assertEquals(orders, storage.takePizzas(courier));
     }
 
@@ -122,9 +124,6 @@ public class BakeryTest {
      */
     @Test
     void parserParseTest() {
-        Parser parser = new Parser();
-        Bakery bakery = parser.parse("build/resources/test/data.json");
-
         ArrayList<Baker> bakers = new ArrayList<>();
         bakers.add(new Baker(500, "1"));
         bakers.add(new Baker(1000, "2"));
@@ -143,6 +142,9 @@ public class BakeryTest {
         Storage storage = new Storage(8);
 
         Bakery bakery1 = new Bakery(bakers, couriers, storage);
+
+        Parser parser = new Parser();
+        Bakery bakery = parser.parse("build/resources/test/data.json");
 
         Assertions.assertEquals(bakery, bakery1);
     }
@@ -242,6 +244,7 @@ public class BakeryTest {
 
         bakery.initialisingProcess();
 
-        Assertions.assertTrue(bakery.getTotalOrders().stream().allMatch(x -> x.getStatus().equals("delivered")));
+        Assertions.assertTrue(bakery.getTotalOrders().stream()
+                .allMatch(x -> x.getStatus().equals("delivered")));
     }
 }
