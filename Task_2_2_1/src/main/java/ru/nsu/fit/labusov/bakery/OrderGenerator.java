@@ -44,7 +44,7 @@ public class OrderGenerator implements Runnable {
                 return;
             } else {
                 Order b = generateNewOrder();
-                System.out.printf("[%d] [%s]\n", b.getOrderNumber(), b.getStatus());
+                //System.out.printf("[%d] [%s]\n", b.getOrderNumber(), b.getStatus());
 
                 bakery.addOrder(b);
                 try {

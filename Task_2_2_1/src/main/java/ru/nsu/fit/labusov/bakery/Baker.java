@@ -37,27 +37,35 @@ public class Baker implements Runnable {
     private boolean tryToCook() { // готовка пиццы
         Order order = null;
         boolean result = false;
-        if (bakery.hasFreeOrders()) {
-            order = bakery.takeOrder();
-        }
 
-        if (order != null) {
-            order.reserveOrder();
-            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
-            try {
-                Thread.sleep(this.velocity);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        synchronized (bakery) {
+            if (bakery.hasFreeOrders()) {
+                //System.out.println("Baker has come: " + threadName);
+                order = bakery.takeOrder();
             }
 
-            order.readyOrder();
-            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
-            try {
-                pizzaTransfer(order);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            if (order != null) {
+                order.reserveOrder();
+                System.out.printf("[%d] [%s] by Baker [%s]\n", order.getOrderNumber(),
+                        order.getStatus(), this.threadName);
+                try {
+                    Thread.sleep(this.velocity);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                order.readyOrder();
+                System.out.printf("[%d] [%s] by Baker [%s]\n", order.getOrderNumber(),
+                        order.getStatus(), this.threadName);
+                try {
+                    pizzaTransfer(order);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                result = true;
             }
-            result = true;
+
+            bakery.notifyAll();
         }
 
         return result;
@@ -72,15 +80,18 @@ public class Baker implements Runnable {
 
         try {
             while (thread.isAlive()) { // пока поток жив
-                if (!tryToCook()) { // если не получилось взять заказ
-                    if (bakery.isEndOfDay()) { // если день закончился
-                        return;
-                    } else {
-                        try {
-                            Thread.sleep(100);
-                            //wait();
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+
+                synchronized (bakery) {
+                    if (!tryToCook()) { // если не получилось взять заказ
+                        if (bakery.isEndOfDay()) { // если день закончился
+                            return;
+                        } else {
+                            try {
+                                //System.out.println("Baker has come: " + threadName);
+                                bakery.wait();
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }

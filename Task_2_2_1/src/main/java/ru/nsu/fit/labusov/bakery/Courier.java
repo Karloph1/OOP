@@ -39,7 +39,8 @@ public class Courier implements Runnable {
         if (!takenOrders.isEmpty()) {
             for (Order order : takenOrders) {
                 order.sentOrder();
-                System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
+                System.out.printf("[%d] [%s] by Courier [%s]\n", order.getOrderNumber(),
+                        order.getStatus(), this.thread);
             }
             Thread.sleep(100L * takenOrders.size());
             takenOrders.clear();

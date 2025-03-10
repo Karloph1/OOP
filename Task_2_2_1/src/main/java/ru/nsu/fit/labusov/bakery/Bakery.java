@@ -12,9 +12,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Bakery class.
  */
 public class Bakery {
-    private final ArrayList<Baker> bakers;
-    private final ArrayList<Courier> couriers;
-    private final Storage storage;
+    private ArrayList<Baker> bakers;
+    private ArrayList<Courier> couriers;
+    private Storage storage;
     private final LinkedList<Order> freeOrders;
     private final ArrayList<Order> totalOrders;
     private boolean isEndOfDay; //конец дня
@@ -42,6 +42,18 @@ public class Bakery {
         }
     }
 
+    public void setBakers(ArrayList<Baker> bakers) {
+        this.bakers = bakers;
+    }
+
+    public void setCouriers(ArrayList<Courier> couriers) {
+        this.couriers = couriers;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
     public boolean checkStorageEmpty() {
         return storage.isCompletedOrdersEmpty();
     }
@@ -52,6 +64,10 @@ public class Bakery {
 
     public void putPizzaToStorage(Baker baker, Order order) {
         storage.putPizza(baker, order);
+    }
+
+    public List<Order> getFreeOrders() {
+        return freeOrders;
     }
 
     public List<Order> getTotalOrders() {
