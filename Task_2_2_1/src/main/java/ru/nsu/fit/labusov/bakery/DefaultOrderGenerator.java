@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Order generator class.
  */
-public class DefaultOrderGenerator implements Runnable {
+public class DefaultOrderGenerator implements Runnable, OrderGenerator {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders;
@@ -17,11 +17,12 @@ public class DefaultOrderGenerator implements Runnable {
         thread = new Thread(this, "orders");
     }
 
+    @Override
     public void setBakery(Bakery bakery) {
         this.bakery = bakery;
     }
 
-    protected Thread getThread() {
+    public Thread getThread() {
         return this.thread;
     }
 

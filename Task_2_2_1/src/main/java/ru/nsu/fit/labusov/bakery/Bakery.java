@@ -18,6 +18,7 @@ public class Bakery {
     private final ArrayList<Order> totalOrders;
     private boolean isEndOfDay; //конец дня
     private final AtomicInteger workingBakerCounter;
+    private final OrderGenerator orderGenerator;
     protected final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
@@ -31,6 +32,7 @@ public class Bakery {
         freeOrders = new LockQueue<>();
         totalOrders = new ArrayList<>();
         workingBakerCounter = new AtomicInteger(0);
+        this.orderGenerator = new DefaultOrderGenerator();
 
         for (Baker baker : bakers) {
             baker.setBakery(this);
@@ -128,9 +130,8 @@ public class Bakery {
             thr.getThread().start();
         }
 
-        DefaultOrderGenerator thrr = new DefaultOrderGenerator();
-        thrr.setBakery(this);
-        thrr.getThread().start();
+        orderGenerator.setBakery(this);
+        orderGenerator.getThread().start();
         long dayStart = System.currentTimeMillis();
         while (true) {
             boolean allThreadsDead = true;
