@@ -68,11 +68,11 @@ public class BakeryTest {
      */
     @Test
     void orderGeneratorGenerateNewOrderTest() {
-        OrderGenerator orderGenerator = new OrderGenerator();
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator();
 
         Order order = orderGenerator.generateNewOrder();
         String[] species = new String[]
-                {"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
+            {"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
 
         Assertions.assertTrue(Arrays.stream(species).anyMatch(x -> x.equals(order.getName())));
         Assertions.assertEquals(1, order.getOrderNumber());

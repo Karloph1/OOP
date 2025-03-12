@@ -5,14 +5,14 @@ import java.util.Objects;
 /**
  * Order generator class.
  */
-public class OrderGenerator implements Runnable {
+public class DefaultOrderGenerator implements Runnable {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders;
     private final Thread thread;
     private Bakery bakery;
 
-    public OrderGenerator() {
+    public DefaultOrderGenerator() {
         totalOrders = 0;
         thread = new Thread(this, "orders");
     }
@@ -44,8 +44,6 @@ public class OrderGenerator implements Runnable {
                 return;
             } else {
                 Order b = generateNewOrder();
-                //System.out.printf("[%d] [%s]\n", b.getOrderNumber(), b.getStatus());
-
                 bakery.addOrder(b);
                 try {
                     Thread.sleep((int) (Math.random() * 500) + 1);
@@ -65,7 +63,7 @@ public class OrderGenerator implements Runnable {
             return false;
         }
 
-        OrderGenerator that = (OrderGenerator) o;
+        DefaultOrderGenerator that = (DefaultOrderGenerator) o;
 
         if (!Objects.equals(thread, that.thread)) {
             return false;
