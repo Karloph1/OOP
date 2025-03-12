@@ -1,7 +1,6 @@
 package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -12,10 +11,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Bakery class.
  */
 public class Bakery {
-    private ArrayList<Baker> bakers;
-    private ArrayList<Courier> couriers;
-    private Storage storage;
-    private final LinkedList<Order> freeOrders;
+    private final ArrayList<Baker> bakers;
+    private final ArrayList<Courier> couriers;
+    private final Storage storage;
+    private final LockQueue<Order> freeOrders;
     private final ArrayList<Order> totalOrders;
     private boolean isEndOfDay; //конец дня
     private final AtomicInteger workingBakerCounter;
@@ -29,7 +28,7 @@ public class Bakery {
         this.couriers = couriers;
         isEndOfDay = false;
         this.storage = storage;
-        freeOrders = new LinkedList<>();
+        freeOrders = new LockQueue<>();
         totalOrders = new ArrayList<>();
         workingBakerCounter = new AtomicInteger(0);
 
@@ -42,18 +41,6 @@ public class Bakery {
         }
     }
 
-    public void setBakers(ArrayList<Baker> bakers) {
-        this.bakers = bakers;
-    }
-
-    public void setCouriers(ArrayList<Courier> couriers) {
-        this.couriers = couriers;
-    }
-
-    public void setStorage(Storage storage) {
-        this.storage = storage;
-    }
-
     public boolean checkStorageEmpty() {
         return storage.isCompletedOrdersEmpty();
     }
@@ -64,10 +51,6 @@ public class Bakery {
 
     public void putPizzaToStorage(Baker baker, Order order) {
         storage.putPizza(baker, order);
-    }
-
-    public List<Order> getFreeOrders() {
-        return freeOrders;
     }
 
     public List<Order> getTotalOrders() {
@@ -114,7 +97,7 @@ public class Bakery {
 
         try {
             lock.writeLock().lock();
-            order = freeOrders.removeFirst();
+            order = freeOrders.take();
         } catch (NoSuchElementException e) {
             order = null;
         } finally {

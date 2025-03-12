@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Storage class.
  */
 public class Storage {
-    private final Queue<Order> completedOrders;
+    private final LockQueue<Order> completedOrders;
     private final Queue<String> incomingOrders;
     private final int capacity;
     protected final ReentrantReadWriteLock lock1 = new ReentrantReadWriteLock(true);
@@ -21,7 +21,7 @@ public class Storage {
      */
     public Storage(int capacity) {
         this.capacity = capacity;
-        completedOrders = new ArrayDeque<>();
+        completedOrders = new LockQueue<>();
         incomingOrders = new ArrayDeque<>();
     }
 
@@ -52,7 +52,7 @@ public class Storage {
 
         for (int i = 0; i < maxCount; i++) {
             if (!completedOrders.isEmpty()) {
-                selectedOrders.add(completedOrders.poll());
+                selectedOrders.add(completedOrders.take());
             } else {
                 break;
             }
@@ -139,9 +139,9 @@ public class Storage {
             return false;
         }
 
-        Queue<Order> tmp = this.completedOrders;
+        LockQueue<Order> tmp = this.completedOrders;
         for (int i = 0; i < tmp.size(); i++) {
-            if (tmp.remove() != storage.completedOrders.remove()) {
+            if (tmp.take() != storage.completedOrders.take()) {
                 return false;
             }
         }
