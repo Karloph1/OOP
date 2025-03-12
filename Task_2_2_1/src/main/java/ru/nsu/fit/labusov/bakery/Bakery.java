@@ -128,7 +128,7 @@ public class Bakery {
             thr.getThread().start();
         }
 
-        OrderGenerator thrr = new OrderGenerator();
+        DefaultOrderGenerator thrr = new DefaultOrderGenerator();
         thrr.setBakery(this);
         thrr.getThread().start();
         long dayStart = System.currentTimeMillis();
