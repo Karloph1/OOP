@@ -45,6 +45,7 @@ public class Bakery {
             courier.setStorage(this);
         }
     }
+
     public void setOrderGeneratorSpeed(int speed) {
         orderGenerator.setOrderSpeed(speed);
     }

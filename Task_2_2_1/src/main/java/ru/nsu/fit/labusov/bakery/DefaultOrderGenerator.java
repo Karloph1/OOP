@@ -13,6 +13,9 @@ public class DefaultOrderGenerator implements Runnable {
     private Bakery bakery;
     private int orderSpeed;
 
+    /**
+     * order generator constructor class.
+     */
     public DefaultOrderGenerator(int orderSpeed) {
         totalOrders = 0;
         thread = new Thread(this, "orders");
