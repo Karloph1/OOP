@@ -23,6 +23,9 @@ public class Baker implements Runnable {
         this.freeOrders = new LockQueue<>(10);
     }
 
+    /**
+     * set method.
+     */
     public void setBakery(Bakery bakery) {
         this.bakery = bakery;
         this.freeOrders = bakery.getFreeOrders();

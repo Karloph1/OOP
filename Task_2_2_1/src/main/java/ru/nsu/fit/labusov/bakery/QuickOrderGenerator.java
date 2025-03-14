@@ -2,6 +2,9 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.Objects;
 
+/**
+ * Quick order generator class.
+ */
 public class QuickOrderGenerator implements Runnable, OrderGenerator {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};

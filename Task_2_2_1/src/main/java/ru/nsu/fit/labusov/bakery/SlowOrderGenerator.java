@@ -2,7 +2,10 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.Objects;
 
-public class SlowOrderGenerator implements Runnable, OrderGenerator{
+/**
+ * Slow order generator class.
+ */
+public class SlowOrderGenerator implements Runnable, OrderGenerator {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders;
