@@ -74,6 +74,6 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order " + orderNumber + ", " + name + ". " + status;
+        return orderNumber + "-" + name + "-" + status;
     }
 }

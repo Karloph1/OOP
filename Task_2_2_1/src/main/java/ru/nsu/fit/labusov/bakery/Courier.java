@@ -10,6 +10,7 @@ public class Courier implements Runnable {
     private final int capacity; // вместимость сумки
     private final Thread thread;
     private ArrayList<Order> takenOrders; // взятые заказы
+    private Storage storage;
     private Bakery bakery;
 
     /**
@@ -21,8 +22,9 @@ public class Courier implements Runnable {
         takenOrders = new ArrayList<>();
     }
 
-    public void setBakery(Bakery bakery) {
+    public void setStorage(Bakery bakery) {
         this.bakery = bakery;
+        this.storage = bakery.getStorage();
     }
 
     public int getCapacity() {
@@ -34,13 +36,12 @@ public class Courier implements Runnable {
     }
 
     private void pizzaDelivery() throws InterruptedException {
-        takenOrders = (ArrayList<Order>) bakery.takePizzasFormStorage(this);
+        takenOrders = (ArrayList<Order>) storage.takePizzas(this);
 
         if (!takenOrders.isEmpty()) {
             for (Order order : takenOrders) {
                 order.sentOrder();
-                System.out.printf("[%d] [%s] by Courier [%s]\n", order.getOrderNumber(),
-                        order.getStatus(), this.thread);
+                //System.out.printf("[%d] [%s] by Courier [%s]\n", order.getOrderNumber(), order.getStatus(), this.thread);
             }
             Thread.sleep(100L * takenOrders.size());
             takenOrders.clear();
@@ -55,7 +56,7 @@ public class Courier implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (!bakery.checkStorageEmpty()) { // если есть готовые пиццы
+            if (!storage.isCompletedOrdersEmpty()) { // если есть готовые пиццы
                 try {
                     pizzaDelivery();
                 } catch (InterruptedException e) {
@@ -63,7 +64,7 @@ public class Courier implements Runnable {
                 }
             } else {
                 if (bakery.hasNotWorkedBakers()
-                        && bakery.checkStorageEmpty()) {
+                        && storage.isCompletedOrdersEmpty()) {
                     return;
                 } else {
                     try {

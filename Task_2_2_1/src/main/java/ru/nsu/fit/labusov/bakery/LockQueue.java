@@ -2,43 +2,41 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Lock queue class.
  */
 public class LockQueue<E> {
     private final Queue<E> lockQueue;
-    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+    private final int capacity;
 
-    public LockQueue() {
+    public LockQueue(int capacity) {
+        this.capacity = capacity;
         lockQueue = new ArrayDeque<>();
     }
 
     /**
      * add method.
      */
-    public synchronized void add(E element) {
-        lock.writeLock().lock();
-        try {
-            lockQueue.add(element);
-        } finally {
-            lock.writeLock().unlock();
+    public synchronized void put(E element) throws InterruptedException {
+        while (lockQueue.size() == capacity) {
+            wait();
         }
+
+        lockQueue.add(element);
+        notifyAll();
     }
 
     /**
      * take method.
      */
-    public synchronized E take() {
-        E element;
-
-        lock.writeLock().lock();
-        try {
-            element = lockQueue.remove();
-        } finally {
-            lock.writeLock().unlock();
+    public synchronized E take() throws InterruptedException {
+        while (lockQueue.isEmpty()) {
+            wait();
         }
+
+        E element = lockQueue.remove();
+        notifyAll();
 
         return element;
     }
@@ -51,7 +49,7 @@ public class LockQueue<E> {
         return lockQueue.isEmpty();
     }
 
-    public int size() {
+    public synchronized int size() {
         return lockQueue.size();
     }
 

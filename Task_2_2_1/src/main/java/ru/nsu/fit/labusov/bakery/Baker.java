@@ -4,10 +4,13 @@ package ru.nsu.fit.labusov.bakery;
  * Baker class.
  */
 public class Baker implements Runnable {
-    private final int velocity; // скорость готовки
+    private final int velocity;
     private final String threadName;
     private final Thread thread;
+    private LockQueue<Order> freeOrders;
     private Bakery bakery;
+    private Storage storage;
+
 
     /**
      * Baker constructor.
@@ -16,10 +19,13 @@ public class Baker implements Runnable {
         this.velocity = velocity;
         this.threadName = threadName;
         thread = new Thread(this, threadName);
+        this.freeOrders = new LockQueue<>(10);
     }
 
     public void setBakery(Bakery bakery) {
         this.bakery = bakery;
+        this.freeOrders = bakery.getFreeOrders();
+        this.storage = bakery.getStorage();
     }
 
     protected Thread getThread() {
@@ -30,35 +36,21 @@ public class Baker implements Runnable {
         return this.threadName;
     }
 
-    private void pizzaTransfer(Order order) throws InterruptedException {
-        bakery.putPizzaToStorage(this, order);
-    }
-
-    private boolean tryToCook() { // готовка пиццы
-        Order order = null;
+    private boolean tryToCook() throws InterruptedException {
+        Order order;
         boolean result = false;
 
-        if (bakery.hasFreeOrders()) {
-            order = bakery.takeOrder();
+        order = freeOrders.take();
+
+        order.reserveOrder();
+        try {
+            Thread.sleep(this.velocity);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
 
-        if (order != null) {
-            order.reserveOrder();
-            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
-            try {
-                Thread.sleep(this.velocity);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            order.readyOrder();
-            System.out.printf("[%d] [%s]\n", order.getOrderNumber(), order.getStatus());
-            try {
-                pizzaTransfer(order);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        order.readyOrder();
+        storage.putPizza(this, order);
 
         return result;
     }
@@ -71,9 +63,10 @@ public class Baker implements Runnable {
         bakery.registerBaker(true);
 
         try {
-            while (thread.isAlive()) { // пока поток жив
-                if (!tryToCook()) { // если не получилось взять заказ
-                    if (bakery.isEndOfDay()) { // если день закончился
+            while (thread.isAlive()) {
+                if (!tryToCook()) {
+                    if (bakery.isEndOfDay()) {
+                        System.out.println("Baker " + threadName + " has gone");
                         return;
                     } else {
                         try {
@@ -84,6 +77,8 @@ public class Baker implements Runnable {
                     }
                 }
             }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         } finally {
             bakery.registerBaker(false);
         }

@@ -2,7 +2,6 @@ package ru.nsu.fit.labusov.bakery;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -16,9 +15,9 @@ public class Bakery {
     private final Storage storage;
     private final LockQueue<Order> freeOrders;
     private final ArrayList<Order> totalOrders;
-    private boolean isEndOfDay; //конец дня
+    private boolean isEndOfDay;
     private final AtomicInteger workingBakerCounter;
-    private final OrderGenerator orderGenerator;
+    private OrderGenerator orderGenerator;
     protected final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
@@ -29,7 +28,7 @@ public class Bakery {
         this.couriers = couriers;
         isEndOfDay = false;
         this.storage = storage;
-        freeOrders = new LockQueue<>();
+        freeOrders = new LockQueue<>(100);
         totalOrders = new ArrayList<>();
         workingBakerCounter = new AtomicInteger(0);
         this.orderGenerator = new DefaultOrderGenerator();
@@ -39,24 +38,25 @@ public class Bakery {
         }
 
         for (Courier courier : couriers) {
-            courier.setBakery(this);
+            courier.setStorage(this);
         }
     }
 
-    public boolean checkStorageEmpty() {
-        return storage.isCompletedOrdersEmpty();
-    }
-
-    public List<Order> takePizzasFormStorage(Courier courier) {
-        return storage.takePizzas(courier);
-    }
-
-    public void putPizzaToStorage(Baker baker, Order order) {
-        storage.putPizza(baker, order);
+    public Storage getStorage() {
+        return storage;
     }
 
     public List<Order> getTotalOrders() {
         return totalOrders;
+    }
+
+    public LockQueue<Order> getFreeOrders() {
+        return freeOrders;
+    }
+
+    public void setOrderGenerator(OrderGenerator orderGenerator) {
+        this.orderGenerator = orderGenerator;
+        orderGenerator.setBakery(this);
     }
 
     public boolean hasNotWorkedBakers() {
@@ -71,14 +71,9 @@ public class Bakery {
         return isEndOfDay;
     }
 
-    protected void addOrder(Order order) {
-        try {
-            lock.writeLock().lock();
-            freeOrders.add(order);
-            totalOrders.add(order);
-        } finally {
-            lock.writeLock().unlock();
-        }
+    protected void addOrder(Order order) throws InterruptedException {
+        freeOrders.put(order);
+        totalOrders.add(order);
     }
 
     protected void registerBaker(boolean needRegister) {
@@ -93,22 +88,6 @@ public class Bakery {
             lock.writeLock().unlock();
         }
     }
-
-    protected Order takeOrder() {
-        Order order;
-
-        try {
-            lock.writeLock().lock();
-            order = freeOrders.take();
-        } catch (NoSuchElementException e) {
-            order = null;
-        } finally {
-            lock.writeLock().unlock();
-        }
-
-        return order;
-    }
-
 
     /**
      * start function.
@@ -136,7 +115,7 @@ public class Bakery {
         while (true) {
             boolean allThreadsDead = true;
 
-            if (System.currentTimeMillis() - dayStart >= 10000) {
+            if (System.currentTimeMillis() - dayStart >= 3000) {
                 isEndOfDay = true;
             }
 

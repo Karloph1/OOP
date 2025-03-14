@@ -21,7 +21,7 @@ public class Storage {
      */
     public Storage(int capacity) {
         this.capacity = capacity;
-        completedOrders = new LockQueue<>();
+        completedOrders = new LockQueue<>(10);
         incomingOrders = new ArrayDeque<>();
     }
 
@@ -47,7 +47,7 @@ public class Storage {
     /**
      * get function.
      */
-    private List<Order> getOrders(int maxCount) {
+    private List<Order> getOrders(int maxCount) throws InterruptedException {
         ArrayList<Order> selectedOrders = new ArrayList<>();
 
         for (int i = 0; i < maxCount; i++) {
@@ -64,7 +64,7 @@ public class Storage {
     /**
      * get pizza to storage.
      */
-    protected void putPizza(Baker baker, Order order) {
+    protected void putPizza(Baker baker, Order order) throws InterruptedException {
         boolean isReserved = false;
 
         try {
@@ -73,7 +73,7 @@ public class Storage {
                 incomingOrders.add(baker.getThreadName());
                 isReserved = true;
             } else {
-                completedOrders.add(order);
+                completedOrders.put(order);
             }
         } finally {
             lock1.writeLock().unlock();
@@ -81,16 +81,11 @@ public class Storage {
 
         if (isReserved) {
             while (true) {
-                try {
-                    lock1.writeLock().lock();
-                    if (isExistFreeSpace()
-                            && checkFirstReservedPlace(baker.getThreadName())) {
-                        incomingOrders.remove();
-                        completedOrders.add(order);
-                        break;
-                    }
-                } finally {
-                    lock1.writeLock().unlock();
+                if (isExistFreeSpace()
+                        && checkFirstReservedPlace(baker.getThreadName())) {
+                    incomingOrders.remove();
+                    completedOrders.put(order);
+                    break;
                 }
 
                 try {
@@ -105,7 +100,7 @@ public class Storage {
     /**
      * take pizzas from storage.
      */
-    protected List<Order> takePizzas(Courier courier) {
+    protected List<Order> takePizzas(Courier courier) throws InterruptedException {
         List<Order> takenOrders;
 
         try {
@@ -141,8 +136,12 @@ public class Storage {
 
         LockQueue<Order> tmp = this.completedOrders;
         for (int i = 0; i < tmp.size(); i++) {
-            if (tmp.take() != storage.completedOrders.take()) {
-                return false;
+            try {
+                if (tmp.take() != storage.completedOrders.take()) {
+                    return false;
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
 

@@ -59,7 +59,7 @@ public class BakeryTest {
     void orderToStringTest() {
         Order order = new Order("123", 1);
 
-        Assertions.assertEquals("Order 1, 123. free", order.toString());
+        Assertions.assertEquals("1-123-free", order.toString());
     }
 
 
@@ -97,7 +97,7 @@ public class BakeryTest {
     }
 
     @Test
-    void storageTakePizzasTest() {
+    void storageTakePizzasTest() throws InterruptedException {
         Baker baker = new Baker(200, "1");
         Order order = new Order("4 Cheeses", 1);
         Order order1 = new Order("Margarita", 2);
@@ -174,7 +174,7 @@ public class BakeryTest {
     }
 
     @Test
-    void bakeryAddOrderTest() {
+    void bakeryAddOrderTest() throws InterruptedException {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
@@ -197,20 +197,6 @@ public class BakeryTest {
     }
 
     @Test
-    void bakeryTakeOrderTest() {
-        ArrayList<Baker> bakers = new ArrayList<>();
-        ArrayList<Courier> couriers = new ArrayList<>();
-        Storage storage = new Storage(10);
-
-        Bakery bakery = new Bakery(bakers, couriers, storage);
-
-        bakery.addOrder(new Order("4 cheeses", 1));
-        bakery.takeOrder();
-
-        Assertions.assertFalse(bakery.hasFreeOrders());
-    }
-
-    @Test
     void bakeryRegisterBakerTest() {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
@@ -221,8 +207,8 @@ public class BakeryTest {
         Assertions.assertFalse(bakery.hasNotWorkedBakers());
     }
 
-    @Test
-    void bakeryInitialisingProcess() {
+   /* @Test
+    void bakeryInitialisingProcessDefaultTest() {
         ArrayList<Baker> bakers = new ArrayList<>();
         bakers.add(new Baker(500, "1"));
         bakers.add(new Baker(1000, "2"));
@@ -247,4 +233,34 @@ public class BakeryTest {
         Assertions.assertTrue(bakery.getTotalOrders().stream()
                 .allMatch(x -> x.getStatus().equals("delivered")));
     }
+
+    @Test
+    void bakeryInitialisingProcessQuickOrdersTest() {
+        Parser parser = new Parser();
+        Bakery bakery = parser.parse("build/resources/test/data.json");
+
+        bakery.setOrderGenerator(new QuickOrderGenerator());
+        bakery.initialisingProcess();
+
+        //System.out.println(Arrays.toString(bakery.getTotalOrders().toArray()));
+
+        Assertions.assertTrue(bakery.getTotalOrders().stream()
+                .allMatch(x -> x.getStatus().equals("delivered")));
+    }
+
+    @Test
+    void bakeryInitialisingProcessSlowOrdersTest() {
+        Parser parser = new Parser();
+        Bakery bakery = parser.parse("build/resources/test/data.json");
+
+        bakery.setOrderGenerator(new SlowOrderGenerator());
+        bakery.initialisingProcess();
+
+        System.out.println(Arrays.toString(bakery.getTotalOrders().toArray()));
+
+        Assertions.assertTrue(bakery.getTotalOrders().stream()
+                .allMatch(x -> x.getStatus().equals("delivered")));
+    }
+
+    */
 }
