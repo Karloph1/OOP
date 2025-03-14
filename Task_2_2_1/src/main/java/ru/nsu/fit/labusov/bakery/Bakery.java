@@ -17,13 +17,14 @@ public class Bakery {
     private final ArrayList<Order> totalOrders;
     private boolean isEndOfDay;
     private final AtomicInteger workingBakerCounter;
-    private OrderGenerator orderGenerator;
+    private final DefaultOrderGenerator orderGenerator;
     protected final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
      * bakery constructor.
      */
-    public Bakery(ArrayList<Baker> bakers, ArrayList<Courier> couriers, Storage storage) {
+    public Bakery(ArrayList<Baker> bakers, ArrayList<Courier> couriers,
+                  Storage storage, DefaultOrderGenerator orderGenerator) {
         this.bakers = bakers;
         this.couriers = couriers;
         isEndOfDay = false;
@@ -33,7 +34,8 @@ public class Bakery {
 
         totalOrders = new ArrayList<>();
         workingBakerCounter = new AtomicInteger(0);
-        this.orderGenerator = new DefaultOrderGenerator();
+
+        this.orderGenerator = orderGenerator;
 
         for (Baker baker : bakers) {
             baker.setBakery(this);
@@ -42,6 +44,9 @@ public class Bakery {
         for (Courier courier : couriers) {
             courier.setStorage(this);
         }
+    }
+    public void setOrderGeneratorSpeed(int speed) {
+        orderGenerator.setOrderSpeed(speed);
     }
 
     public Storage getStorage() {
@@ -54,11 +59,6 @@ public class Bakery {
 
     public LockQueue<Order> getFreeOrders() {
         return freeOrders;
-    }
-
-    public void setOrderGenerator(OrderGenerator orderGenerator) {
-        this.orderGenerator = orderGenerator;
-        orderGenerator.setBakery(this);
     }
 
     public boolean hasNotWorkedBakers() {
@@ -118,7 +118,7 @@ public class Bakery {
         while (true) {
             boolean allThreadsDead = true;
 
-            if (System.currentTimeMillis() - dayStart >= 3000) {
+            if (System.currentTimeMillis() - dayStart >= 10000) {
                 isEndOfDay = true;
                 freeOrders.signalEndOfDay();
                 if (i == 0) {

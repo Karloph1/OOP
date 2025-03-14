@@ -14,5 +14,6 @@
     { "capacity": "4", "threadName": "4" },
     { "capacity": "2", "threadName": "5" }
   ],
-  "storage": "8"
+  "storage": "8",
+  "orderGenerator": "500"
 }

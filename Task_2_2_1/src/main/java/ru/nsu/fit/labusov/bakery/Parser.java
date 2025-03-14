@@ -24,8 +24,10 @@ public class Parser {
             bakers = json.getAsJsonArray("bakers");
             couriers = json.getAsJsonArray("couriers");
             int storageCapacity = json.get("storage").getAsInt();
+            int orderGeneratorSpeed = json.get("orderGenerator").getAsInt();
 
-            return new Bakery(getBakers(), getCouriers(), new Storage(storageCapacity));
+            return new Bakery(getBakers(), getCouriers(), new Storage(storageCapacity),
+                    new DefaultOrderGenerator(orderGeneratorSpeed));
         } catch (IOException e) {
             e.printStackTrace();
         }

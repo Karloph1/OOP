@@ -68,7 +68,7 @@ public class BakeryTest {
      */
     @Test
     void orderGeneratorGenerateNewOrderTest() {
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator();
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(10);
 
         Order order = orderGenerator.generateNewOrder();
         String[] species = new String[]
@@ -141,7 +141,9 @@ public class BakeryTest {
 
         Storage storage = new Storage(8);
 
-        Bakery bakery1 = new Bakery(bakers, couriers, storage);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+
+        Bakery bakery1 = new Bakery(bakers, couriers, storage, orderGenerator);
 
         Parser parser = new Parser();
         Bakery bakery = parser.parse("build/resources/test/data.json");
@@ -158,8 +160,9 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         Assertions.assertTrue(bakery.hasNotWorkedBakers());
     }
 
@@ -168,8 +171,9 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         Assertions.assertFalse(bakery.hasFreeOrders());
     }
 
@@ -178,8 +182,9 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         bakery.addOrder(new Order("4 cheeses", 1));
 
         Assertions.assertTrue(bakery.hasFreeOrders());
@@ -190,8 +195,9 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
         Assertions.assertFalse(bakery.isEndOfDay());
     }
@@ -201,8 +207,9 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         bakery.registerBaker(true);
         Assertions.assertFalse(bakery.hasNotWorkedBakers());
     }
@@ -229,8 +236,9 @@ public class BakeryTest {
         couriers.add(new Courier(2, "5"));
 
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
         bakery.initialisingProcess();
 
@@ -243,10 +251,8 @@ public class BakeryTest {
         Parser parser = new Parser();
         Bakery bakery = parser.parse("build/resources/test/data.json");
 
-        bakery.setOrderGenerator(new QuickOrderGenerator());
+        bakery.setOrderGeneratorSpeed(100);
         bakery.initialisingProcess();
-
-        //System.out.println(Arrays.toString(bakery.getTotalOrders().toArray()));
 
         Assertions.assertTrue(bakery.getTotalOrders().stream()
                 .allMatch(x -> x.getStatus().equals("delivered")));
@@ -257,10 +263,8 @@ public class BakeryTest {
         Parser parser = new Parser();
         Bakery bakery = parser.parse("build/resources/test/data.json");
 
-        bakery.setOrderGenerator(new SlowOrderGenerator());
+        bakery.setOrderGeneratorSpeed(2000);
         bakery.initialisingProcess();
-
-        System.out.println(Arrays.toString(bakery.getTotalOrders().toArray()));
 
         Assertions.assertTrue(bakery.getTotalOrders().stream()
                 .allMatch(x -> x.getStatus().equals("delivered")));
@@ -280,7 +284,9 @@ public class BakeryTest {
 
         Storage storage = new Storage(10);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
         bakery.initialisingProcess();
 
@@ -302,8 +308,9 @@ public class BakeryTest {
         couriers.add(new Courier(3, "1"));
 
         Storage storage = new Storage(10);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
         bakery.initialisingProcess();
 
@@ -329,8 +336,9 @@ public class BakeryTest {
         couriers.add(new Courier(2, "5"));
 
         Storage storage = new Storage(1);
+        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
 
-        Bakery bakery = new Bakery(bakers, couriers, storage);
+        Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
         bakery.initialisingProcess();
 

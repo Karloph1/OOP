@@ -5,19 +5,24 @@ import java.util.Objects;
 /**
  * Order generator class.
  */
-public class DefaultOrderGenerator implements Runnable, OrderGenerator {
+public class DefaultOrderGenerator implements Runnable {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders;
     private final Thread thread;
     private Bakery bakery;
+    private int orderSpeed;
 
-    public DefaultOrderGenerator() {
+    public DefaultOrderGenerator(int orderSpeed) {
         totalOrders = 0;
         thread = new Thread(this, "orders");
+        this.orderSpeed = orderSpeed;
     }
 
-    @Override
+    public void setOrderSpeed(int orderSpeed) {
+        this.orderSpeed = orderSpeed;
+    }
+
     public void setBakery(Bakery bakery) {
         this.bakery = bakery;
     }
@@ -29,7 +34,6 @@ public class DefaultOrderGenerator implements Runnable, OrderGenerator {
     /**
      * generate function.
      */
-    @Override
     public Order generateNewOrder() {
         String pizza = pizzaNames[(int) (Math.random() * pizzaNames.length)];
         totalOrders++;
@@ -52,7 +56,7 @@ public class DefaultOrderGenerator implements Runnable, OrderGenerator {
                     throw new RuntimeException(e);
                 }
                 try {
-                    Thread.sleep((int) (Math.random() * 500) + 1);
+                    Thread.sleep((int) (Math.random() * orderSpeed) + 1);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
