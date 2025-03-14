@@ -207,6 +207,10 @@ public class BakeryTest {
         Assertions.assertFalse(bakery.hasNotWorkedBakers());
     }
 
+
+    /**
+     * Process tests.
+     */
     @Test
     void bakeryInitialisingProcessDefaultTest() {
         ArrayList<Baker> bakers = new ArrayList<>();

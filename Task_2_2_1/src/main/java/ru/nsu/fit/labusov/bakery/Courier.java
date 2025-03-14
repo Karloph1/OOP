@@ -38,15 +38,11 @@ public class Courier implements Runnable {
     private void pizzaDelivery() throws InterruptedException {
         takenOrders = (ArrayList<Order>) storage.takePizzas(this);
 
-        if (!takenOrders.isEmpty()) {
-            for (Order order : takenOrders) {
-                order.sentOrder();
-            }
-            Thread.sleep(100L * takenOrders.size());
-            takenOrders.clear();
-        } else {
-            Thread.sleep(100);
+        for (Order order : takenOrders) {
+            order.sentOrder();
         }
+        Thread.sleep(100L * takenOrders.size());
+        takenOrders.clear();
     }
 
     /**
