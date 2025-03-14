@@ -207,7 +207,7 @@ public class BakeryTest {
         Assertions.assertFalse(bakery.hasNotWorkedBakers());
     }
 
-   /* @Test
+    /*@Test
     void bakeryInitialisingProcessDefaultTest() {
         ArrayList<Baker> bakers = new ArrayList<>();
         bakers.add(new Baker(500, "1"));
@@ -262,5 +262,5 @@ public class BakeryTest {
                 .allMatch(x -> x.getStatus().equals("delivered")));
     }
 
-    */
+     */
 }

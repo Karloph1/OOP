@@ -29,6 +29,8 @@ public class Bakery {
         isEndOfDay = false;
         this.storage = storage;
         freeOrders = new LockQueue<>(100);
+        freeOrders.setBakery(this);
+
         totalOrders = new ArrayList<>();
         workingBakerCounter = new AtomicInteger(0);
         this.orderGenerator = new DefaultOrderGenerator();
@@ -138,7 +140,6 @@ public class Bakery {
             }
         }
     }
-
 
     @Override
     public boolean equals(Object o) {

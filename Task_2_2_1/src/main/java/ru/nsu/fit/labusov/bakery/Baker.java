@@ -7,6 +7,7 @@ public class Baker implements Runnable {
     private final int velocity;
     private final String threadName;
     private final Thread thread;
+    private Order cookingOrder;
     private LockQueue<Order> freeOrders;
     private Bakery bakery;
     private Storage storage;
@@ -36,11 +37,19 @@ public class Baker implements Runnable {
         return this.threadName;
     }
 
-    private boolean tryToCook() throws InterruptedException {
-        Order order;
-        boolean result = false;
+    private boolean tryToCook() {
+        try {
+            System.out.println("Baker " + threadName + " is trying to take...");
+            cookingOrder = freeOrders.take();
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Baker gone wrong " + threadName);
+        }
 
-        order = freeOrders.take();
+        return cookingOrder != null;
+    }
+
+    private void cooking(Order order) {
+        System.out.println("Baker " + threadName + " took order " + order);
 
         order.reserveOrder();
         try {
@@ -50,9 +59,13 @@ public class Baker implements Runnable {
         }
 
         order.readyOrder();
-        storage.putPizza(this, order);
-
-        return result;
+        try {
+            System.out.println("Baker " + threadName + " release order " + order);
+            storage.putPizza(this, order);
+            cookingOrder = null;
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -64,21 +77,15 @@ public class Baker implements Runnable {
 
         try {
             while (thread.isAlive()) {
-                if (!tryToCook()) {
+                if (tryToCook()) {
+                    cooking(cookingOrder);
+                } else {
                     if (bakery.isEndOfDay()) {
                         System.out.println("Baker " + threadName + " has gone");
                         return;
-                    } else {
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
                     }
                 }
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         } finally {
             bakery.registerBaker(false);
         }

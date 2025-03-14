@@ -9,17 +9,22 @@ import java.util.Queue;
 public class LockQueue<E> {
     private final Queue<E> lockQueue;
     private final int capacity;
+    private Bakery bakery;
 
     public LockQueue(int capacity) {
         this.capacity = capacity;
         lockQueue = new ArrayDeque<>();
     }
 
+    public void setBakery(Bakery bakery) {
+        this.bakery = bakery;
+    }
+
     /**
      * add method.
      */
     public synchronized void put(E element) throws InterruptedException {
-        while (lockQueue.size() == capacity) {
+        while (lockQueue.size() == capacity && !bakery.isEndOfDay()) {
             wait();
         }
 
@@ -31,8 +36,12 @@ public class LockQueue<E> {
      * take method.
      */
     public synchronized E take() throws InterruptedException {
-        while (lockQueue.isEmpty()) {
+        while (lockQueue.isEmpty() && !bakery.isEndOfDay()) {
             wait();
+        }
+
+        if (lockQueue.isEmpty() && bakery.isEndOfDay()) {
+            return null;
         }
 
         E element = lockQueue.remove();
