@@ -37,20 +37,17 @@ public class Baker implements Runnable {
         return this.threadName;
     }
 
-    private boolean tryToCook() {
+    private boolean tryToTakeFreeOrder() {
         try {
-            System.out.println("Baker " + threadName + " is trying to take...");
             cookingOrder = freeOrders.take();
         } catch (InterruptedException e) {
-            throw new RuntimeException("Baker gone wrong " + threadName);
+            throw new RuntimeException();
         }
 
         return cookingOrder != null;
     }
 
     private void cooking(Order order) {
-        System.out.println("Baker " + threadName + " took order " + order);
-
         order.reserveOrder();
         try {
             Thread.sleep(this.velocity);
@@ -60,7 +57,6 @@ public class Baker implements Runnable {
 
         order.readyOrder();
         try {
-            System.out.println("Baker " + threadName + " release order " + order);
             storage.putPizza(this, order);
             cookingOrder = null;
         } catch (InterruptedException e) {
@@ -77,11 +73,10 @@ public class Baker implements Runnable {
 
         try {
             while (thread.isAlive()) {
-                if (tryToCook()) {
+                if (tryToTakeFreeOrder()) {
                     cooking(cookingOrder);
                 } else {
                     if (bakery.isEndOfDay()) {
-                        System.out.println("Baker " + threadName + " has gone");
                         return;
                     }
                 }

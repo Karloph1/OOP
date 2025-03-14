@@ -207,7 +207,7 @@ public class BakeryTest {
         Assertions.assertFalse(bakery.hasNotWorkedBakers());
     }
 
-    /*@Test
+    @Test
     void bakeryInitialisingProcessDefaultTest() {
         ArrayList<Baker> bakers = new ArrayList<>();
         bakers.add(new Baker(500, "1"));
@@ -262,5 +262,76 @@ public class BakeryTest {
                 .allMatch(x -> x.getStatus().equals("delivered")));
     }
 
-     */
+    @Test
+    void bakeryOneBakerDefaultTest() {
+        ArrayList<Baker> bakers = new ArrayList<>();
+        bakers.add(new Baker(500, "1"));
+
+        ArrayList<Courier> couriers = new ArrayList<>();
+        couriers.add(new Courier(3, "1"));
+        couriers.add(new Courier(7, "2"));
+        couriers.add(new Courier(1, "3"));
+        couriers.add(new Courier(4, "4"));
+        couriers.add(new Courier(2, "5"));
+
+        Storage storage = new Storage(10);
+
+        Bakery bakery = new Bakery(bakers, couriers, storage);
+
+        bakery.initialisingProcess();
+
+        Assertions.assertTrue(bakery.getTotalOrders().stream()
+                .allMatch(x -> x.getStatus().equals("delivered")));
+    }
+
+    @Test
+    void bakeryOneCourierDefaultTest() {
+        ArrayList<Baker> bakers = new ArrayList<>();
+        bakers.add(new Baker(500, "1"));
+        bakers.add(new Baker(1000, "2"));
+        bakers.add(new Baker(200, "3"));
+        bakers.add(new Baker(1001, "4"));
+        bakers.add(new Baker(467, "5"));
+        bakers.add(new Baker(786, "6"));
+
+        ArrayList<Courier> couriers = new ArrayList<>();
+        couriers.add(new Courier(3, "1"));
+
+        Storage storage = new Storage(10);
+
+        Bakery bakery = new Bakery(bakers, couriers, storage);
+
+        bakery.initialisingProcess();
+
+        Assertions.assertTrue(bakery.getTotalOrders().stream()
+                .allMatch(x -> x.getStatus().equals("delivered")));
+    }
+
+    @Test
+    void bakeryOnePlaceStorageDefaultTest() {
+        ArrayList<Baker> bakers = new ArrayList<>();
+        bakers.add(new Baker(500, "1"));
+        bakers.add(new Baker(1000, "2"));
+        bakers.add(new Baker(200, "3"));
+        bakers.add(new Baker(1001, "4"));
+        bakers.add(new Baker(467, "5"));
+        bakers.add(new Baker(786, "6"));
+
+        ArrayList<Courier> couriers = new ArrayList<>();
+        couriers.add(new Courier(3, "1"));
+        couriers.add(new Courier(7, "2"));
+        couriers.add(new Courier(1, "3"));
+        couriers.add(new Courier(4, "4"));
+        couriers.add(new Courier(2, "5"));
+
+        Storage storage = new Storage(1);
+
+        Bakery bakery = new Bakery(bakers, couriers, storage);
+
+        bakery.initialisingProcess();
+
+        Assertions.assertTrue(bakery.getTotalOrders().stream()
+                .allMatch(x -> x.getStatus().equals("delivered")));
+    }
+
 }

@@ -38,7 +38,6 @@ public class SlowOrderGenerator implements Runnable, OrderGenerator{
                 return;
             } else {
                 Order b = generateNewOrder();
-                System.out.println("Generate new Order " + totalOrders);
                 try {
                     bakery.addOrder(b);
                 } catch (InterruptedException e) {

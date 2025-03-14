@@ -20,6 +20,10 @@ public class LockQueue<E> {
         this.bakery = bakery;
     }
 
+    protected synchronized void signalEndOfDay() {
+        notifyAll();
+    }
+
     /**
      * add method.
      */

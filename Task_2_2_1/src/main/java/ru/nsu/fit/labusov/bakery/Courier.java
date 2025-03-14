@@ -7,9 +7,9 @@ import java.util.Objects;
  * Courier class.
  */
 public class Courier implements Runnable {
-    private final int capacity; // вместимость сумки
+    private final int capacity;
     private final Thread thread;
-    private ArrayList<Order> takenOrders; // взятые заказы
+    private ArrayList<Order> takenOrders;
     private Storage storage;
     private Bakery bakery;
 
@@ -41,7 +41,6 @@ public class Courier implements Runnable {
         if (!takenOrders.isEmpty()) {
             for (Order order : takenOrders) {
                 order.sentOrder();
-                //System.out.printf("[%d] [%s] by Courier [%s]\n", order.getOrderNumber(), order.getStatus(), this.thread);
             }
             Thread.sleep(100L * takenOrders.size());
             takenOrders.clear();
@@ -56,7 +55,7 @@ public class Courier implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (!storage.isCompletedOrdersEmpty()) { // если есть готовые пиццы
+            if (!storage.isCompletedOrdersEmpty()) {
                 try {
                     pizzaDelivery();
                 } catch (InterruptedException e) {

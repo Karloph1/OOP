@@ -114,11 +114,16 @@ public class Bakery {
         orderGenerator.setBakery(this);
         orderGenerator.getThread().start();
         long dayStart = System.currentTimeMillis();
+        int i = 0;
         while (true) {
             boolean allThreadsDead = true;
 
             if (System.currentTimeMillis() - dayStart >= 3000) {
                 isEndOfDay = true;
+                freeOrders.signalEndOfDay();
+                if (i == 0) {
+                    i = 1;
+                }
             }
 
             for (Baker thr : bakers) {
