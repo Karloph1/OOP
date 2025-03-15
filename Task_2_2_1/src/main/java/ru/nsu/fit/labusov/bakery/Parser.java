@@ -27,7 +27,7 @@ public class Parser {
             int orderGeneratorSpeed = json.get("orderGenerator").getAsInt();
 
             return new Bakery(getBakers(), getCouriers(), new Storage(storageCapacity),
-                    new DefaultOrderGenerator(orderGeneratorSpeed));
+                    new OrderGenerator(orderGeneratorSpeed));
         } catch (IOException e) {
             e.printStackTrace();
         }

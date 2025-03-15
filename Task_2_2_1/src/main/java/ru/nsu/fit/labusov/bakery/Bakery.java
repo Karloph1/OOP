@@ -17,14 +17,14 @@ public class Bakery {
     private final ArrayList<Order> totalOrders;
     private boolean isEndOfDay;
     private final AtomicInteger workingBakerCounter;
-    private final DefaultOrderGenerator orderGenerator;
+    private final OrderGenerator orderGenerator;
     protected final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     /**
      * bakery constructor.
      */
     public Bakery(ArrayList<Baker> bakers, ArrayList<Courier> couriers,
-                  Storage storage, DefaultOrderGenerator orderGenerator) {
+                  Storage storage, OrderGenerator orderGenerator) {
         this.bakers = bakers;
         this.couriers = couriers;
         isEndOfDay = false;

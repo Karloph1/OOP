@@ -68,7 +68,7 @@ public class BakeryTest {
      */
     @Test
     void orderGeneratorGenerateNewOrderTest() {
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(10);
+        OrderGenerator orderGenerator = new OrderGenerator(10);
 
         Order order = orderGenerator.generateNewOrder();
         String[] species = new String[]
@@ -141,7 +141,7 @@ public class BakeryTest {
 
         Storage storage = new Storage(8);
 
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery1 = new Bakery(bakers, couriers, storage, orderGenerator);
 
@@ -160,7 +160,7 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         Assertions.assertTrue(bakery.hasNotWorkedBakers());
@@ -171,7 +171,7 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         Assertions.assertFalse(bakery.hasFreeOrders());
@@ -182,7 +182,7 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         bakery.addOrder(new Order("4 cheeses", 1));
@@ -195,7 +195,7 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
@@ -207,7 +207,7 @@ public class BakeryTest {
         ArrayList<Baker> bakers = new ArrayList<>();
         ArrayList<Courier> couriers = new ArrayList<>();
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
         bakery.registerBaker(true);
@@ -236,7 +236,7 @@ public class BakeryTest {
         couriers.add(new Courier(2, "5"));
 
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
@@ -284,7 +284,7 @@ public class BakeryTest {
 
         Storage storage = new Storage(10);
 
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
@@ -308,7 +308,7 @@ public class BakeryTest {
         couriers.add(new Courier(3, "1"));
 
         Storage storage = new Storage(10);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 
@@ -336,7 +336,7 @@ public class BakeryTest {
         couriers.add(new Courier(2, "5"));
 
         Storage storage = new Storage(1);
-        DefaultOrderGenerator orderGenerator = new DefaultOrderGenerator(500);
+        OrderGenerator orderGenerator = new OrderGenerator(500);
 
         Bakery bakery = new Bakery(bakers, couriers, storage, orderGenerator);
 

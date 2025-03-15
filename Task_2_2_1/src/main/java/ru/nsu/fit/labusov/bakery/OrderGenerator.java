@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Order generator class.
  */
-public class DefaultOrderGenerator implements Runnable {
+public class OrderGenerator implements Runnable {
     private static final String[] pizzaNames =
             new String[]{"Margarita", "4 cheeses", "Hawaii", "Peperoni", "Meat", "Seafood"};
     private static int totalOrders;
@@ -16,7 +16,7 @@ public class DefaultOrderGenerator implements Runnable {
     /**
      * order generator constructor class.
      */
-    public DefaultOrderGenerator(int orderSpeed) {
+    public OrderGenerator(int orderSpeed) {
         totalOrders = 0;
         thread = new Thread(this, "orders");
         this.orderSpeed = orderSpeed;
@@ -76,7 +76,7 @@ public class DefaultOrderGenerator implements Runnable {
             return false;
         }
 
-        DefaultOrderGenerator that = (DefaultOrderGenerator) o;
+        OrderGenerator that = (OrderGenerator) o;
 
         return Objects.equals(bakery, that.bakery);
     }
